@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+//    _____________________________________________________
+//    ___                                               ___
+//    ___     AISuite Project Important Information     ___
+//    ___     Edit this file only in AISuite Project    ___
+//    _____________________________________________________
+//
+// this is either re-used here or copied everywhere else it is needed thus enabling a single point for development.
+-->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" width="166.667" height="102.667" viewBox="0 0 166.67 102.67" enable-background="new 0 0 166.67 102.67" xml:space="preserve">
+	<path class="iconografia-logo-artescriba" fill="#2C75FF" fill-opacity="1" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" d="M 33.3574,1.33333L 95.1561,1.33344L 95.1561,8.63033L 40.6587,8.63328L 40.6574,94.0333L 126.009,94.0334L 126.01,63.1273L 133.309,63.1304L 133.309,101.333L 33.3574,101.333L 33.3574,1.33333 Z "/>
+	<linearGradient id="SVGID_Stroke1_" gradientUnits="objectBoundingBox" x1="0.987924" y1="0.491372" x2="1.97093" y2="0.491372" gradientTransform="rotate(180.000000 0.987924 0.491372)">
+		<stop offset="0" stop-color="#5F004A" stop-opacity="1"/>
+		<stop offset="1" stop-color="#FCA2C5" stop-opacity="1"/>
+	</linearGradient>
+	<linearGradient id="SVGID_Fill1_" gradientUnits="objectBoundingBox" x1="1" y1="0.491241" x2="2.00733" y2="0.491241" gradientTransform="rotate(180.000000 1.000000 0.491241)">
+		<stop offset="0" stop-color="#A8769D" stop-opacity="0.403922"/>
+		<stop offset="0.977376" stop-color="#F6BAD2" stop-opacity="0.403922"/>
+	</linearGradient>
+	<path fill="url(#SVGID_Fill1_)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke="url(#SVGID_Stroke1_)" d="M 121.973,84.3691C 123.778,87.681 123.251,86.6955 125.975,94.085C 116.154,57.0029 77.9426,16.5744 77.5383,15.1387C 77.1341,13.7031 78.9271,42.5097 94.9384,53.8554C 99.4143,53.9518 104.044,54.5684 104.044,54.5684C 104.044,54.5684 100.028,54.8764 96.0116,55.2887C 97.8281,58.0275 101.743,58.9347 108.188,58.5195C 105.374,60.8405 100.942,59.8094 98.4803,59.0528C 102.651,66.7041 111.41,71.9646 117.364,77.4134C 119.954,80.8478 120.167,81.0573 121.973,84.3691 Z "/>
+</svg>

@@ -1,0 +1,40 @@
+<div class="theecanvas-container">
+  <svg class="theecanvas" version="1.1" viewBox="0 0 1618 1000" xmlns="http://www.w3.org/2000/svg">
+    <title>{{ title }}</title>
+    <defs>
+      <linearGradient id="fondcourbes" x1="0" x2="0" y1="1" y2="0">
+        <stop offset="0%" stop-color="#fff" stop-opacity="1" />
+        <stop offset="100%" stop-color="#c3dde9" stop-opacity="1" />
+      </linearGradient>
+    </defs>
+    <g class="fond-courbes">
+      <rect [attr.x]="gradsoffset" y="0" [attr.width]="xline" [attr.height]="yline" stroke="#ced4da" fill="url(#fondcourbes)" stroke-width="1" />
+      <line class="graduation-line" [attr.x1]="gradsoffset" [attr.x2]="gradsoffset" y1="0" [attr.y2]="(yline + 10)" />
+      <line class="graduation-line" [attr.x1]="(gradsoffset-10)" [attr.x2]="xmax" [attr.y1]="yline" [attr.y2]="yline" />
+      <g>
+        <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ xaxislegend }}</text>
+        <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(ymax-gradsoffset+25)">0</text>
+        <text text-anchor="middle" *ngFor="let axistick of xaxis" [attr.x]="axistick.x" [attr.y]="(ymax-gradsoffset+25)">{{axistick.grad}}</text>
+        <line class="graduation-line" *ngFor="let axistick of xaxis" [attr.x1]="axistick.x"[attr.x2]="axistick.x" [attr.y1]="(ymax-gradsoffset-10)" [attr.y2]="(ymax-gradsoffset+10)" />
+    </g>
+      <g transform="translate(0, 1000)">
+        <g transform="rotate(-90)">
+          <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ yaxislegend }}</text>
+          <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(gradsoffset-15)">0</text>
+          <text text-anchor="middle" *ngFor="let axistick of yaxis" [attr.x]="axistick.x" [attr.y]="(gradsoffset-15)">{{axistick.grad}}</text>
+          <line class="graduation-line" *ngFor="let axistick of yaxis" [attr.x1]="axistick.x"[attr.x2]="axistick.x" [attr.y1]="(gradsoffset-10)" [attr.y2]="(gradsoffset+10)" />
+        </g>
+      </g>
+    </g>
+    <g class="curves-drawing" [attr.transform]="'translate('+gradsoffset+',-'+gradsoffset+')'">
+      <path *ngFor="let crv of redoxcurves" [attr.d]="fetchpath(crv)"  [attr.stroke]="crv.linecolor" stroke-width="3" fill="none" />
+      <path id="usercurve" [attr.d]="fetchpath(usercurve)"  [attr.stroke]="usercurve.linecolor" stroke-width="5" fill="none" />
+    </g> 
+  </svg>
+  <span class="theecanvas-title">{{ title }}</span>
+  <div class="theecanvas-legendbox">
+    <span *ngFor="let crv of redoxcurves"><span class="line" [style.background]="crv.linecolor">&nbsp;</span>{{crv.legend}}</span>
+    <span>Votre courbe</span>
+    <span id="usercurve-legend"><span class="line" [style.background]="usercurve.linecolor">&nbsp;</span>{{usercurve.legend}}</span>
+  </div>
+</div>
