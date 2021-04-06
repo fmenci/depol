@@ -35,6 +35,6 @@ RGD, 15 ter, rue Maurice Petit, 69360 Sérézin du Rhône, France
 [RGD](https://www.rgdevt.com)
 
 This project is realised by
-![Arte Scriba](/src/asset/icone_piuma.svg)
+![Arte Scriba](/src/assets/icone_piuma.svg)
 Arte Scriba, 754 route des Fontaines, 69440 Taluyers, France
 [Arte Scriba](https://www.artescriba.com)

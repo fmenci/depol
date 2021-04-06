@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+.footer {
+	background-color: #f5f5f5;
+	border-top: #9c9c9c 1px solid;
+	width: 100%;
+	padding-top: .1rem;
+}
+
+.footer .pgtitle {
+    font-style: italic;
+    color: #00b265;
+}
+
+.footer p {
+    margin-bottom: .1rem;
+}
+
+.footer .logo-icon, .footer .logo-icon svg.iconografia {
+    width: 30px;
+    height: 30px;
+}
+
+.footer .button-to-end {
+    display: none;
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .footer {
+        position: fixed;
+        bottom: 0;
+    }
+
+    .body-content {
+        margin-bottom: 120px;
+    }
+}

@@ -11,7 +11,8 @@ import { FormulaMathComponent } from './formula.math.component';
     templateUrl: './corrosionpreventioncurve.component.html'
 })
 export class CorrosionPreventionCurveComponent implements AfterViewInit {
-    corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '#d40707');
+  @ViewChild('mathformula') private mathformula!: FormulaMathComponent;
+  corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '#d40707');
     aiForm = this.fb.group({
       xon: [this.corrosionview.xon],
       xoff: [this.corrosionview.xoff],
@@ -19,22 +20,19 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
       measuredSurface: [this.corrosionview.measuredSurface],
       refreport: ['']
     });
-
-    @ViewChild('mathformula') mathformula!: FormulaMathComponent;
-
     private ispoped = false;
     private delay: TimeDelayDirective<string> = new TimeDelayDirective<string>();
 
     constructor(private fb: FormBuilder) {
-      this.delay.event.subscribe((ev:string) => {
+      this.delay.event.subscribe((ev: string) => {
         console.log(ev);
         this.ispoped = ev !== '';
-      })
+      });
      }
 
   ngAfterViewInit(): void {
     if(this.mathformula !== undefined){
-      this.mathformula.evpopbox.subscribe((ev:string)=>{
+      this.mathformula.evpopbox.subscribe((ev: string)=>{
 //        console.log(ev);
         this.delay.tima(ev);
 
@@ -46,7 +44,7 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
       console.log(this.aiForm.value);
     }
 
-    popbox(ev:string){
+    popbox(ev: string){
       this.delay.tima(ev);
     }
 
