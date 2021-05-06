@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { LinsceModule } from 'src/tools/linsce/linsce.module';
 
 import { AppComponent } from './app.component';
 import { CorrosionPreventionCurveComponent } from './components/corrosionpreventioncurve.component';
@@ -12,7 +13,7 @@ import { TheeCanvasComponent } from './components/theecanvas';
     AppComponent, TheeCanvasComponent, CorrosionPreventionCurveComponent, FormulaMathComponent
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule
+    BrowserModule, FormsModule, ReactiveFormsModule, LinsceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

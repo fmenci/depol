@@ -7,14 +7,14 @@ export class RedoxCalculation {
     private noicorrresult = new IcorrResultModel(0, '', 'rgb(233,236,239)', 'rgb(197,209,222)');
 
     constructor(
-       public xon: number, // mV
-       public xoff: number, // mV
-       public measuredIntensity: number, // mA
-       public measuredSurface: number, // m²
-       public linecolor: string
-    ){}
+        public xon: number, // mV
+        public xoff: number, // mV
+        public measuredIntensity: number, // mA
+        public measuredSurface: number, // m²
+        public linecolor: string
+    ) { }
 
-    public icorr(): IcorrResultModel{
+    public icorr(): IcorrResultModel {
         let result: IcorrResultModel;
         if (this.canCalc()) {
             const evalcorrosion = this.fx(Math.abs(this.xon - this.xoff) / 1e3) * 1e3;
@@ -33,24 +33,24 @@ export class RedoxCalculation {
         return result;
     }
 
-    public drawline(steps: number, xmax: number, ymax: number, coefx: number, coefy: number): string{
-        if(this.canCalc()){
+    public drawline(steps: number, xmax: number, ymax: number, coefx: number, coefy: number): string {
+        if (this.canCalc()) {
             let xpos = 0;
             const de = Math.abs(this.xon - this.xoff) / 1e3;
             const passi = de / steps;
-            xpos = passi/10;
-            let pathdata = 'M '+ Math.round(coefx * xpos) + ' '+ (ymax - Math.round(coefy * this.fx(xpos)));
+            xpos = passi / 10;
+            let pathdata = 'M ' + Math.round(coefx * xpos) + ' ' + (ymax - Math.round(coefy * this.fx(xpos)));
             xpos = 0;
-            while (xpos <= (de*2)) {
+            while (xpos <= (de * 2)) {
                 xpos = xpos + passi;
                 pathdata = pathdata + ' L ' + Math.round(coefx * xpos) + ' ' + (ymax - Math.round(coefy * this.fx(xpos)));
             }
             return pathdata;
         }
-        return 'M 0 0 L '+xmax+' '+ymax+' ';
+        return 'M 0 0 L ' + xmax + ' ' + ymax + ' ';
     }
 
-    public fx(x: number): number{
+    public fx(x: number): number {
         if (this.measuredIntensity <= this.epsiloncutoff) {
             return 0;
         }
@@ -58,7 +58,7 @@ export class RedoxCalculation {
             return Infinity;
         }
         const de = Math.log(10) * x;
-        const denominator =  Math.exp(de / this.betac) - Math.exp(-de / this.betaa);
+        const denominator = Math.exp(de / this.betac) - Math.exp(-de / this.betaa);
         if (denominator <= this.epsiloncutoff) {
             if (this.measuredIntensity > 0) {
                 return Infinity;
@@ -70,12 +70,12 @@ export class RedoxCalculation {
         return iapp / denominator / 1e3;
     }
 
-    get legend(): string{
+    get legend(): string {
         const mam2 = this.measuredIntensity / this.measuredSurface;
         return mam2.toFixed(1) + ' mA/m²';
     }
 
-    private canCalc(): boolean{
+    private canCalc(): boolean {
         let chk = this.xon > this.epsiloncutoff;
         chk = chk && this.xoff > this.epsiloncutoff;
         chk = chk && this.measuredIntensity > this.epsiloncutoff;

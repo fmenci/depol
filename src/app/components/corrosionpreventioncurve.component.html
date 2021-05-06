@@ -1,119 +1,126 @@
 <form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row">
-    <div class=" col-lg-7">
-      <h2>Evaluation de la vitesse de corrosion</h2>
+  <div class=" col-lg-7">
+    <h2>{{'perfEval'|localise:'RGD'}}</h2>
+  </div>
+  <fieldset class="col-lg-5 px-1">
+    <div class="form-row">
+      <div class="row m-0 w-100">
+        <label class="col-4 text-right col-form-label" for="refreport">{{'labelRefEtude'|localise:'RGD'}}</label>
+        <div class="input-group col-8">
+          <input formControlName="refreport" class="form-control font-weight-bold text-right"
+            placeholder="{{'placeholderRefEtude'|localise:'RGD'}}" type="text" aria-describedby="refreport-button"
+            aria-label="refreport" />
+          <div class="input-group-append">
+            <button role="submit" class="btn btn-outline-secondary" id="refreport-button" (click)="mePrint()">
+              {{'btnPrint'|localise:'RGD'}}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <fieldset class="col-lg-5 px-1">
-      <div class="form-row">
-        <div class="row m-0 w-100">
-          <label class="col-4 text-right col-form-label" for="refreport">Référence de rapport</label>
-          <div class="input-group col-8">
-            <input formControlName="refreport" class="form-control font-weight-bold text-right" placeholder="ref de votre rapport" type="text" aria-describedby="refreport-button" aria-label="refreport" />
-            <div class="input-group-append">
-              <button role="submit" class="btn btn-outline-secondary" id="refreport-button">
-                pdf
-              </button>
-            </div>
+  </fieldset>
+  <div class="col-xl-4 p-0">
+    <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
+    <app-formula-math #mathformula></app-formula-math>
+  </div>
+  <fieldset class="col-lg-7 col-xl-4 px-1">
+    <div class="form-row">
+      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'RGD'}}</p>
+      <div class="row m-0 w-100">
+        <label class="col-2 text-right col-form-label" for="measuredIntensity">I <sub>app</sub></label>
+        <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
+          <input formControlName="measuredIntensity" class="form-control font-weight-bold text-right"
+            placeholder="measured intensity" type="text" aria-describedby="iapp-desc" aria-label="measuredIntensity" />
+          <div class="input-group-append">
+            <span class="input-group-text" id="iapp-desc">mA</span>
+          </div>
+        </div>
+        <label class="col-2 text-right col-form-label" for="measuredSurface">{{'rsurf'|localise:'RGD'}}</label>
+        <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
+          <input formControlName="measuredSurface" class="form-control font-weight-bold text-right"
+            placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
+          <div class="input-group-append">
+            <span class="input-group-text" id="surface-desc">m²</span>
           </div>
         </div>
       </div>
-    </fieldset>
-    <div class="col-xl-4 p-0">
-      <p class="text-muted w-100 text-center m-1">Tafel, Butler-Volmer formula</p>
-      <app-formula-math #mathformula></app-formula-math>
     </div>
-    <fieldset class="col-lg-7 col-xl-4 px-1">
-      <div class="form-row">
-        <p class="text-muted w-100 text-center m-1">charge appliquées</p>
-        <div class="row m-0 w-100">
-          <label class="col-2 text-right col-form-label" for="measuredIntensity">I <sub>app</sub></label>
-          <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
-            <input formControlName="measuredIntensity" class="form-control font-weight-bold text-right" placeholder="measured intensity" type="text" aria-describedby="iapp-desc" aria-label="measuredIntensity" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="iapp-desc">mA</span>
-            </div>
+    <div class="form-row">
+      <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'RGD'}}</p>
+      <div class="row m-0 w-100">
+        <label class="col-2 text-right col-form-label" for="xon">X <sub>on</sub></label>
+        <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
+          <input formControlName="xon" class="form-control font-weight-bold text-right" placeholder="xon" type="text"
+            aria-describedby="xon-desc" aria-label="xon" />
+          <div class="input-group-append" id="xon-desc">
+            <span class="input-group-text">mV</span>
           </div>
-          <label class="col-2 text-right col-form-label" for="measuredSurface">surface</label>
-          <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
-            <input formControlName="measuredSurface" class="form-control font-weight-bold text-right" placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="surface-desc">m²</span>
-            </div>
+        </div>
+        <label class="col-2 text-right col-form-label" for="xoff">X <sub>off</sub></label>
+        <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
+          <input formControlName="xoff" class="form-control font-weight-bold text-right" placeholder="xoff" type="text"
+            aria-describedby="xoff-desc" aria-label="xoff" />
+          <div class="input-group-append" id="xoff-desc">
+            <span class="input-group-text">mV</span>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <p class="text-muted w-100 text-center m-1">potentiels mesurés</p>
-        <div class="row m-0 w-100">
-          <label class="col-2 text-right col-form-label" for="xon">X <sub>on</sub></label>
-          <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-            <input formControlName="xon" class="form-control font-weight-bold text-right" placeholder="xon" type="text" aria-describedby="xon-desc" aria-label="xon" />
-            <div class="input-group-append" id="xon-desc">
-              <span class="input-group-text">mV</span>
-            </div>
-          </div>
-          <label class="col-2 text-right col-form-label" for="xoff">X <sub>off</sub></label>
-          <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-            <input formControlName="xoff" class="form-control font-weight-bold text-right" placeholder="xoff" type="text" aria-describedby="xoff-desc" aria-label="xoff" />
-            <div class="input-group-append" id="xoff-desc">
-              <span class="input-group-text">mV</span>
-            </div>
-          </div>
-          </div>
-      </div>
-    </fieldset>
-    <fieldset class="col-lg-5 col-xl-4 px-1">
-      <div class="form-row mt-4">
-        <p class="text-muted w-100 text-center m-1">Evaluation de la corrosion</p>
-        <div class="row m-0 w-100">
-          <label class="col-3 text-right col-form-label" for="icorr">i <sub>corr</sub></label>
-          <div class="input-group input-group-lg col-9">
-            <input [value]="userIcorr.effect" class="form-control text-center"
-                    placeholder="effect" type="text" aria-describedby="icorr-desc" aria-label="icorr" readonly
-                    [style.background-color]="userIcorr.bgcolor" [style.border-color]="userIcorr.bordercolor" />
-            <input [value]="userIcorr.p3" class="form-control font-weight-bold text-right"
-                   placeholder="icorr" type="text" aria-describedby="icorr-desc" aria-label="icorr" readonly
-                   [style.background-color]="userIcorr.bgcolor" [style.border-color]="userIcorr.bordercolor" />
-            <div class="input-group-append" id="icorr-desc">
-              <span class="input-group-text" [style.background-color]="userIcorr.bgcolor" [style.border-color]="userIcorr.bordercolor">mA/m²</span>
-            </div>
+    </div>
+  </fieldset>
+  <fieldset class="col-lg-5 col-xl-4 px-1">
+    <div class="form-row mt-4">
+      <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'RGD'}}</p>
+      <div class="row m-0 w-100">
+        <label class="col-3 text-right col-form-label" for="icorr">i <sub>corr</sub></label>
+        <div class="input-group input-group-lg col-9">
+          <input [value]="userIcorr.effect" class="form-control text-center" placeholder="effect" type="text"
+            aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
+            [style.border-color]="userIcorr.bordercolor" />
+          <input [value]="userIcorr.p3" class="form-control font-weight-bold text-right" placeholder="icorr" type="text"
+            aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
+            [style.border-color]="userIcorr.bordercolor" />
+          <div class="input-group-append" id="icorr-desc">
+            <span class="input-group-text" [style.background-color]="userIcorr.bgcolor"
+              [style.border-color]="userIcorr.bordercolor">mA/m²</span>
           </div>
         </div>
       </div>
-    </fieldset>
-    <div class="col-12" [style.display]="illustdisplay">
-      <div class="row">
-        <div class="col-6">
-          <img src="/assets/fig_icorr_measure.jpg" alt="Measure illustration" class="d-block m-auto" />
-        </div>
-        <div class="col-6">
-          <h2>Galvanic protection</h2>
-          <h4>Concrete steel reinforced structure corrosion prevention with galvanic anodes</h4>
-          <p>This application provides a calculation from measured parameters on a steel reinforced concrete structure (see illustration).  The mathematical formula is deduced
-            from Tafel and Butler-Volmer equations</p>
+    </div>
+  </fieldset>
+  <div class="col-12" [style.display]="illustdisplay">
+    <div class="row">
+      <div class="col-lg-6">
+        <img src="/assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
+          class="d-block m-auto" />
+      </div>
+      <div class="col-lg-6">
+        <h2>{{'illustDepolTitle'|localise:'RGD'}}</h2>
+        <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
+        <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
+        <ul>
+          <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'RGD'}}s</li>
+          <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'RGD'}}</li>
+          <li>{{'rcstdesc'|localise:'RGD'}}
             <ul>
-              <li>I<sub>app</sub>&nbsp;: intensité appliquée avant dépolarisation en milliampaères</li>
-              <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: mesure du potentiel sur le circuit jaune, potentiel mesuré aux points X<sub>on</sub> et X<sub>off</sub> en millivolts</li>
-              <li>Constantes appliquées &beta;<sub>a</sub> et &beta;<sub>c</sub>, déterminées de façon empirique en millivolts</li>
               <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
               <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
             </ul>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="col-12">
-      <app-theecanvas [title]="'Courbes protection de corrosion'" [usercurve]="corrosionview"></app-theecanvas>
-    </div>
+  </div>
+  <app-theecanvas [title]="'chartTitle'|localise:'RGD'" [usercurve]="corrosionview" class="col-12"></app-theecanvas>
 
-    <div class="col-12 px-4" *ngIf="showingdebug">
-        <h3>Debug</h3>
-        <p class="form-text">
-          status : {{ aiForm.status }}
-          <br />
-          dirty : {{ aiForm.dirty }}
-        </p>
-        <div class="form-text text-muted">
-          <pre>{{ aiForm.value | json }}</pre>
-        </div>
-      </div>
-    </form>
-      
+  <div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
+    <h3>Debug</h3>
+    <p class="form-text">
+      status : {{ aiForm.status }}
+      <br />
+      dirty : {{ aiForm.dirty }}
+    </p>
+    <div class="form-text text-muted">
+      <pre>{{ aiForm.value | json }}</pre>
+    </div>
+  </div>
+</form>

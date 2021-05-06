@@ -5,7 +5,7 @@ import { RedoxCalculation } from 'src/models/redox.calculation.model';
 @Component({
     selector: 'app-theecanvas',
     templateUrl: './theecanvas.html',
-    styleUrls:[ './theecanvas.less' ]
+    styleUrls: ['./theecanvas.less']
 })
 export class TheeCanvasComponent {
 
@@ -16,8 +16,6 @@ export class TheeCanvasComponent {
     get usercurve(): RedoxCalculation {
         return this.localusercurve;
     }
-    xaxislegend = 'Dépolarisation (en mV)';
-    yaxislegend = 'Taux de corrosion (i Corr en mA/m²)';
     redoxcurves: RedoxCalculation[] = [
         new RedoxCalculation(740, 618, .2, 1, '#f08080'),
         new RedoxCalculation(740, 618, .5, 1, '#0080ff'),
@@ -30,49 +28,44 @@ export class TheeCanvasComponent {
     ];
     gradsoffset = 50;
     xmax = 1618;
-    xaxis: GraduationModel[]=[];
-    yaxis: GraduationModel[]=[];
+    xaxis: GraduationModel[] = [];
+    yaxis: GraduationModel[] = [];
     ymax = 1000;
 
     private coefx = 1e4;
     private coefy = 1e5;
     private localusercurve = new RedoxCalculation(740, 618, 6, 1, '#ffff12');
 
-    constructor(){
+    constructor() {
         let xpos = 0;
         let xcal = this.gradsoffset;
         const xstep = 50 / this.coefx; // mV
-        const precx = this.coefx/10;
-        // console.log('cx ' + (50/this.coefx) + ' ' + xstep);
-        while (xcal < this.xmax){
+        const precx = this.coefx / 10;
+        while (xcal < this.xmax) {
             xpos = xpos + xstep;
             xcal = Math.round(this.coefx * xpos) + this.gradsoffset;
-            if(xcal < this.xmax){
-                this.xaxis.push(new GraduationModel(Math.round(xpos*1e3*precx)/precx, xcal));
+            if (xcal < this.xmax) {
+                this.xaxis.push(new GraduationModel(Math.round(xpos * 1e3 * precx) / precx, xcal));
             }
         }
         let ypos = 0;
         let ycal = this.gradsoffset;
         const ystep = 50 / this.coefy; // mA/m²
-        // let testycal = Math.round(this.coefy * ystep) + this.gradsoffset;
-        // console.log('cy ' + (50/this.coefy) + ' ' + ystep);
-        const precy = this.coefy/10;
-        // console.log(testycal);
-        while (ycal < this.ymax){
+        const precy = this.coefy / 10;
+        while (ycal < this.ymax) {
             ypos = ypos + ystep;
             ycal = Math.round(this.coefy * ypos) + this.gradsoffset;
-            if(ycal < this.ymax){
-                // console.log(ycal);
-                this.yaxis.push(new GraduationModel(Math.round(ypos*1e3*precy)/precy, ycal));
+            if (ycal < this.ymax) {
+                this.yaxis.push(new GraduationModel(Math.round(ypos * 1e3 * precy) / precy, ycal));
             }
         }
     }
 
-    fetchpath(curve: RedoxCalculation){
+    fetchpath(curve: RedoxCalculation) {
         return curve.drawline(200, this.xmax, this.ymax, this.coefx, this.coefy);
     }
 
-    get xline(): number{
+    get xline(): number {
         return this.xmax - this.gradsoffset;
     }
 
@@ -80,7 +73,7 @@ export class TheeCanvasComponent {
         return Math.round(this.xmax / 2);
     }
 
-    get yline(): number{
+    get yline(): number {
         return this.ymax - this.gradsoffset;
     }
 
