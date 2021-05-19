@@ -23,7 +23,7 @@
     <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
     <app-formula-math #mathformula></app-formula-math>
   </div>
-  <fieldset class="col-lg-7 col-xl-4 px-1">
+  <fieldset class="col-lg-7 col-xl-4 px-1 desc-corr">
     <div class="form-row">
       <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'RGD'}}</p>
       <div class="row m-0 w-100">
@@ -67,7 +67,7 @@
       </div>
     </div>
   </fieldset>
-  <fieldset class="col-lg-5 col-xl-4 px-1">
+  <fieldset class="col-lg-5 col-xl-4 px-1 fig-corr">
     <div class="form-row mt-4">
       <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'RGD'}}</p>
       <div class="row m-0 w-100">
@@ -87,13 +87,13 @@
       </div>
     </div>
   </fieldset>
-  <div class="col-12" [style.display]="illustdisplay">
+  <div class="col-12 illust-info" [style.display]="illustdisplay">
     <div class="row">
-      <div class="col-lg-6">
-        <img src="/assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
+      <div class="col-lg-6 fig-corr">
+        <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
           class="d-block m-auto" />
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 desc-corr">
         <h2>{{'illustDepolTitle'|localise:'RGD'}}</h2>
         <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
         <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
