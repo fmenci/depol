@@ -1,8 +1,12 @@
 <form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row">
   <div class=" col-lg-7">
-    <h2>{{'perfEval'|localise:'RGD'}}</h2>
+    <h2>
+      <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91"
+        height="56" />
+      {{'perfEval'|localise:'RGD'}}</h2>
+      <p class="gest-print">{{'labelRefEtude'|localise:'RGD'}} {{refreport}}</p>
   </div>
-  <fieldset class="col-lg-5 px-1">
+  <fieldset class="col-lg-5 px-1 ungest-print">
     <div class="form-row">
       <div class="row m-0 w-100">
         <label class="col-4 text-right col-form-label" for="refreport">{{'labelRefEtude'|localise:'RGD'}}</label>
@@ -94,7 +98,7 @@
           class="d-block m-auto" />
       </div>
       <div class="col-lg-6 desc-corr">
-        <h2>{{'illustDepolTitle'|localise:'RGD'}}</h2>
+        <h2 class="ungest-print">{{'illustDepolTitle'|localise:'RGD'}}</h2>
         <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
         <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
         <ul>

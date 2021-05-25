@@ -36,17 +36,23 @@
   border: 1px #ced4da solid;
 }
 
-.theecanvas-container .theecanvas-legendbox span{
-  display: inline-block;
+.theecanvas-container .theecanvas-legendbox .legend-line{
+  display: flex;
   width:100%;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 16px;
 }
 
-.theecanvas-container .theecanvas-legendbox span>span.line{
+.theecanvas-container .theecanvas-legendbox .legend-line hr.line{
+  display: inline-block;
   width:30px;
   height: 2px;
   margin: 6px 6px 0 0;
-  float: left;
-  background: cyan;
+  border-top: cyan 2px solid;
+  color: cyan;
+  background-color: cyan;
+}
+
+.theecanvas-container .theecanvas-legendbox .legend-line span.curve-name{
+  display: inline-block;
 }

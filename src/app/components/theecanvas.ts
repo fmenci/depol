@@ -19,11 +19,11 @@ export class TheeCanvasComponent {
     redoxcurves: RedoxCalculation[] = [
         new RedoxCalculation(740, 618, .2, 1, '#f08080'),
         new RedoxCalculation(740, 618, .5, 1, '#0080ff'),
-        new RedoxCalculation(740, 618, 1, 1, '#00ffff'),
+        new RedoxCalculation(740, 618, 1, 1, '#00fbff'),
         new RedoxCalculation(880, 618, 2, 1, '#8080f0'),
         new RedoxCalculation(740, 618, 3, 1, '#80f064'),
-        new RedoxCalculation(740, 618, 6, 1, '#ffff12'),
         new RedoxCalculation(740, 618, 11, 2, '#ff0000'),
+        new RedoxCalculation(740, 618, 6, 1, '#fbff12'),
         new RedoxCalculation(880, 618, 12, 1, '#000000')
     ];
     gradsoffset = 50;
