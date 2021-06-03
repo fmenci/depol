@@ -1,11 +1,12 @@
 {
   "name": "depol",
-  "version": "5.0.4",
+  "version": "5.0.5",
+  "license": "GNU GPLv3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "publish": "ng build --prod",
+    "publish": "ng build --prod --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,7 +25,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.12",
+    "@angular-devkit/build-angular": "0.1102.9",
     "@angular-eslint/builder": "4.3.0",
     "@angular-eslint/eslint-plugin": "4.3.0",
     "@angular-eslint/eslint-plugin-template": "4.3.0",
@@ -33,7 +34,7 @@
     "@angular/cli": "~11.2.13",
     "@angular/compiler-cli": "~11.2.14",
     "@types/jasmine": "~3.7.4",
-    "@types/node": "^15.6.1",
+    "@types/node": "^15.9.0",
     "@typescript-eslint/eslint-plugin": "~4.25.0",
     "@typescript-eslint/parser": "~4.25.0",
     "codelyzer": "^6.0.2",
@@ -43,7 +44,7 @@
     "eslint-plugin-prefer-arrow": "1.2.3",
     "jasmine-core": "~3.7.1",
     "jasmine-spec-reporter": "~7.0.0",
-    "karma": "~6.3.2",
+    "karma": "~6.3.3",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
