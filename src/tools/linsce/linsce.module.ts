@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FlagsRepository } from './flags.repository';
 import { LanguageRepository } from './language.repository';
 import { LocalisePipe } from './localisation.pipe';
 
 @NgModule({
   declarations: [LocalisePipe],
   imports: [HttpClientModule, CommonModule],
-  providers: [LanguageRepository],
+  providers: [LanguageRepository, FlagsRepository],
   exports: [LocalisePipe]
 })
 /*

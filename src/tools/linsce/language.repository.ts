@@ -1,6 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LanguageFormula } from '../models/languageformula.model';
-import { LanguageTag } from '../models/languagetag.model';
+import { environment } from 'src/environments/environment.prod';
+import { DEFLIN } from '../constantes.helper';
+import { TimeDelayDirective } from '../timedelay.directive';
+import { LanguageFormula } from './models/languageformula.model';
+import { LanguageTag } from './models/languagetag.model';
+import { LinguaQueryModel } from './models/linguaquery.model';
 
 declare const opLingua: string;
 declare const aiSuiteLanguageJS: string | any[] | undefined;
@@ -16,22 +21,65 @@ declare const aiSuiteLanguageJS: string | any[] | undefined;
 @Injectable()
 export class LanguageRepository {
     private linformula: LanguageFormula[] = [];
+    private calltagurl = 'api/WorldDesk/AjaxCallTag';
     private currentlingua: string;
+    private tagStatus: LinguaQueryModel[] = [];
+    private delaychecktags: TimeDelayDirective = new TimeDelayDirective(3000);
 
-    constructor() {
-        this.currentlingua = opLingua;
+    constructor(
+        private http: HttpClient
+    ) {
+        this.calltagurl = environment.baseUrl + this.calltagurl;
+        if (opLingua === undefined) {
+            this.currentlingua = DEFLIN; // Default
+        } else {
+            this.currentlingua = opLingua;
+        }
+        if (!this.currentlingua || this.currentlingua.length < 2) {
+            console.log('forcing op lingua to (default) ' + DEFLIN);
+            this.currentlingua = DEFLIN;
+        }
+        this.delaychecktags.event.subscribe(() => {
+            if (this.tagStatus.length > 0) {
+                this.http.post(this.calltagurl, this.tagStatus).subscribe();
+                this.tagStatus = [];
+            }
+        });
         this.initFormula();
     }
 
     public label(formula: string, tag: string): string {
-        const myformula = this.linformula.find(tm => tm.formula === formula && tm.lingua === this.currentlingua);
+        const myformula = this.linformula.find((tm: LanguageFormula) => tm.formula === formula);
         if (myformula !== undefined) {
-            const ltag = myformula.tags.find(tm => tm.tag === tag);
-            if (ltag !== undefined) {
+            const ltag = myformula.tags.find((tm: LanguageTag) => tm.tag === tag);
+            if (ltag === undefined) {
+                // then add to cache
+                myformula.tags.push(new LanguageTag(tag, '*' + tag, 1));
+            } else {
+                if (ltag.use === undefined) {
+                    ltag.use = 0;
+                }
+                if (ltag.use === 0) {
+                    this.tagStatus.push(new LinguaQueryModel(formula, tag, this.currentlingua));
+                    this.delaychecktags.tima();
+                }
+                ltag.use++;
                 return ltag.pcmt;
             }
         }
+        console.log('missing tag ' + formula + ' - ' + tag + ' ' + this.currentlingua);
+        const foundtag = this.tagStatus.find((tm: LinguaQueryModel) => tm.formula === formula && tm.tag === tag);
+        if (foundtag === undefined) {
+            this.tagStatus.push(new LinguaQueryModel(formula, tag, this.currentlingua, true));
+            this.delaychecktags.tima();
+        }
+        // add missing formula to cache
+        this.linformula.push(new LanguageFormula(formula, this.currentlingua, [new LanguageTag(tag, '*' + tag, 1)]));
         return '*' + tag;
+    }
+
+    get operationLingua(): string {
+        return opLingua;
     }
 
     private initFormula(): void {

@@ -62,19 +62,29 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "depol:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "depol:build:production"
+            },
+            "development": {
+              "browserTarget": "depol:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -123,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "depol"
+  "defaultProject": "depol",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

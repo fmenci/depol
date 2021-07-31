@@ -96,7 +96,7 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     return 'none';
   }
 
-  get refreport():string{
+  get refreport(): string {
     const ctr = this.aiForm.get('refreport') as FormControl;
     return ctr.value;
   }

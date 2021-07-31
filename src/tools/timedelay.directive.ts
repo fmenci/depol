@@ -41,7 +41,7 @@ export class TimeDelayDirective<T = undefined> {
     this.triggerSubscribe = interval(this.msDelay)
       .subscribe(() => {
         this.event.emit(eventEmittedValue);
-        if (this.triggerSubscribe) {
+        if(this.triggerSubscribe !== undefined){
           this.triggerSubscribe.unsubscribe();
         }
       });
