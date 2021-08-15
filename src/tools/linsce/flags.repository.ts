@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { IAjaxResponse } from '../models/iajax.response';
 import { ALLLIN } from '../constantes.helper';
 import { ILinguaFlag } from './models/ilingua.flag';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class FlagsRepository {
@@ -20,10 +21,9 @@ export class FlagsRepository {
   private urllingua = 'api/WorldDesk/Linguas';
 
   constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') baseUrl: string
+    private http: HttpClient
   ) {
-    this.http.get<IAjaxResponse<ILinguaFlag>>(baseUrl + this.urllingua)
+    this.http.get<IAjaxResponse<ILinguaFlag>>(environment.baseUrl + this.urllingua)
       .subscribe((result: IAjaxResponse<ILinguaFlag>) => {
         if (result.success && result.valid) {
           this.linguas = result.data;

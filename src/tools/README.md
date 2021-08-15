@@ -15,3 +15,5 @@ Each file concerned containes the comment following area :
 */
 
 08/03/2021 : concentrated into AISuiteModule (aisuite.module.ts  and ged.module.ts)
+10/08/2021 : linsce call to repo using API ; require Angular module call API on same url root, variable is set in Environment, NO CROSS SITE SCRIPTING ALLOWED
+

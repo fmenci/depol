@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Directive, EventEmitter, Inject, Injectable, Output } from '@angular/core';
+import { Directive, EventEmitter, Injectable, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { environment } from '../environments/environment';
 import { IAuthCode } from './models/iauthcode';
 
 @Directive()
@@ -19,11 +20,10 @@ export class AditoAPIDirective {
   private frmout = document.createElement('form');
 
   constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') baseUrl: string
+    private http: HttpClient
   ) {
     this.urlz.forEach(tm => {
-      tm.url = baseUrl + tm.url;
+      tm.url = environment.baseUrl + tm.url;
     });
   }
 
@@ -36,8 +36,6 @@ export class AditoAPIDirective {
       { responseType: 'text' }
     ).subscribe(
       (result: string) => {
-        //console.log('adito check status connected');
-        //console.log(result);
         if (result.length > 0) {
           this.setConnect(true);
         } else {
@@ -71,21 +69,21 @@ export class AditoAPIDirective {
   }
 
   private formIn(): HTMLFormElement {
-    let frmin = document.createElement('form');
-    let tema = document.createElement('input');
+    const frmin = document.createElement('form');
+    const tema = document.createElement('input');
     tema.type = 'text';
     tema.name = 'email';
     tema.placeholder = 'email';
     frmin.appendChild(tema);
-    let tpwd = document.createElement('input');
+    const tpwd = document.createElement('input');
     tpwd.type = 'password';
     tpwd.name = 'password';
     tpwd.placeholder = 'password';
     frmin.appendChild(tpwd);
-    let btnsign = document.createElement('button');
+    const btnsign = document.createElement('button');
     btnsign.type = 'button';
     btnsign.classList.add('btn', 'btn-sm', 'btn-primary');
-    let falink = document.createElement('i');
+    const falink = document.createElement('i');
     falink.classList.add('fas', 'fa-link');
     btnsign.appendChild(falink);
     btnsign.addEventListener('click', () => {
@@ -96,11 +94,11 @@ export class AditoAPIDirective {
   }
 
   private formOut(): HTMLFormElement {
-    let frmout = document.createElement('form');
-    let bout = document.createElement('button');
+    const frmout = document.createElement('form');
+    const bout = document.createElement('button');
     bout.type = 'button';
     bout.classList.add('btn', 'btn-sm', 'btn-dark');
-    let faunlink = document.createElement('i');
+    const faunlink = document.createElement('i');
     faunlink.classList.add('fas', 'fa-unlink');
     bout.appendChild(faunlink);
     frmout.appendChild(bout);
@@ -111,8 +109,8 @@ export class AditoAPIDirective {
   }
 
   private auth(frmin: HTMLFormElement) {
-    let emainp = frmin.elements[0] as HTMLInputElement;
-    let pwdinp = frmin.elements[1] as HTMLInputElement;
+    const emainp = frmin.elements[0] as HTMLInputElement;
+    const pwdinp = frmin.elements[1] as HTMLInputElement;
     if ((emainp.value.length > 4) && (pwdinp.value.length > 4)) {
       if (this.checkSubscribe) {
         this.checkSubscribe.unsubscribe();
@@ -129,6 +127,7 @@ export class AditoAPIDirective {
             alert(result?.auth);
           }
         }, (error: HttpErrorResponse) => this.handle401(error));
+      pwdinp.value = '';
     }
   }
 
