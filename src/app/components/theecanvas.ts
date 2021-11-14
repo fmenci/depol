@@ -81,4 +81,14 @@ export class TheeCanvasComponent {
         return Math.round(this.ymax / 2);
     }
 
+    // x axis cross hair
+    get xxhair(): number {
+        return this.localusercurve.deltapotential * this.coefx;
+    }
+
+    // y axis cross hair
+    get yxhair(): number {
+        return (this.ymax - Math.round(this.coefy * this.localusercurve.fx(this.localusercurve.deltapotential)));
+    }
+
 }

@@ -30,24 +30,27 @@
             [attr.y1]="(gradsoffset-10)" [attr.y2]="(gradsoffset+10)" />
         </g>
       </g>
+      <text text-anchor="middle" x="809" y="36" font-size="26">{{ title }}</text>
     </g>
     <g class="curves-drawing" [attr.transform]="'translate('+gradsoffset+',-'+gradsoffset+')'">
-      <path *ngFor="let crv of redoxcurves" [attr.d]="fetchpath(crv)" [attr.stroke]="crv.linecolor" stroke-width="3"
+      <path *ngFor="let crv of redoxcurves" [attr.d]="fetchpath(crv)" [attr.stroke]="crv.linecolor" stroke-width="2"
+        fill="none" stroke-dasharray="8 4" />
+      <path id="usercurve" [attr.d]="fetchpath(usercurve)" [attr.stroke]="usercurve.linecolor" stroke-width="4"
         fill="none" />
-      <path id="usercurve" [attr.d]="fetchpath(usercurve)" [attr.stroke]="usercurve.linecolor" stroke-width="5"
-        fill="none" />
+      <line [attr.x1]="xxhair" y1="0" [attr.x2]="xxhair" y2="1000" stroke="#f00" stroke-width=".35" />
+      <line x1="0" [attr.y1]="yxhair" x2="1618" [attr.y2]="yxhair" stroke="#f00" stroke-width=".35" />
+    </g>
+    <g class="legendbox" transform="translate(1484, 10)">
+      <rect x="0" y="0" width="124" height="200" fill="#fff" stroke="#ced4da" stroke-width="1" />
+      <g *ngFor="let crv of redoxcurves; let i = index" [attr.transform]="'translate(0,'+i*19+')'">
+        <line x1="3" y1="14" x2="36" y2="14" class="legend-line" [attr.stroke]="crv.linecolor" stroke-width="2" stroke-dasharray="8  4" />
+        <text x="40" y="19" class="curve-name">{{crv.legend}}</text>
+      </g>
+      <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'RGD'}}</text>
+      <g>
+        <line x1="3" y1="189" x2="36" y2="189" class="legend-line" [attr.stroke]="usercurve.linecolor" stroke-width="4" />
+        <text x="40" y="194" class="curve-name">{{usercurve.legend}}</text>
+      </g>
     </g>
   </svg>
-  <span class="theecanvas-title">{{ title }}</span>
-  <div class="theecanvas-legendbox">
-    <span *ngFor="let crv of redoxcurves" class="legend-line">
-      <hr class="line" [style.color]="crv.linecolor" [style.background-color]="crv.linecolor" [style.border-top-color]="crv.linecolor" />
-      <span class="curve-name">{{crv.legend}}</span>
-    </span>
-    <span>{{'yourCurve'|localise:'RGD'}}</span>
-    <span id="usercurve-legend" class="legend-line">
-      <hr class="line" [style.color]="usercurve.linecolor" [style.background-color]="usercurve.linecolor" [style.border-top-color]="usercurve.linecolor" />
-      <span class="curve-name">{{usercurve.legend}}</span>
-    </span>
-  </div>
 </div>

@@ -26,7 +26,7 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
 
   constructor(private fb: FormBuilder, private linrepo: LanguageRepository) {
     this.delay.event.subscribe((ev: string) => {
-      console.log(ev);
+      //console.log(ev);
       this.ispoped = ev !== '';
     });
   }

@@ -75,6 +75,10 @@ export class RedoxCalculation {
         return mam2.toFixed(1) + ' mA/m²';
     }
 
+    get deltapotential(): number {
+        return Math.abs(this.xon - this.xoff) / 1e3;
+    }
+
     private canCalc(): boolean {
         let chk = this.xon > this.epsiloncutoff;
         chk = chk && this.xoff > this.epsiloncutoff;

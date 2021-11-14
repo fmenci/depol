@@ -23,16 +23,14 @@
       </div>
     </div>
   </fieldset>
-  <div class="col-xl-4 p-0">
-    <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
-    <app-formula-math #mathformula></app-formula-math>
-  </div>
-  <fieldset class="col-lg-7 col-xl-4 px-1 desc-corr">
+  <fieldset class="col-lg-7 px-1 desc-corr">
     <div class="form-row">
-      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'RGD'}}</p>
+      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'RGD'}} 
+        <a href="#mathformula"><i class="fas fa-question-circle"></i></a>
+      </p>
       <div class="row m-0 w-100">
         <label class="col-2 text-right col-form-label" for="measuredIntensity">I <sub>app</sub></label>
-        <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
+        <div class="input-group col-4">
           <input formControlName="measuredIntensity" class="form-control font-weight-bold text-right"
             placeholder="measured intensity" type="text" aria-describedby="iapp-desc" aria-label="measuredIntensity" />
           <div class="input-group-append">
@@ -40,7 +38,7 @@
           </div>
         </div>
         <label class="col-2 text-right col-form-label" for="measuredSurface">{{'rsurf'|localise:'RGD'}}</label>
-        <div class="input-group col-4" (mouseenter)="popbox('iapp')" (mouseleave)="popbox('')">
+        <div class="input-group col-4">
           <input formControlName="measuredSurface" class="form-control font-weight-bold text-right"
             placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
           <div class="input-group-append">
@@ -71,7 +69,7 @@
       </div>
     </div>
   </fieldset>
-  <fieldset class="col-lg-5 col-xl-4 px-1 fig-corr">
+  <fieldset class="col-lg-5 px-1 fig-corr">
     <div class="form-row mt-4">
       <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'RGD'}}</p>
       <div class="row m-0 w-100">
@@ -91,29 +89,6 @@
       </div>
     </div>
   </fieldset>
-  <div class="col-12 illust-info" [style.display]="illustdisplay">
-    <div class="row">
-      <div class="col-lg-6 fig-corr">
-        <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
-          class="d-block m-auto" />
-      </div>
-      <div class="col-lg-6 desc-corr">
-        <h2 class="ungest-print">{{'illustDepolTitle'|localise:'RGD'}}</h2>
-        <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
-        <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
-        <ul>
-          <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'RGD'}}s</li>
-          <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'RGD'}}</li>
-          <li>{{'rcstdesc'|localise:'RGD'}}
-            <ul>
-              <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
-              <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
   <app-theecanvas [title]="'chartTitle'|localise:'RGD'" [usercurve]="corrosionview" class="col-12"></app-theecanvas>
 
   <div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
@@ -128,3 +103,30 @@
     </div>
   </div>
 </form>
+<div class="col-12 p-0" id="mathformula">
+  <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
+  <app-formula-math #mathformula></app-formula-math>
+</div>
+<div class="col-12 illust-info">
+  <div class="row">
+    <div class="col-lg-6 fig-corr">
+      <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
+        class="d-block m-auto" />
+    </div>
+    <div class="col-lg-6 desc-corr">
+      <h2 class="ungest-print">{{'illustDepolTitle'|localise:'RGD'}}</h2>
+      <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
+      <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
+      <ul>
+        <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'RGD'}}s</li>
+        <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'RGD'}}</li>
+        <li>{{'rcstdesc'|localise:'RGD'}}
+          <ul>
+            <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
+            <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
