@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/.angular
 package-lock.json
 
 # profiling files
