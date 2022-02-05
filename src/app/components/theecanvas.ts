@@ -10,12 +10,7 @@ import { RedoxCalculation } from 'src/models/redox.calculation.model';
 export class TheeCanvasComponent {
 
     @Input() title = '-';
-    @Input() set usercurve(value: RedoxCalculation) {
-        this.localusercurve = value;
-    }
-    get usercurve(): RedoxCalculation {
-        return this.localusercurve;
-    }
+
     redoxcurves: RedoxCalculation[] = [
         new RedoxCalculation(740, 618, .2, 1, '#f08080'),
         new RedoxCalculation(740, 618, .5, 1, '#0080ff'),
@@ -26,6 +21,7 @@ export class TheeCanvasComponent {
         new RedoxCalculation(740, 618, 6, 1, '#fbff12'),
         new RedoxCalculation(880, 618, 12, 1, '#000000')
     ];
+
     gradsoffset = 50;
     xmax = 1618;
     xaxis: GraduationModel[] = [];
@@ -61,10 +57,6 @@ export class TheeCanvasComponent {
         }
     }
 
-    fetchpath(curve: RedoxCalculation) {
-        return curve.drawline(200, this.xmax, this.ymax, this.coefx, this.coefy);
-    }
-
     get xline(): number {
         return this.xmax - this.gradsoffset;
     }
@@ -89,6 +81,18 @@ export class TheeCanvasComponent {
     // y axis cross hair
     get yxhair(): number {
         return (this.ymax - Math.round(this.coefy * this.localusercurve.fx(this.localusercurve.deltapotential)));
+    }
+
+    get usercurve(): RedoxCalculation {
+        return this.localusercurve;
+    }
+
+    @Input() set usercurve(value: RedoxCalculation) {
+        this.localusercurve = value;
+    }
+
+    fetchpath(curve: RedoxCalculation) {
+        return curve.drawline(200, this.xmax, this.ymax, this.coefx, this.coefy);
     }
 
 }

@@ -48,6 +48,10 @@ export class LanguageRepository {
     this.initFormula();
   }
 
+  get operationLingua(): string {
+    return opLingua;
+  }
+
   public label(formula: string, tag: string): string {
     const myformula = this.linformula.find((tm: LanguageFormula) => tm.formula === formula);
     if (myformula !== undefined) {
@@ -76,10 +80,6 @@ export class LanguageRepository {
     // add missing formula to cache
     this.linformula.push(new LanguageFormula(formula, this.currentlingua, [new LanguageTag(tag, '*' + tag, 1)]));
     return '*' + tag;
-  }
-
-  get operationLingua(): string {
-    return opLingua;
   }
 
   private initFormula(): void {

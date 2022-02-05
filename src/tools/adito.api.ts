@@ -27,6 +27,10 @@ export class AditoAPIDirective {
     });
   }
 
+  get isConnected(): boolean {
+    return this.statusconnected;
+  }
+
   public check() {
     if (this.checkSubscribe) {
       this.checkSubscribe.unsubscribe();
@@ -54,10 +58,6 @@ export class AditoAPIDirective {
     } else {
       alert('could not create login menu');
     }
-  }
-
-  get isConnected(): boolean {
-    return this.statusconnected;
   }
 
   private meurl(listname: string): string {

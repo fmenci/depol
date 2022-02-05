@@ -31,26 +31,6 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    if (this.mathformula !== undefined) {
-      this.mathformula.evpopbox.subscribe((ev: string) => {
-        this.delay.tima(ev);
-      });
-    }
-  }
-
-  onSubmit() {
-    //console.log(this.aiForm.value);
-  }
-
-  popbox(ev: string) {
-    this.delay.tima(ev);
-  }
-
-  mePrint() {
-    window.print();
-  }
-
   get showingdebug(): boolean {
     return !environment.production;
   }
@@ -100,4 +80,25 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     const ctr = this.aiForm.get('refreport') as FormControl;
     return ctr.value;
   }
+
+  ngAfterViewInit(): void {
+    if (this.mathformula !== undefined) {
+      this.mathformula.evpopbox.subscribe((ev: string) => {
+        this.delay.tima(ev);
+      });
+    }
+  }
+
+  onSubmit() {
+    //console.log(this.aiForm.value);
+  }
+
+  popbox(ev: string) {
+    this.delay.tima(ev);
+  }
+
+  mePrint() {
+    window.print();
+  }
+
 }

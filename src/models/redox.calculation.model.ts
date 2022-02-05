@@ -14,6 +14,15 @@ export class RedoxCalculation {
         public linecolor: string
     ) { }
 
+    get legend(): string {
+        const mam2 = this.measuredIntensity / this.measuredSurface;
+        return mam2.toFixed(1) + ' mA/m²';
+    }
+
+    get deltapotential(): number {
+        return Math.abs(this.xon - this.xoff) / 1e3;
+    }
+
     public icorr(): IcorrResultModel {
         let result: IcorrResultModel;
         if (this.canCalc()) {
@@ -68,15 +77,6 @@ export class RedoxCalculation {
         }
         const iapp = this.measuredIntensity / this.measuredSurface;
         return iapp / denominator / 1e3;
-    }
-
-    get legend(): string {
-        const mam2 = this.measuredIntensity / this.measuredSurface;
-        return mam2.toFixed(1) + ' mA/m²';
-    }
-
-    get deltapotential(): number {
-        return Math.abs(this.xon - this.xoff) / 1e3;
     }
 
     private canCalc(): boolean {
