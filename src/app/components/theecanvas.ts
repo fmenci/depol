@@ -57,6 +57,10 @@ export class TheeCanvasComponent {
         }
     }
 
+    get canvasviewport(): string{
+        return '0 0 '+ this.xmax +' ' + this.ymax;
+    }
+
     get xline(): number {
         return this.xmax - this.gradsoffset;
     }
