@@ -1,4 +1,4 @@
-<form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row m-0">
+<form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row m-0 corr-form-component">
   <div class=" col-xl-6">
     <h2>
       <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91"
@@ -89,20 +89,20 @@
       </div>
     </div>
   </fieldset>
-  <app-theecanvas [title]="'chartTitle'|localise:'RGD'" [usercurve]="corrosionview" class="col-12"></app-theecanvas>
-
-  <div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
-    <h3>Debug</h3>
-    <p class="form-text">
-      status : {{ aiForm.status }}
-      <br />
-      dirty : {{ aiForm.dirty }}
-    </p>
-    <div class="form-text text-muted">
-      <pre>{{ aiForm.value | json }}</pre>
-    </div>
-  </div>
 </form>
+<app-theecanvas [title]="'chartTitle'|localise:'RGD'" [usercurve]="corrosionview" class="col-12 m-0 p-0"></app-theecanvas>
+
+<div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
+  <h3>Debug</h3>
+  <p class="form-text">
+    status : {{ aiForm.status }}
+    <br />
+    dirty : {{ aiForm.dirty }}
+  </p>
+  <div class="form-text text-muted">
+    <pre>{{ aiForm.value | json }}</pre>
+  </div>
+</div>
 <div class="col-12 p-0" id="mathformula">
   <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
   <app-formula-math #mathformula></app-formula-math>

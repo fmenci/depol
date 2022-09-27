@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, OnInit, Input } from '@angular/core';
 import { GraduationModel } from 'src/models/graduation.model';
 import { RedoxCalculation } from 'src/models/redox.calculation.model';
 
@@ -7,7 +7,7 @@ import { RedoxCalculation } from 'src/models/redox.calculation.model';
     templateUrl: './theecanvas.html',
     styleUrls: ['./theecanvas.less']
 })
-export class TheeCanvasComponent {
+export class TheeCanvasComponent implements OnInit {
 
     @Input() title = '-';
 
@@ -31,6 +31,9 @@ export class TheeCanvasComponent {
     private coefx = 1e4;
     private coefy = 1e5;
     private localusercurve = new RedoxCalculation(740, 618, 6, 1, '#ffff12');
+    private gdheight = 500;
+    private empiricalOffsetH = 0;
+    private bootstrapThreshold = 800;
 
     constructor() {
         let xpos = 0;
@@ -60,6 +63,15 @@ export class TheeCanvasComponent {
     get canvasviewport(): string{
         return '0 0 '+ this.xmax +' ' + this.ymax;
     }
+
+    get computedheight(): string {
+        if (window.innerHeight > this.bootstrapThreshold) {
+          return Math.round(this.gdheight) + 'px';
+        }
+        else {
+          return 'auto';
+        }
+      }
 
     get xline(): number {
         return this.xmax - this.gradsoffset;
@@ -95,8 +107,31 @@ export class TheeCanvasComponent {
         this.localusercurve = value;
     }
 
+      @HostListener('window:resize')
+      onResize() {
+        this.computeGDH();
+      }
+      ngOnInit() {
+        this.computeGDH();
+      }
+
     fetchpath(curve: RedoxCalculation) {
         return curve.drawline(200, this.xmax, this.ymax, this.coefx, this.coefy);
     }
 
+    private computeGDH() {
+        if (window.innerHeight > this.bootstrapThreshold) {
+            let nh = this.empiricalOffsetH;
+            nh = nh + document.getElementsByClassName('aisuite-menu-head')[0].clientHeight;
+            const elemfoot = document.getElementsByClassName('footer');
+            if(elemfoot.length > 0){
+                nh = nh + elemfoot[0].clientHeight;
+            }
+            nh = nh + document.getElementsByClassName('corr-form-component')[0].clientHeight;
+            this.gdheight = window.innerHeight - nh;
+        }
+        else{
+            this.gdheight = 500;
+        }
+    }
 }
