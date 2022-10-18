@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { LanguageService, TimeDelayDirective } from 'aisuite-ngtools';
 import { environment } from 'src/environments/environment';
 import { IcorrResultModel } from 'src/models/icorr.result.model';
 import { RedoxCalculation } from 'src/models/redox.calculation.model';
-import { LanguageRepository } from 'src/tools/linsce/language.repository';
-import { TimeDelayDirective } from 'src/tools/timedelay.directive';
 import { FormulaMathComponent } from './formula.math.component';
 
 @Component({
@@ -24,7 +23,7 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
   private ispoped = false;
   private delay: TimeDelayDirective<string> = new TimeDelayDirective<string>();
 
-  constructor(private fb: FormBuilder, private linrepo: LanguageRepository) {
+  constructor(private fb: FormBuilder, private linrepo: LanguageService) {
     this.delay.event.subscribe((ev: string) => {
       //console.log(ev);
       this.ispoped = ev !== '';
