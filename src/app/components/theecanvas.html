@@ -14,7 +14,7 @@
       <line class="graduation-line" [attr.x1]="gradsoffset" [attr.x2]="gradsoffset" y1="0" [attr.y2]="(yline + 10)" />
       <line class="graduation-line" [attr.x1]="(gradsoffset-10)" [attr.x2]="xmax" [attr.y1]="yline" [attr.y2]="yline" />
       <g>
-        <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ 'chartXLabel' | localise:'RGD' }}</text>
+        <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ 'chartXLabel' | localise:'Predim' }}</text>
         <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(ymax-gradsoffset+25)">0</text>
         <text text-anchor="middle" *ngFor="let axistick of xaxis" [attr.x]="axistick.x"
           [attr.y]="(ymax-gradsoffset+25)">{{axistick.grad}}</text>
@@ -23,7 +23,7 @@
       </g>
       <g transform="translate(0, 1000)">
         <g transform="rotate(-90)">
-          <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ 'chartYLabel' | localise:'RGD' }}</text>
+          <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ 'chartYLabel' | localise:'Predim' }}</text>
           <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(gradsoffset-15)">0</text>
           <text text-anchor="middle" *ngFor="let axistick of yaxis" [attr.x]="axistick.x"
             [attr.y]="(gradsoffset-15)">{{axistick.grad}}</text>
@@ -47,7 +47,7 @@
         <line x1="3" y1="14" x2="36" y2="14" class="legend-line" [attr.stroke]="crv.linecolor" stroke-width="2" stroke-dasharray="8  4" />
         <text x="40" y="19" class="curve-name">{{crv.legend}}</text>
       </g>
-      <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'RGD'}}</text>
+      <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'Predim'}}</text>
       <g>
         <line x1="3" y1="189" x2="36" y2="189" class="legend-line" [attr.stroke]="usercurve.linecolor" stroke-width="4" />
         <text x="40" y="194" class="curve-name">{{usercurve.legend}}</text>

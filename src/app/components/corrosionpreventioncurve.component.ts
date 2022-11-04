@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, SecurityContext, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LanguageService, TimeDelayDirective } from 'aisuite-ngtools';
 import { environment } from 'src/environments/environment';
 import { IcorrResultModel } from 'src/models/icorr.result.model';
@@ -18,12 +19,12 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     xoff: [this.corrosionview.xoff],
     measuredIntensity: [this.corrosionview.measuredIntensity],
     measuredSurface: [this.corrosionview.measuredSurface],
-    refreport: ['']
+    refReport: ['']
   });
   private ispoped = false;
   private delay: TimeDelayDirective<string> = new TimeDelayDirective<string>();
 
-  constructor(private fb: FormBuilder, private linrepo: LanguageService) {
+  constructor(private fb: FormBuilder, private linrepo: LanguageService, private sanitizer: DomSanitizer) {
     this.delay.event.subscribe((ev: string) => {
       //console.log(ev);
       this.ispoped = ev !== '';
@@ -50,19 +51,19 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     const uIcorr = this.corrosionmodel.icorr();
     switch (uIcorr.effect) {
       case 'high':
-        uIcorr.effect = this.linrepo.label('RGD', 'icorrDepolHigh');
+        uIcorr.effect = this.linrepo.label('Predim', 'icorrDepolHigh');
         break;
       case 'moderate':
-        uIcorr.effect = this.linrepo.label('RGD', 'icorrDepolModerate');
+        uIcorr.effect = this.linrepo.label('Predim', 'icorrDepolModerate');
         break;
       case 'low':
-        uIcorr.effect = this.linrepo.label('RGD', 'icorrDepolLow');
+        uIcorr.effect = this.linrepo.label('Predim', 'icorrDepolLow');
         break;
       case 'passive':
-        uIcorr.effect = this.linrepo.label('RGD', 'icorrDepolPassif');
+        uIcorr.effect = this.linrepo.label('Predim', 'icorrDepolPassif');
         break;
       default:
-        uIcorr.effect = this.linrepo.label('RGD', 'icorrDepolUnset');
+        uIcorr.effect = this.linrepo.label('Predim', 'icorrDepolUnset');
         break;
     }
     return uIcorr;
@@ -76,8 +77,12 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
   }
 
   get refreport(): string {
-    const ctr = this.aiForm.get('refreport') as FormControl;
+    const ctr = this.aiForm.get('refReport') as FormControl;
     return ctr.value;
+  }
+
+  get headPrintTemplate(): string {
+    return this.sanitizer.sanitize(SecurityContext.HTML, this.linrepo.docHeaderTemplate) ?? '';
   }
 
   ngAfterViewInit(): void {

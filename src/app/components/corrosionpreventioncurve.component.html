@@ -1,22 +1,23 @@
 <form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row m-0 corr-form-component">
+  <div [innerHtml]="headPrintTemplate" class="gest-print col-6"></div>
   <div class=" col-xl-6">
     <h2>
-      <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91"
-        height="56" />
-      {{'perfEval'|localise:'RGD'}}</h2>
-      <p class="gest-print">{{'labelRefEtude'|localise:'RGD'}} {{refreport}}</p>
+      <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91" height="56" />
+      {{'perfEval'|localise:'Predim'}}
+    </h2>
+    <p class="gest-print">{{'labelRefEtude'|localise:'Predim'}} <em class="badge badge-light">{{refreport}}</em></p>
   </div>
   <fieldset class="col-xl-6 px-1 ungest-print">
     <div class="form-row">
       <div class="row m-0 w-100">
-        <label class="col-4 text-right col-form-label" for="refreport">{{'labelRefEtude'|localise:'RGD'}}</label>
+        <label class="col-4 text-right col-form-label" for="refReport">{{'labelRefEtude'|localise:'Predim'}}</label>
         <div class="input-group col-8">
-          <input formControlName="refreport" class="form-control font-weight-bold text-right"
-            placeholder="{{'placeholderRefEtude'|localise:'RGD'}}" type="text" aria-describedby="refreport-button"
-            aria-label="refreport" />
+          <input formControlName="refReport" class="form-control font-weight-bold text-right"
+            placeholder="{{'placeholderRefEtude'|localise:'Predim'}}" type="text" aria-describedby="refReport-button"
+            aria-label="refReport" />
           <div class="input-group-append">
-            <button role="submit" class="btn btn-outline-secondary" id="refreport-button" (click)="mePrint()">
-              {{'btnPrint'|localise:'RGD'}}
+            <button role="submit" class="btn btn-outline-secondary" id="refReport-button" (click)="mePrint()">
+              {{'btnPrint'|localise:'Predim'}}
             </button>
           </div>
         </div>
@@ -25,7 +26,7 @@
   </fieldset>
   <fieldset class="col-lg-7 px-1 desc-corr">
     <div class="form-row">
-      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'RGD'}} 
+      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'Predim'}}
         <a href="#mathformula"><i class="fas fa-question-circle"></i></a>
       </p>
       <div class="row m-0 w-100">
@@ -37,7 +38,7 @@
             <span class="input-group-text" id="iapp-desc">mA</span>
           </div>
         </div>
-        <label class="col-2 text-right col-form-label" for="measuredSurface">{{'rsurf'|localise:'RGD'}}</label>
+        <label class="col-2 text-right col-form-label" for="measuredSurface">{{'rsurf'|localise:'Predim'}}</label>
         <div class="input-group col-4">
           <input formControlName="measuredSurface" class="form-control font-weight-bold text-right"
             placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
@@ -48,7 +49,7 @@
       </div>
     </div>
     <div class="form-row">
-      <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'RGD'}}</p>
+      <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'Predim'}}</p>
       <div class="row m-0 w-100">
         <label class="col-2 text-right col-form-label" for="xon">X <sub>on</sub></label>
         <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
@@ -71,7 +72,7 @@
   </fieldset>
   <fieldset class="col-lg-5 px-1 fig-corr">
     <div class="form-row mt-4">
-      <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'RGD'}}</p>
+      <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'Predim'}}</p>
       <div class="row m-0 w-100">
         <label class="col-3 text-right col-form-label" for="icorr">i <sub>corr</sub></label>
         <div class="input-group input-group-lg col-9">
@@ -90,7 +91,8 @@
     </div>
   </fieldset>
 </form>
-<app-theecanvas [title]="'chartTitle'|localise:'RGD'" [usercurve]="corrosionview" class="col-12 m-0 p-0"></app-theecanvas>
+<app-theecanvas [title]="'chartTitle'|localise:'Predim'" [usercurve]="corrosionview" class="col-12 m-0 p-0">
+</app-theecanvas>
 
 <div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
   <h3>Debug</h3>
@@ -104,7 +106,7 @@
   </div>
 </div>
 <div class="col-12 p-0" id="mathformula">
-  <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'RGD'}}</p>
+  <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'Predim'}}</p>
   <app-formula-math #mathformula></app-formula-math>
 </div>
 <div class="col-12 illust-info">
@@ -114,13 +116,13 @@
         class="d-block m-auto" />
     </div>
     <div class="col-lg-6 desc-corr">
-      <h2 class="ungest-print">{{'illustDepolTitle'|localise:'RGD'}}</h2>
-      <h4>{{'illustDepolPurpose'|localise:'RGD'}}</h4>
-      <p>{{'illustDepolDesc'|localise:'RGD'}}</p>
+      <h2 class="ungest-print">{{'illustDepolTitle'|localise:'Predim'}}</h2>
+      <h4>{{'illustDepolPurpose'|localise:'Predim'}}</h4>
+      <p>{{'illustDepolDesc'|localise:'Predim'}}</p>
       <ul>
-        <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'RGD'}}s</li>
-        <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'RGD'}}</li>
-        <li>{{'rcstdesc'|localise:'RGD'}}
+        <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'Predim'}}s</li>
+        <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'Predim'}}</li>
+        <li>{{'rcstdesc'|localise:'Predim'}}
           <ul>
             <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
             <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>

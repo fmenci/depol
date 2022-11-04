@@ -27,12 +27,19 @@ Pour en savoir plus :
 [Loi de Tafel](https://fr.wikipedia.org/wiki/Loi_de_Tafel)
 [Relation de Butler Volmer](https://fr.wikipedia.org/wiki/Relation_de_Butler-Volmer)
 
+![Predim V5.2 Depolarisation](/src/assets/depol_i.svg)
+
 ## Sponsor and realisation
 
 This project is sponsored and produced by
 ![RGDevt](/src/assets/logoRGDevt.svg)
 RGD, 15 ter, rue Maurice Petit, 69360 Sérézin du Rhône, France
 [RGD](https://www.rgdevt.com)
+
+Since 2022, This project is also sponsored by
+![RGDevt](/src/assets/Logo_Drizoro.svg)
+DRIZORO, C/ Primavera nº50-52, Polígono Industrial Las Monjas 28850 Torrejón de Ardoz - Madrid, España
+[DRIZORO](https://www.drizoro.com)
 
 This project is realised by
 ![Arte Scriba](/src/assets/icone_piuma.svg)
