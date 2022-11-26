@@ -1,6 +1,6 @@
 {
   "name": "depol",
-  "version": "5.2.12",
+  "version": "5.2.13",
   "license": "GNU GPLv3",
   "description": "Predim V5, courbe de dépolarisation",
   "scripts": {
@@ -40,10 +40,10 @@
     "@angular/compiler-cli": "~14.2.8",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "~5.42.0",
-    "@typescript-eslint/experimental-utils": "~5.42.0",
-    "@typescript-eslint/parser": "~5.42.0",
-    "eslint": "~8.26.0",
+    "@typescript-eslint/eslint-plugin": "~5.44.0",
+    "@typescript-eslint/experimental-utils": "~5.44.0",
+    "@typescript-eslint/parser": "~5.44.0",
+    "eslint": "~8.28.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "~39.6.2",
     "eslint-plugin-node": "^11.1.0",
