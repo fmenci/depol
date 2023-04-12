@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, SecurityContext, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LanguageService, TimeDelayDirective } from 'aisuite-ngtools';
 import { environment } from 'src/environments/environment';
@@ -14,17 +14,20 @@ import { FormulaMathComponent } from './formula.math.component';
 export class CorrosionPreventionCurveComponent implements AfterViewInit {
   @ViewChild('mathformula') private mathformula!: FormulaMathComponent;
   corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '#d40707');
-  aiForm = this.fb.group({
-    xon: [this.corrosionview.xon],
-    xoff: [this.corrosionview.xoff],
-    measuredIntensity: [this.corrosionview.measuredIntensity],
-    measuredSurface: [this.corrosionview.measuredSurface],
-    refReport: ['']
+  aiForm: FormGroup = new FormGroup({
+    xon: new FormControl(this.corrosionview.xon),
+    xoff: new FormControl(this.corrosionview.xoff),
+    measuredIntensity: new FormControl(this.corrosionview.measuredIntensity),
+    measuredSurface: new FormControl(this.corrosionview.measuredSurface),
+    refReport: new FormControl()
   });
   private ispoped = false;
   private delay: TimeDelayDirective<string> = new TimeDelayDirective<string>();
 
-  constructor(private fb: FormBuilder, private linrepo: LanguageService, private sanitizer: DomSanitizer) {
+  constructor(
+    private linrepo: LanguageService, 
+    private sanitizer: DomSanitizer
+    ) {
     this.delay.event.subscribe((ev: string) => {
       //console.log(ev);
       this.ispoped = ev !== '';
