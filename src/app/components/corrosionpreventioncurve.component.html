@@ -14,7 +14,7 @@
       <div class="row m-0 w-100">
         <label class="col-4 text-end col-form-label" for="refReport">{{'labelRefEtude'|localise:'Predim'}}</label>
         <div class="input-group col-8">
-          <input formControlName="refReport" class="form-control font-weight-bold text-end"
+          <input formControlName="refReport" class="form-control fw-bold text-end"
             placeholder="{{'placeholderRefEtude'|localise:'Predim'}}" type="text" aria-describedby="refReport-button"
             aria-label="refReport" />
           <button role="submit" class="btn btn-outline-secondary" id="refReport-button" (click)="mePrint()">
@@ -32,13 +32,13 @@
       <div class="row m-0 w-100">
         <label class="col-2 text-end col-form-label" for="measuredIntensity">I <sub>app</sub></label>
         <div class="input-group col-4">
-          <input formControlName="measuredIntensity" class="form-control font-weight-bold text-end"
+          <input formControlName="measuredIntensity" class="form-control fw-bold text-end"
             placeholder="measured intensity" type="text" aria-describedby="iapp-desc" aria-label="measuredIntensity" />
           <span class="input-group-text" id="iapp-desc">mA</span>
         </div>
         <label class="col-2 text-end col-form-label" for="measuredSurface">{{'rsurf'|localise:'Predim'}}</label>
         <div class="input-group col-4">
-          <input formControlName="measuredSurface" class="form-control font-weight-bold text-end"
+          <input formControlName="measuredSurface" class="form-control fw-bold text-end"
             placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
           <span class="input-group-text" id="surface-desc">m²</span>
         </div>
@@ -49,13 +49,13 @@
       <div class="row m-0 w-100">
         <label class="col-2 text-end col-form-label" for="xon">X <sub>on</sub></label>
         <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-          <input formControlName="xon" class="form-control font-weight-bold text-end" placeholder="xon" type="text"
+          <input formControlName="xon" class="form-control fw-bold text-end" placeholder="xon" type="text"
             aria-describedby="xon-desc" aria-label="xon" />
             <span class="input-group-text">mV</span>
         </div>
         <label class="col-2 text-end col-form-label" for="xoff">X <sub>off</sub></label>
         <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-          <input formControlName="xoff" class="form-control font-weight-bold text-end" placeholder="xoff" type="text"
+          <input formControlName="xoff" class="form-control fw-bold text-end" placeholder="xoff" type="text"
             aria-describedby="xoff-desc" aria-label="xoff" />
             <span class="input-group-text">mV</span>
         </div>
@@ -71,7 +71,7 @@
           <input [value]="userIcorr.effect" class="form-control text-center" placeholder="effect" type="text"
             aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
             [style.border-color]="userIcorr.bordercolor" />
-          <input [value]="userIcorr.p3" class="form-control font-weight-bold text-end" placeholder="icorr" type="text"
+          <input [value]="userIcorr.p3" class="form-control fw-bold text-end" placeholder="icorr" type="text"
             aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
             [style.border-color]="userIcorr.bordercolor" />
             <span id="icorr-desc" class="input-group-text" [style.background-color]="userIcorr.bgcolor"
