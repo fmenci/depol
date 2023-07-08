@@ -1,89 +1,89 @@
-<form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="row m-0 corr-form-component">
-  <div [innerHtml]="headPrintTemplate" class="gest-print col-6"></div>
-  <div class=" col-xl-6">
-    <h2>
-      <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91" height="56" />
-      {{'perfEval'|localise:'Predim'}}
-    </h2>
-    <p class="gest-print">{{'labelRefEtude'|localise:'Predim'}} <em class="badge badge-light">{{refreport}}</em></p>
-  </div>
-  <fieldset class="col-xl-6 px-1 ungest-print">
-    <div class="form-row">
-      <div class="row m-0 w-100">
-        <label class="col-4 text-right col-form-label" for="refReport">{{'labelRefEtude'|localise:'Predim'}}</label>
-        <div class="input-group col-8">
-          <input formControlName="refReport" class="form-control font-weight-bold text-right"
-            placeholder="{{'placeholderRefEtude'|localise:'Predim'}}" type="text" aria-describedby="refReport-button"
-            aria-label="refReport" />
-          <div class="input-group-append">
-            <button role="submit" class="btn btn-outline-secondary" id="refReport-button" (click)="mePrint()">
-              {{'btnPrint'|localise:'Predim'}}
-            </button>
-          </div>
-        </div>
+<form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="corr-form-component">
+  <fieldset class="row">
+    <div [innerHtml]="headPrintTemplate" class="gest-print col-lg-6"></div>
+    <div class="col-lg-5">
+      <h2>
+        <img src="assets/logoRGDevt.svg" class="gest-print" alt="Logo RGDevt" width="91" height="56" />
+        {{'perfEval'|localise:'Predim'}}
+      </h2>
+      <p class="gest-print">{{'labelRefEtude'|localise:'Predim'}} <em class="badge text-bg-light">{{refreport}}</em></p>
+    </div>
+    <label class="col-lg-3 col-sm-6 text-end col-form-label ungest-print ps-0"
+      for="refReport">{{'labelRefEtude'|localise:'Predim'}}</label>
+    <div class="col-lg-4 col-sm-6 ungest-print ps-sm-0 ps-auto">
+      <div class="input-group">
+        <input formControlName="refReport" class="form-control fw-bold text-end"
+          placeholder="{{'placeholderRefEtude'|localise:'Predim'}}" type="text" aria-describedby="refReport-button"
+          aria-label="refReport" />
+        <button role="submit" class="btn btn-outline-secondary" id="refReport-button" (click)="mePrint()">
+          {{'btnPrint'|localise:'Predim'}}
+        </button>
       </div>
     </div>
   </fieldset>
-  <fieldset class="col-lg-7 px-1 desc-corr">
-    <div class="form-row">
-      <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'Predim'}}
-        <a href="#mathformula"><i class="fas fa-question-circle"></i></a>
-      </p>
-      <div class="row m-0 w-100">
-        <label class="col-2 text-right col-form-label" for="measuredIntensity">I <sub>app</sub></label>
-        <div class="input-group col-4">
-          <input formControlName="measuredIntensity" class="form-control font-weight-bold text-right"
-            placeholder="measured intensity" type="text" aria-describedby="iapp-desc" aria-label="measuredIntensity" />
-          <div class="input-group-append">
-            <span class="input-group-text" id="iapp-desc">mA</span>
+  <fieldset class="row mb-1">
+    <div class="col-md-7 px-0">
+      <div class="row">
+        <div class="col-xl-6">
+          <p class="text-muted w-100 text-center m-1">{{'rappliedload'|localise:'Predim'}}
+            <a href="#mathformula"><i class="fas fa-question-circle"></i></a>
+          </p>
+          <div class="row">
+            <label class="col-sm-2 col-4 text-end col-form-label" for="measuredIntensity">I <sub>app</sub></label>
+            <div class="col-sm-4 col-8 ps-0">
+              <div class="input-group">
+                <input formControlName="measuredIntensity" class="form-control fw-bold text-end"
+                  placeholder="measured intensity" type="text" aria-describedby="iapp-desc"
+                  aria-label="measuredIntensity" />
+                <span class="input-group-text" id="iapp-desc">mA</span>
+              </div>
+            </div>
+            <label class="col-sm-2 col-4 text-end col-form-label" for="measuredSurface">{{'rsurf'|localise:'Predim'}}</label>
+            <div class="col-sm-4 col-8 ps-0">
+              <div class="input-group">
+                <input formControlName="measuredSurface" class="form-control fw-bold text-end"
+                  placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
+                <span class="input-group-text" id="surface-desc">m²</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <label class="col-2 text-right col-form-label" for="measuredSurface">{{'rsurf'|localise:'Predim'}}</label>
-        <div class="input-group col-4">
-          <input formControlName="measuredSurface" class="form-control font-weight-bold text-right"
-            placeholder="measured surface" type="text" aria-describedby="surface-desc" aria-label="measuredSurface" />
-          <div class="input-group-append">
-            <span class="input-group-text" id="surface-desc">m²</span>
+            </div>
+        <div class="col-xl-6">
+          <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'Predim'}}</p>
+          <div class="row">
+            <label class="col-sm-2 col-4 text-end col-form-label" for="xon">X <sub>on</sub></label>
+            <div class="col-sm-4 col-8 ps-0">
+              <div class="input-group" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
+                <input formControlName="xon" class="form-control fw-bold text-end" placeholder="xon" type="text"
+                  aria-describedby="xon-desc" aria-label="xon" />
+                <span class="input-group-text">mV</span>
+              </div>
+            </div>
+            <label class="col-sm-2 col-4 text-end col-form-label" for="xoff">X <sub>off</sub></label>
+            <div class="col-sm-4 col-8 ps-0">
+              <div class="input-group" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
+                <input formControlName="xoff" class="form-control fw-bold text-end" placeholder="xoff" type="text"
+                  aria-describedby="xoff-desc" aria-label="xoff" />
+                <span class="input-group-text">mV</span>
+              </div>
+            </div>
           </div>
-        </div>
+            </div>
       </div>
     </div>
-    <div class="form-row">
-      <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'Predim'}}</p>
-      <div class="row m-0 w-100">
-        <label class="col-2 text-right col-form-label" for="xon">X <sub>on</sub></label>
-        <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-          <input formControlName="xon" class="form-control font-weight-bold text-right" placeholder="xon" type="text"
-            aria-describedby="xon-desc" aria-label="xon" />
-          <div class="input-group-append" id="xon-desc">
-            <span class="input-group-text">mV</span>
-          </div>
-        </div>
-        <label class="col-2 text-right col-form-label" for="xoff">X <sub>off</sub></label>
-        <div class="input-group col-4" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-          <input formControlName="xoff" class="form-control font-weight-bold text-right" placeholder="xoff" type="text"
-            aria-describedby="xoff-desc" aria-label="xoff" />
-          <div class="input-group-append" id="xoff-desc">
-            <span class="input-group-text">mV</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset class="col-lg-5 px-1 fig-corr">
-    <div class="form-row mt-4">
+    <div class="col-md-5 px-0 mt-md-4 mt-xl-0">
       <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'Predim'}}</p>
       <div class="row m-0 w-100">
-        <label class="col-3 text-right col-form-label" for="icorr">i <sub>corr</sub></label>
-        <div class="input-group input-group-lg col-9">
-          <input [value]="userIcorr.effect" class="form-control text-center" placeholder="effect" type="text"
-            aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
-            [style.border-color]="userIcorr.bordercolor" />
-          <input [value]="userIcorr.p3" class="form-control font-weight-bold text-right" placeholder="icorr" type="text"
-            aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
-            [style.border-color]="userIcorr.bordercolor" />
-          <div class="input-group-append" id="icorr-desc">
-            <span class="input-group-text" [style.background-color]="userIcorr.bgcolor"
+        <label class="col-3 text-end col-form-label" for="icorr">i <sub>corr</sub></label>
+        <div class="col-9">
+          <div class="input-group">
+            <input [value]="userIcorr.effect" class="form-control text-center" placeholder="effect" type="text"
+              aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
+              [style.border-color]="userIcorr.bordercolor" />
+            <input [value]="userIcorr.p3" class="form-control fw-bold text-end" placeholder="icorr" type="text"
+              aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
+              [style.border-color]="userIcorr.bordercolor" />
+            <span id="icorr-desc" class="input-group-text" [style.background-color]="userIcorr.bgcolor"
               [style.border-color]="userIcorr.bordercolor">mA/m²</span>
           </div>
         </div>
@@ -91,44 +91,46 @@
     </div>
   </fieldset>
 </form>
-<app-theecanvas [title]="'chartTitle'|localise:'Predim'" [usercurve]="corrosionview" class="col-12 m-0 p-0">
+<app-theecanvas [title]="'chartTitle'|localise:'Predim'" [usercurve]="corrosionview" class="row m-0 p-0">
 </app-theecanvas>
 
-<div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
-  <h3>Debug</h3>
-  <p class="form-text">
-    status : {{ aiForm.status }}
-    <br />
-    dirty : {{ aiForm.dirty }}
-  </p>
-  <div class="form-text text-muted">
-    <pre>{{ aiForm.value | json }}</pre>
-  </div>
-</div>
-<div class="col-12 p-0" id="mathformula">
-  <p class="text-muted w-100 text-center m-1">{{'depolFormula'|localise:'Predim'}}</p>
-  <app-formula-math #mathformula></app-formula-math>
-</div>
-<div class="col-12 illust-info">
-  <div class="row">
-    <div class="col-lg-6 fig-corr">
-      <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
-        class="d-block m-auto" />
+<div class="row">
+  <div class="col-12 px-4 debug-aiform" *ngIf="showingdebug">
+    <h3>Debug</h3>
+    <p class="form-text">
+      status : {{ aiForm.status }}
+      <br />
+      dirty : {{ aiForm.dirty }}
+    </p>
+    <div class="form-text text-muted">
+      <pre>{{ aiForm.value | json }}</pre>
     </div>
-    <div class="col-lg-6 desc-corr">
-      <h2 class="ungest-print">{{'illustDepolTitle'|localise:'Predim'}}</h2>
-      <h4>{{'illustDepolPurpose'|localise:'Predim'}}</h4>
-      <p>{{'illustDepolDesc'|localise:'Predim'}}</p>
-      <ul>
-        <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'Predim'}}s</li>
-        <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'Predim'}}</li>
-        <li>{{'rcstdesc'|localise:'Predim'}}
-          <ul>
-            <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
-            <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
-          </ul>
-        </li>
-      </ul>
+  </div>
+  <div class="col-12 p-0">
+    <p class="text-muted w-100 text-center m-1" id="mathformula">{{'depolFormula'|localise:'Predim'}}</p>
+    <app-formula-math #mathformula></app-formula-math>
+  </div>
+  <div class="col-12 illust-info">
+    <div class="row">
+      <div class="col-lg-6 fig-corr">
+        <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (RGDevt)"
+          class="d-block m-auto" />
+      </div>
+      <div class="col-lg-6">
+        <h2 class="ungest-print">{{'illustDepolTitle'|localise:'Predim'}}</h2>
+        <h4>{{'illustDepolPurpose'|localise:'Predim'}}</h4>
+        <p>{{'illustDepolDesc'|localise:'Predim'}}</p>
+        <ul>
+          <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'Predim'}}s</li>
+          <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'Predim'}}</li>
+          <li>{{'rcstdesc'|localise:'Predim'}}
+            <ul>
+              <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
+              <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

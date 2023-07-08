@@ -60,18 +60,18 @@ export class TheeCanvasComponent implements OnInit {
         }
     }
 
-    get canvasviewport(): string{
-        return '0 0 '+ this.xmax +' ' + this.ymax;
+    get canvasviewport(): string {
+        return '0 0 ' + this.xmax + ' ' + this.ymax;
     }
 
     get computedheight(): string {
         if (window.innerHeight > this.bootstrapThreshold) {
-          return Math.round(this.gdheight) + 'px';
+            return Math.round(this.gdheight) + 'px';
         }
         else {
-          return 'auto';
+            return 'auto';
         }
-      }
+    }
 
     get xline(): number {
         return this.xmax - this.gradsoffset;
@@ -107,13 +107,13 @@ export class TheeCanvasComponent implements OnInit {
         this.localusercurve = value;
     }
 
-      @HostListener('window:resize')
-      onResize() {
+    @HostListener('window:resize')
+    onResize() {
         this.computeGDH();
-      }
-      ngOnInit() {
+    }
+    ngOnInit() {
         this.computeGDH();
-      }
+    }
 
     fetchpath(curve: RedoxCalculation) {
         return curve.drawline(200, this.xmax, this.ymax, this.coefx, this.coefy);
@@ -124,14 +124,15 @@ export class TheeCanvasComponent implements OnInit {
             let nh = this.empiricalOffsetH;
             nh = nh + document.getElementsByClassName('aisuite-menu-head')[0].clientHeight;
             const elemfoot = document.getElementsByClassName('footer');
-            if(elemfoot.length > 0){
+            if (elemfoot.length > 0) {
                 nh = nh + elemfoot[0].clientHeight;
             }
             nh = nh + document.getElementsByClassName('corr-form-component')[0].clientHeight;
             this.gdheight = window.innerHeight - nh;
         }
-        else{
+        else {
             this.gdheight = 500;
         }
     }
 }
+ 
