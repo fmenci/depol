@@ -132,9 +132,5 @@
         }
       }
     }
-  },
-  "defaultProject": "depol",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
   }
 }
