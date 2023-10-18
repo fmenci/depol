@@ -1,6 +1,6 @@
 {
   "name": "depol",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "license": "GNU GPLv3",
   "description": "Predim V5, courbe de dépolarisation",
   "scripts": {
@@ -24,7 +24,7 @@
     "@angular/platform-browser": "~16.2.6",
     "@angular/platform-browser-dynamic": "~16.2.6",
     "@angular/router": "~16.2.6",
-    "aisuite-ngtools": "file:../AISuite.v14/Includes/aisuite-ngtools-2.5.0.tgz",
+    "aisuite-ngtools": "file:../AISuite.v14/Includes/aisuite-ngtools-2.5.1.tgz",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
     "zone.js": "~0.13.3"
