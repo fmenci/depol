@@ -1,4 +1,4 @@
-.theecanvas-container{
+.theecanvas-container {
   display: block;
   position: relative;
   margin: auto;
@@ -9,4 +9,14 @@
 .theecanvas-container .graduation-line {
   stroke: #000;
   stroke-width: 1;
+}
+
+
+@media print {
+
+  .theecanvas-container,
+  .theecanvas {
+    width: 19cm;
+    height: 12cm;
+  }
 }

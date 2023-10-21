@@ -108,4 +108,8 @@ export class CorrosionPreventionCurveComponent implements AfterViewInit {
     window.print();
   }
 
+  goToBottom(){
+    window.scrollTo(0,document.body.scrollHeight);
+  }
+  
 }
