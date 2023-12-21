@@ -1,6 +1,6 @@
 {
   "name": "depol",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "license": "GNU GPLv3",
   "description": "Predim V5, courbe de dépolarisation",
   "scripts": {
