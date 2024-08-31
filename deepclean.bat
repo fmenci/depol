@@ -18,4 +18,4 @@ if exist .angular\cache (
 
 rem Complete
 echo "AI Suite project deep clean complete, please check messages above"
-pause
+rem pause
