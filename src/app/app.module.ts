@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CorrosionPreventionCurveComponent } from './components/corrosionpreventioncurve.component';
 import { FormulaMathComponent } from './components/formula.math.component';
 import { TheeCanvasComponent } from './components/theecanvas';
+import { provideHttpClient } from '@angular/common/http';
 
 declare const opLingua: string;
 declare const aiSuiteLanguageJS: string | any[] | undefined;
@@ -19,7 +20,7 @@ declare const aiSuiteLanguageJS: string | any[] | undefined;
     BrowserModule, FormsModule, ReactiveFormsModule,
     AisuiteTstoolsModule.forRoot({ opLingua, uiLanguageJS: aiSuiteLanguageJS, baseUrl: environment.baseUrl })
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
