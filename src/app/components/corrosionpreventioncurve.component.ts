@@ -8,8 +8,9 @@ import { RedoxCalculation } from 'src/models/redox.calculation.model';
 import { FormulaMathComponent } from './formula.math.component';
 
 @Component({
-  selector: 'app-corrosion-prevention-curve',
-  templateUrl: './corrosionpreventioncurve.component.html'
+    selector: 'app-corrosion-prevention-curve',
+    templateUrl: './corrosionpreventioncurve.component.html',
+    standalone: false
 })
 export class CorrosionPreventionCurveComponent implements AfterViewInit {
   @ViewChild('mathformula') private mathformula!: FormulaMathComponent;
