@@ -5,8 +5,7 @@ import { RedoxCalculation } from 'src/models/redox.calculation.model';
 @Component({
     selector: 'app-theecanvas',
     templateUrl: './theecanvas.html',
-    styleUrls: ['./theecanvas.less'],
-    standalone: false
+    styleUrls: ['./theecanvas.less']
 })
 export class TheeCanvasComponent implements OnInit {
 
