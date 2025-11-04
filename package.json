@@ -1,6 +1,6 @@
 {
   "name": "depol",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "license": "GNU GPLv3",
   "author": {
     "name": "Franck Menci",
@@ -16,9 +16,8 @@
     "publish": "ng build --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
-    "watch": "ng build --watch --configuration development",
-    "prestart": "node aspnetcore-https",
-    "e2e": "ng e2e"
+    "staging": "ng build --configuration staging",
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
@@ -45,16 +44,10 @@
     "@angular/cli": "~19.2.19",
     "@angular/compiler-cli": "~19.2.15",
     "@types/jasmine": "~5.1.12",
-    "@types/node": "^22.5.1",
     "@typescript-eslint/eslint-plugin": "~8.46.2",
     "@typescript-eslint/parser": "~8.46.2",
     "eslint": "^9.39.0",
-    "eslint-plugin-jsdoc": "~50.3.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-promise": "^7.1.0",
     "jasmine-core": "~5.12.1",
-    "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.4.2",
     "karma-coverage": "~2.2.0",
     "karma-firefox-launcher": "^2.1.3",

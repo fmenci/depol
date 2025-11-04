@@ -18,7 +18,7 @@ declare const aiSuiteLanguageJS: string | any[] | undefined;
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
-    AisuiteTstoolsModule.forRoot({ opLingua, uiLanguageJS: aiSuiteLanguageJS, baseUrl: environment.baseUrl })
+    AisuiteTstoolsModule.forRoot({ opLingua, uiLanguageJS: aiSuiteLanguageJS, baseUrl: environment.aisuiteApiUrl })
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
