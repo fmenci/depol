@@ -1,6 +1,6 @@
 <div class="theecanvas-container">
   <svg class="theecanvas" version="1.1" [attr.viewBox]="canvasviewport" xmlns="http://www.w3.org/2000/svg"
-        [style.maxheight]="computedheight">
+    [style.maxheight]="computedheight">
     <title>{{ title }}</title>
     <defs>
       <linearGradient id="fondcourbes" x1="0" x2="0" y1="1" y2="0">
@@ -11,47 +11,59 @@
     <g class="fond-courbes">
       <rect [attr.x]="gradsoffset" y="0" [attr.width]="xline" [attr.height]="yline" stroke="#ced4da"
         fill="url(#fondcourbes)" stroke-width="1" />
-      <line class="graduation-line" [attr.x1]="gradsoffset" [attr.x2]="gradsoffset" y1="0" [attr.y2]="(yline + 10)" />
-      <line class="graduation-line" [attr.x1]="(gradsoffset-10)" [attr.x2]="xmax" [attr.y1]="yline" [attr.y2]="yline" />
-      <g>
-        <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ 'chartXLabel' | localise:'Predim' }}</text>
-        <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(ymax-gradsoffset+25)">0</text>
-        <text text-anchor="middle" *ngFor="let axistick of xaxis" [attr.x]="axistick.x"
-          [attr.y]="(ymax-gradsoffset+25)">{{axistick.grad}}</text>
-        <line class="graduation-line" *ngFor="let axistick of xaxis" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
-          [attr.y1]="(ymax-gradsoffset-10)" [attr.y2]="(ymax-gradsoffset+10)" />
-      </g>
-      <g transform="translate(0, 1000)">
-        <g transform="rotate(-90)">
-          <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ 'chartYLabel' | localise:'Predim' }}</text>
-          <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(gradsoffset-15)">0</text>
-          <text text-anchor="middle" *ngFor="let axistick of yaxis" [attr.x]="axistick.x"
-            [attr.y]="(gradsoffset-15)">{{axistick.grad}}</text>
-          <line class="graduation-line" *ngFor="let axistick of yaxis" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
-            [attr.y1]="(gradsoffset-10)" [attr.y2]="(gradsoffset+10)" />
+        <line class="graduation-line" [attr.x1]="gradsoffset" [attr.x2]="gradsoffset" y1="0" [attr.y2]="(yline + 10)" />
+        <line class="graduation-line" [attr.x1]="(gradsoffset-10)" [attr.x2]="xmax" [attr.y1]="yline" [attr.y2]="yline" />
+        <g>
+          <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ 'chartXLabel' | localise:'Predim' }}</text>
+          <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(ymax-gradsoffset+25)">0</text>
+          @for (axistick of xaxis; track axistick) {
+            <text text-anchor="middle" [attr.x]="axistick.x"
+            [attr.y]="(ymax-gradsoffset+25)">{{axistick.grad}}</text>
+          }
+          @for (axistick of xaxis; track axistick) {
+            <line class="graduation-line" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
+              [attr.y1]="(ymax-gradsoffset-10)" [attr.y2]="(ymax-gradsoffset+10)" />
+          }
         </g>
+        <g transform="translate(0, 1000)">
+          <g transform="rotate(-90)">
+            <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ 'chartYLabel' | localise:'Predim' }}</text>
+            <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(gradsoffset-15)">0</text>
+            @for (axistick of yaxis; track axistick) {
+              <text text-anchor="middle" [attr.x]="axistick.x"
+              [attr.y]="(gradsoffset-15)">{{axistick.grad}}</text>
+            }
+            @for (axistick of yaxis; track axistick) {
+              <line class="graduation-line" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
+                [attr.y1]="(gradsoffset-10)" [attr.y2]="(gradsoffset+10)" />
+            }
+          </g>
+        </g>
+        <text text-anchor="middle" x="809" y="36" font-size="26">{{ title }}</text>
       </g>
-      <text text-anchor="middle" x="809" y="36" font-size="26">{{ title }}</text>
-    </g>
-    <g class="curves-drawing" [attr.transform]="'translate('+gradsoffset+',-'+gradsoffset+')'">
-      <path *ngFor="let crv of redoxcurves" [attr.d]="fetchpath(crv)" [attr.stroke]="crv.linecolor" stroke-width="2"
-        fill="none" stroke-dasharray="8 4" />
-      <path id="usercurve" [attr.d]="fetchpath(usercurve)" [attr.stroke]="usercurve.linecolor" stroke-width="4"
-        fill="none" />
-      <line [attr.x1]="xxhair" y1="0" [attr.x2]="xxhair" y2="1000" stroke="#f00" stroke-width=".35" />
-      <line x1="0" [attr.y1]="yxhair" x2="1618" [attr.y2]="yxhair" stroke="#f00" stroke-width=".35" />
-    </g>
-    <g class="legendbox" transform="translate(1484, 10)">
-      <rect x="0" y="0" width="124" height="200" fill="#fff" stroke="#ced4da" stroke-width="1" />
-      <g *ngFor="let crv of redoxcurves; let i = index" [attr.transform]="'translate(0,'+i*19+')'">
-        <line x1="3" y1="14" x2="36" y2="14" class="legend-line" [attr.stroke]="crv.linecolor" stroke-width="2" stroke-dasharray="8  4" />
-        <text x="40" y="19" class="curve-name">{{crv.legend}}</text>
-      </g>
-      <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'Predim'}}</text>
-      <g>
-        <line x1="3" y1="189" x2="36" y2="189" class="legend-line" [attr.stroke]="usercurve.linecolor" stroke-width="4" />
-        <text x="40" y="194" class="curve-name">{{usercurve.legend}}</text>
-      </g>
-    </g>
-  </svg>
-</div>
+      <g class="curves-drawing" [attr.transform]="'translate('+gradsoffset+',-'+gradsoffset+')'">
+        @for (crv of redoxcurves; track crv) {
+          <path [attr.d]="fetchpath(crv)" [attr.stroke]="crv.linecolor" stroke-width="2"
+            fill="none" stroke-dasharray="8 4" />
+        }
+        <path id="usercurve" [attr.d]="fetchpath(usercurve)" [attr.stroke]="usercurve.linecolor" stroke-width="4"
+          fill="none" />
+          <line [attr.x1]="xxhair" y1="0" [attr.x2]="xxhair" y2="1000" stroke="#f00" stroke-width=".35" />
+          <line x1="0" [attr.y1]="yxhair" x2="1618" [attr.y2]="yxhair" stroke="#f00" stroke-width=".35" />
+        </g>
+        <g class="legendbox" transform="translate(1484, 10)">
+          <rect x="0" y="0" width="124" height="200" fill="#fff" stroke="#ced4da" stroke-width="1" />
+          @for (crv of redoxcurves; track crv; let i = $index) {
+            <g [attr.transform]="'translate(0,'+i*19+')'">
+              <line x1="3" y1="14" x2="36" y2="14" class="legend-line" [attr.stroke]="crv.linecolor" stroke-width="2" stroke-dasharray="8  4" />
+              <text x="40" y="19" class="curve-name">{{crv.legend}}</text>
+            </g>
+          }
+          <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'Predim'}}</text>
+          <g>
+            <line x1="3" y1="189" x2="36" y2="189" class="legend-line" [attr.stroke]="usercurve.linecolor" stroke-width="4" />
+            <text x="40" y="194" class="curve-name">{{usercurve.legend}}</text>
+          </g>
+        </g>
+      </svg>
+    </div>
