@@ -31,12 +31,11 @@ Pour en savoir plus :
 
 ## Sponsor and realisation
 
-This project is sponsored and produced by
+This project was inially sponsored by (until 2021)
 ![RGDevt](/src/assets/logoRGDevt.svg)
 RGD, 15 ter, rue Maurice Petit, 69360 Sérézin du Rhône, France
-[RGD](https://www.rgdevt.com)
 
-Since 2022, This project is also sponsored by
+Since 2022, This project is now sponsored by
 ![RGDevt](/src/assets/Logo_Drizoro.svg)
 DRIZORO, C/ Primavera nº50-52, Polígono Industrial Las Monjas 28850 Torrejón de Ardoz - Madrid, España
 [DRIZORO](https://www.drizoro.com)
