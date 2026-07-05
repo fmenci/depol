@@ -1,11 +1,12 @@
-import { Component, HostListener, OnInit, Input } from '@angular/core';
-import { GraduationModel } from 'src/models/graduation.model';
-import { RedoxCalculation } from 'src/models/redox.calculation.model';
+import { Component, HostListener, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { RedoxCalculation } from '../../models/redox.calculation.model';
+import { GraduationModel } from '../../models/graduation.model';
 
 @Component({
     selector: 'app-theecanvas',
     templateUrl: './theecanvas.html',
     styleUrls: ['./theecanvas.less'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TheeCanvasComponent implements OnInit {
