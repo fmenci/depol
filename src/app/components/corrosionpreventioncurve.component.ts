@@ -1,15 +1,16 @@
-import { AfterViewInit, Component, SecurityContext, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, SecurityContext, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LanguageService, TimeDelayDirective } from 'aisuite-ngtools';
-import { environment } from 'src/environments/environment';
-import { IcorrResultModel } from 'src/models/icorr.result.model';
-import { RedoxCalculation } from 'src/models/redox.calculation.model';
 import { FormulaMathComponent } from './formula.math.component';
+import { RedoxCalculation } from '../../models/redox.calculation.model';
+import { environment } from '../../environments/environment';
+import { IcorrResultModel } from '../../models/icorr.result.model';
 
 @Component({
     selector: 'app-corrosion-prevention-curve',
     templateUrl: './corrosionpreventioncurve.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CorrosionPreventionCurveComponent implements AfterViewInit {
