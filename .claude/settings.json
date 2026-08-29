@@ -3,7 +3,10 @@
     "allow": [
       "Bash(xargs grep -l \"AisuiteTstoolsModule\")",
       "Bash(npx ng *)",
-      "Bash(grep -v \"//\\\\|\\\\* \")"
+      "Bash(grep -v \"//\\\\|\\\\* \")",
+      "Bash(node -e ' *)",
+      "Bash(npm view *)",
+      "Bash(npx browserslist *)"
     ]
   }
 }
