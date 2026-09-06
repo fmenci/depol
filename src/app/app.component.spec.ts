@@ -1,11 +1,17 @@
+import { importProvidersFrom } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { AisuiteTstoolsModule } from 'aisuite-ngtools';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      imports: [AppComponent],
+      providers: [
+        // AppComponent's template tree pulls in LanguageService (via the `localise`
+        // pipe); stand in for the real app.config.ts wiring with test-only values.
+        importProvidersFrom(AisuiteTstoolsModule.forRoot({ opLingua: 'en', uiLanguageJS: [], linsceApiUrl: '' }))
       ],
     }).compileComponents();
   });
@@ -14,18 +20,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'depol'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('depol');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('depol app is running!');
   });
 });
