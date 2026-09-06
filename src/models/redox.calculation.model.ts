@@ -44,10 +44,9 @@ export class RedoxCalculation {
 
     public drawline(steps: number, xmax: number, ymax: number, coefx: number, coefy: number): string {
         if (this.canCalc()) {
-            let xpos = 0;
             const de = Math.abs(this.xon - this.xoff) / 1e3;
             const passi = de / steps;
-            xpos = passi / 10;
+            let xpos = passi / 10;
             let pathdata = 'M ' + Math.round(coefx * xpos) + ' ' + (ymax - Math.round(coefy * this.fx(xpos)));
             xpos = 0;
             while (xpos <= (de * 2)) {
