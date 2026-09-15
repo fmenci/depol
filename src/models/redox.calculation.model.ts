@@ -1,8 +1,11 @@
 import { IcorrResultModel } from './icorr.result.model';
 
 export class RedoxCalculation {
-    private betaa = 0.060; // mV
-    private betac = 0.120; // mV
+    // Butler-Volmer slope constants, expressed in volts (60 mV / 120 mV) since fx() takes its
+    // depolarisation argument in volts. Shared via denominator() so the chart engine (theecanvas)
+    // can invert the curve for drag interactions without duplicating the equation.
+    private static readonly BETAA = 0.060;
+    private static readonly BETAC = 0.120;
     private epsiloncutoff = 1e-6;
     private noicorrresult = new IcorrResultModel(0, '', 'rgb(233,236,239)', 'rgb(197,209,222)');
 
@@ -65,8 +68,7 @@ export class RedoxCalculation {
         if (this.measuredSurface <= this.epsiloncutoff) {
             return Infinity;
         }
-        const de = Math.log(10) * x;
-        const denominator = Math.exp(de / this.betac) - Math.exp(-de / this.betaa);
+        const denominator = RedoxCalculation.denominator(x);
         if (denominator <= this.epsiloncutoff) {
             if (this.measuredIntensity > 0) {
                 return Infinity;
@@ -76,6 +78,17 @@ export class RedoxCalculation {
         }
         const iapp = this.measuredIntensity / this.measuredSurface;
         return iapp / denominator / 1e3;
+    }
+
+    /**
+     * Denominator of the Butler-Volmer term at a depolarisation gap (in volts):
+     * exp(2.3·ΔE/βc) − exp(−2.3·ΔE/βa). Exposed so the chart engine can invert the curve
+     * (icorr, ΔE) → I app when the operator drags the operating point, without restating
+     * the equation outside this model.
+     */
+    public static denominator(deltaPotentialVolts: number): number {
+        const de = Math.log(10) * deltaPotentialVolts;
+        return Math.exp(de / RedoxCalculation.BETAC) - Math.exp(-de / RedoxCalculation.BETAA);
     }
 
     private canCalc(): boolean {

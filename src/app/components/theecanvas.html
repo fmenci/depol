@@ -1,69 +1,100 @@
-<div class="theecanvas-container">
-  <svg class="theecanvas" version="1.1" [attr.viewBox]="canvasviewport" xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="xMidYMid meet">
-    <title>{{ title }}</title>
-    <defs>
-      <linearGradient id="fondcourbes" x1="0" x2="0" y1="1" y2="0">
-        <stop offset="0%" stop-color="#fff" stop-opacity="1" />
-        <stop offset="100%" stop-color="#c3dde9" stop-opacity="1" />
-      </linearGradient>
-    </defs>
-    <g class="fond-courbes">
-      <rect [attr.x]="gradsoffset" y="0" [attr.width]="xline" [attr.height]="yline" stroke="#ced4da"
-        fill="url(#fondcourbes)" stroke-width="1" />
-        <line class="graduation-line" [attr.x1]="gradsoffset" [attr.x2]="gradsoffset" y1="0" [attr.y2]="(yline + 10)" />
-        <line class="graduation-line" [attr.x1]="(gradsoffset-10)" [attr.x2]="xmax" [attr.y1]="yline" [attr.y2]="yline" />
-        <g>
-          <text text-anchor="middle" [attr.x]="xmiddle" [attr.y]="(ymax-5)">{{ 'chartXLabel' | localise:'Predim' }}</text>
-          <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(ymax-gradsoffset+25)">0</text>
-          @for (axistick of xaxis; track axistick) {
-            <text text-anchor="middle" [attr.x]="axistick.x"
-            [attr.y]="(ymax-gradsoffset+25)">{{axistick.grad}}</text>
-          }
-          @for (axistick of xaxis; track axistick) {
-            <line class="graduation-line" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
-              [attr.y1]="(ymax-gradsoffset-10)" [attr.y2]="(ymax-gradsoffset+10)" />
-          }
-        </g>
-        <g transform="translate(0, 1000)">
-          <g transform="rotate(-90)">
-            <text text-anchor="middle" [attr.x]="ymiddle" y="15">{{ 'chartYLabel' | localise:'Predim' }}</text>
-            <text text-anchor="middle" [attr.x]="gradsoffset" [attr.y]="(gradsoffset-15)">0</text>
-            @for (axistick of yaxis; track axistick) {
-              <text text-anchor="middle" [attr.x]="axistick.x"
-              [attr.y]="(gradsoffset-15)">{{axistick.grad}}</text>
-            }
-            @for (axistick of yaxis; track axistick) {
-              <line class="graduation-line" [attr.x1]="axistick.x" [attr.x2]="axistick.x"
-                [attr.y1]="(gradsoffset-10)" [attr.y2]="(gradsoffset+10)" />
-            }
-          </g>
-        </g>
-        <text text-anchor="middle" x="809" y="36" font-size="26">{{ title }}</text>
-      </g>
-      <g class="curves-drawing" [attr.transform]="'translate('+gradsoffset+',-'+gradsoffset+')'">
-        @for (crv of redoxcurves; track crv) {
-          <path [attr.d]="fetchpath(crv)" [attr.stroke]="crv.linecolor" stroke-width="2"
-            fill="none" stroke-dasharray="8 4" />
-        }
-        <path id="usercurve" [attr.d]="fetchpath(usercurve)" [attr.stroke]="usercurve.linecolor" stroke-width="4"
-          fill="none" />
-          <line [attr.x1]="xxhair" y1="0" [attr.x2]="xxhair" y2="1000" stroke="#f00" stroke-width=".35" />
-          <line x1="0" [attr.y1]="yxhair" x2="1618" [attr.y2]="yxhair" stroke="#f00" stroke-width=".35" />
-        </g>
-        <g class="legendbox" transform="translate(1484, 10)">
-          <rect x="0" y="0" width="124" height="200" fill="#fff" stroke="#ced4da" stroke-width="1" />
-          @for (crv of redoxcurves; track crv; let i = $index) {
-            <g [attr.transform]="'translate(0,'+i*19+')'">
-              <line x1="3" y1="14" x2="36" y2="14" class="legend-line" [attr.stroke]="crv.linecolor" stroke-width="2" stroke-dasharray="8  4" />
-              <text x="40" y="19" class="curve-name">{{crv.legend}}</text>
-            </g>
-          }
-          <text text-anchor="middle" x="62" y="176">{{'yourCurve'|localise:'Predim'}}</text>
-          <g>
-            <line x1="3" y1="189" x2="36" y2="189" class="legend-line" [attr.stroke]="usercurve.linecolor" stroke-width="4" />
-            <text x="40" y="194" class="curve-name">{{usercurve.legend}}</text>
-          </g>
-        </g>
-      </svg>
+<ng-template #legendContent>
+  <div class="legend-head">
+    <h6>{{ t().refCurves }} <span class="unit">(mA/m²)</span></h6>
+    <button type="button" class="btn btn-link btn-sm legend-toggle" (click)="toggleRefs()">
+      {{ refsOn() ? t().hide : t().show }}
+    </button>
+  </div>
+  <div class="legend-chips">
+    @for (chip of legendChips(); track chip.density) {
+      <button type="button" class="legend-chip" [class.legend-chip--off]="!chip.on" (click)="toggleCurve(chip.density)">
+        <svg width="22" height="8" class="legend-swatch" aria-hidden="true">
+          <line x1="0" y1="4" x2="22" y2="4" [attr.stroke]="chip.on ? chip.color : 'var(--color-neutral-400)'"
+            [attr.stroke-width]="chip.width" [attr.stroke-dasharray]="chip.dash"></line>
+        </svg>
+        <span class="legend-label">{{ chip.label }}</span>
+      </button>
+    }
+  </div>
+  <div class="legend-user">
+    <svg width="22" height="8" class="legend-swatch" aria-hidden="true">
+      <line x1="0" y1="4" x2="22" y2="4" [attr.stroke]="verdictInk()" stroke-width="3.5"></line>
+    </svg>
+    {{ t().yourCurve }}
+  </div>
+  @if (!legendInPlot()) {
+    <p class="drag-hint">{{ t().dragHint }}</p>
+  }
+</ng-template>
+
+<div class="chart-toolbar">
+  <h6 class="chart-title">{{ t().chartTitle }}</h6>
+  <span class="readout" [class.readout--hover]="guideInfo().show" [class.readout--dragging]="dragging()"
+    [style.--readout-tint]="verdictTint()">
+    ΔE {{ readout().x }} mV · i corr {{ readout().y }} mA/m²
+  </span>
+  <div class="chart-controls">
+    <label class="log-toggle">
+      <input type="checkbox" class="form-check-input" [checked]="logOn()" (change)="toggleLog()">
+      {{ t().logScale }}
+    </label>
+    <div class="zoom-group" role="group">
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomOut()" aria-label="Zoom out">−</button>
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomIn()" aria-label="Zoom in">+</button>
+      <button type="button" class="btn btn-outline-secondary reset-btn" (click)="resetView()">{{ t().reset }}</button>
     </div>
+  </div>
+</div>
+
+<div class="chart-row" #chartRow>
+  <div class="plot-box" #plotBox [style.width.px]="printing() ? w() : null" [style.height.px]="printing() ? h() : null">
+    <svg class="plot-svg" [attr.width]="w()" [attr.height]="h()" [attr.viewBox]="'0 0 ' + w() + ' ' + h()"
+      [style.cursor]="plotCursor()" (pointermove)="onPointerMove($event)" (pointerleave)="onPointerLeave()"
+      (pointerdown)="onPointerDown($event)" (pointerup)="onPointerUp($event)" (wheel)="onWheel($event)">
+      <title>{{ t().chartTitle }}</title>
+      <rect class="plot-rect" [attr.x]="plotRect().x" [attr.y]="plotRect().y" [attr.width]="plotRect().w" [attr.height]="plotRect().h"></rect>
+      @for (g of gridY(); track g.y) {
+        <line class="grid-line" [attr.x1]="g.x1" [attr.x2]="g.x2" [attr.y1]="g.y" [attr.y2]="g.y"></line>
+      }
+      @for (g of gridX(); track g.x) {
+        <line class="grid-line" [attr.x1]="g.x" [attr.x2]="g.x" [attr.y1]="g.y1" [attr.y2]="g.y2"></line>
+      }
+      @for (c of refPaths(); track c.color + c.dash) {
+        <path [attr.d]="c.d" fill="none" [attr.stroke]="c.color" [attr.stroke-width]="c.width" [attr.stroke-dasharray]="c.dash"></path>
+      }
+      <path [attr.d]="userPath()" fill="none" [attr.stroke]="verdictInk()" stroke-width="3.5"></path>
+      @if (showOp()) {
+        <g>
+          <line [attr.x1]="opPoint().x" [attr.x2]="opPoint().x" [attr.y1]="plotRect().y" [attr.y2]="opPoint().y"
+            [attr.stroke]="verdictInk()" stroke-width="1" stroke-dasharray="4 3"></line>
+          <line [attr.x1]="plotRect().x" [attr.x2]="opPoint().x" [attr.y1]="opPoint().y" [attr.y2]="opPoint().y"
+            [attr.stroke]="verdictInk()" stroke-width="1" stroke-dasharray="4 3"></line>
+          <circle [attr.cx]="opPoint().x" [attr.cy]="opPoint().y" [attr.r]="opPoint().r" fill="#fff"
+            [attr.stroke]="verdictInk()" stroke-width="3"></circle>
+          <circle [attr.cx]="opPoint().x" [attr.cy]="opPoint().y" r="3" [attr.fill]="verdictInk()"></circle>
+        </g>
+      }
+      @if (guideInfo().show) {
+        <g>
+          <line class="guide-line" [attr.x1]="guideInfo().x" [attr.x2]="guideInfo().x" [attr.y1]="plotRect().y" [attr.y2]="plotRect().bottom"></line>
+          <circle class="guide-ring" [attr.cx]="guideInfo().x" [attr.cy]="guideInfo().y" r="4" fill="none"></circle>
+        </g>
+      }
+    </svg>
+    <div class="axis-overlay">
+      @for (l of labels(); track l.text + l.left + l.top) {
+        <span [style.left.px]="l.left" [style.top.px]="l.top" [style.transform]="l.transform" [class.axis-title]="l.bold">{{ l.text }}</span>
+      }
+    </div>
+    @if (legendInPlot()) {
+      <div class="legend legend--plate">
+        <ng-container [ngTemplateOutlet]="legendContent"></ng-container>
+      </div>
+    }
+  </div>
+  @if (!legendInPlot()) {
+    <div class="legend legend--row">
+      <ng-container [ngTemplateOutlet]="legendContent"></ng-container>
+    </div>
+  }
+</div>

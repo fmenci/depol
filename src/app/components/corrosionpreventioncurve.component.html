@@ -1,191 +1,195 @@
-<table class="gest-print" style="width:100%;">
-  <tr>
-    <td style="width:45%;">
-      <div [innerHtml]="headPrintTemplate"></div>
-    </td>
-    <td style="width:55%;">
-      <h3>
-        <img src="assets/depol_i.svg" alt="Depolarisation curve in an icon" width="56" height="56" />
-        {{'perfEval'|localise:'Predim'}}
-      </h3>
-      <p class="gest-print">{{'labelRefEtude'|localise:'Predim'}} <em class="badge text-bg-light"
-      style="font-size:135%;">{{refreport}}</em></p>
-      <table style="width:100%;">
-        <tr>
-          <td colspan="2">{{'rappliedload'|localise:'Predim'}}</td>
-        </tr>
-        <tr>
-          <td style="text-align: right;">I <sub>app</sub>&nbsp;</td>
-          <td>{{corrosionview.measuredIntensity}} mA</td>
-        </tr>
-        <tr>
-          <td style="text-align: right;">{{'rsurf'|localise:'Predim'}}&nbsp;</td>
-          <td>{{corrosionview.measuredSurface}} m²</td>
-        </tr>
-        <tr>
-          <td colspan="2">{{'rpotential'|localise:'Predim'}}</td>
-        </tr>
-        <tr>
-          <td style="text-align: right;">X <sub>on</sub>&nbsp;</td>
-          <td>{{corrosionview.xon}} mV</td>
-        </tr>
-        <tr>
-          <td style="text-align: right;">X <sub>off</sub>&nbsp;</td>
-          <td>{{corrosionview.xoff}} mV</td>
-        </tr>
-        <tr>
-          <td>{{'rVCorr'|localise:'Predim'}}</td>
-          <td>
-            <svg version="1.1" viewBox="0 0 65 14" xmlns="http://www.w3.org/2000/svg">
-              <title>{{ 'rVCorr'|localise:'Predim' }}</title>
-              <rect x="0" y="0" width="65" height="14" [attr.fill]="userIcorr.bgcolor"></rect>
-              <text x="5" y="10" font-size="10">{{userIcorr.effect}}</text>
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: right;">i <sub>corr</sub>&nbsp;</td>
-          <td>{{userIcorr.p3}} mA/m²</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-<form [formGroup]="aiForm" (ngSubmit)="onSubmit()" class="corr-form-component">
-  <fieldset class="row ungest-print">
-    <div class="col-lg-5">
-      <h2>
-        {{'perfEval'|localise:'Predim'}}
-      </h2>
+<form class="app-shell" [formGroup]="aiForm" (ngSubmit)="onSubmit()"
+  [style.--verdict-ink]="verdictTheme.ink" [style.--verdict-tint]="verdictTheme.tint">
+
+  <nav class="nav ungest-print">
+    <h1 class="nav-title h6">{{ t().title }}</h1>
+    <div class="nav-controls">
+      <input formControlName="refReport" class="input form-control nav-ref" type="text"
+        placeholder="{{ t().refPlaceholder }}" aria-label="{{ t().ref }}" />
+      <button type="button" class="btn btn-primary nav-print" (click)="mePrint()">{{ t().print }}</button>
+      <div class="lang-seg">
+        <input type="radio" id="lang-en" name="lang" [checked]="lang() === 'en'" (change)="setLang('en')">
+        <label for="lang-en">EN</label>
+        <input type="radio" id="lang-fr" name="lang" [checked]="lang() === 'fr'" (change)="setLang('fr')">
+        <label for="lang-fr">FR</label>
+      </div>
     </div>
-    <label class="col-lg-3 col-sm-6 text-end col-form-label ps-0"
-    for="refReport">{{'labelRefEtude'|localise:'Predim'}}</label>
-    <div class="col-lg-4 col-sm-6 ps-sm-0 ps-auto">
-      <div class="input-group">
-        <input formControlName="refReport" class="form-control fw-bold text-end"
-          placeholder="{{'placeholderRefEtude'|localise:'Predim'}}" type="text" aria-describedby="refReport-button"
-          aria-label="refReport" />
-          <button role="submit" class="btn btn-outline-secondary" id="refReport-button" (click)="mePrint()">
-            {{'btnPrint'|localise:'Predim'}}
-          </button>
+  </nav>
+
+  <div class="gest-print">
+    <div class="print-header">
+      <div [innerHtml]="headPrintTemplate"></div>
+      <div class="print-meta">
+        <h6>Predim V5 · Depol</h6>
+        <h3>{{ t().chartTitle }}</h3>
+        <p>{{ t().ref }} : <strong>{{ refreportPrint }}</strong> · {{ printDate }}</p>
+      </div>
+      <div class="print-verdict-box">
+        <div>{{ t().evaluation }}</div>
+        <div class="print-verdict-word">{{ verdictLabel }}</div>
+        <div>i corr {{ icorrText }} mA/m²</div>
+      </div>
+    </div>
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th>{{ t().measure }}</th>
+          <th>I app</th><th>{{ t().surface }}</th><th>X on</th><th>X off</th><th>ΔE</th><th>{{ t().density }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ t().appliedLoad }} / {{ t().potentials }}</td>
+          <td>{{ corrosionview.measuredIntensity }} mA</td>
+          <td>{{ corrosionview.measuredSurface }} m²</td>
+          <td>{{ corrosionview.xon }} mV</td>
+          <td>{{ corrosionview.xoff }} mV</td>
+          <td>{{ deltaE.toFixed(0) }} mV</td>
+          <td>{{ densityText }} mA/m²</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="app-body">
+    <div class="rail ungest-print">
+
+      <div class="blueprint measurement-card">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="measurement-head">
+          <h6>{{ t().measure }} — {{ t().appliedLoad }} · {{ t().potentials }}</h6>
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="toggleSliders()">{{ sliderBtnLabel }}</button>
+        </div>
+
+        <div class="inputs-grid">
+          <div class="field-cell">
+            <div class="field-label-row">
+              <label for="measuredIntensity">I <sub>app</sub></label>
+              <span class="unit">mA</span>
+            </div>
+            <input id="measuredIntensity" formControlName="measuredIntensity" type="number" step="0.1" min="0"
+              class="input form-control field-input" aria-label="I app" />
+            @if (slidersOn()) {
+              <input type="range" min="0" max="30" step="0.1" class="field-slider" [formControl]="aiForm.controls.measuredIntensity"
+                aria-label="I app coarse" />
+            }
+          </div>
+          <div class="field-cell">
+            <div class="field-label-row">
+              <label for="measuredSurface">{{ t().surface }}</label>
+              <span class="unit">m²</span>
+            </div>
+            <input id="measuredSurface" formControlName="measuredSurface" type="number" step="0.1" min="0"
+              class="input form-control field-input" aria-label="Surface" />
+            @if (slidersOn()) {
+              <input type="range" min="0.1" max="20" step="0.1" class="field-slider" [formControl]="aiForm.controls.measuredSurface"
+                aria-label="Surface coarse" />
+            }
+          </div>
+          <div class="field-cell">
+            <div class="field-label-row">
+              <label for="xon">X <sub>on</sub></label>
+              <span class="unit">mV</span>
+            </div>
+            <input id="xon" formControlName="xon" type="number" step="1" min="0"
+              class="input form-control field-input" aria-label="X on" />
+            @if (slidersOn()) {
+              <input type="range" min="0" max="1200" step="1" class="field-slider" [formControl]="aiForm.controls.xon"
+                aria-label="X on coarse" />
+            }
+          </div>
+          <div class="field-cell">
+            <div class="field-label-row">
+              <label for="xoff">X <sub>off</sub></label>
+              <span class="unit">mV</span>
+            </div>
+            <input id="xoff" formControlName="xoff" type="number" step="1" min="0"
+              class="input form-control field-input" aria-label="X off" />
+            @if (slidersOn()) {
+              <input type="range" min="0" max="1200" step="1" class="field-slider" [formControl]="aiForm.controls.xoff"
+                aria-label="X off coarse" />
+            }
+          </div>
+        </div>
+
+        @if (hint; as hintText) {
+          <p class="hint">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16.5v.01"></path>
+            </svg>
+            {{ hintText }}
+          </p>
+        }
+      </div>
+
+      <div class="blueprint verdict-card">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="verdict-head">
+          <h6>{{ t().evaluation }}</h6>
+          <span class="verdict-tag">{{ verdictLabel }}</span>
+        </div>
+        <div class="icorr-row">
+          <span class="icorr-label">i <sub>corr</sub></span>
+          <span class="icorr-value">{{ icorrText }}</span>
+          <span class="icorr-unit">mA/m²</span>
+        </div>
+        <div class="verdict-footer">
+          <div class="stat">
+            <span class="stat-label">ΔE</span>
+            <span class="stat-value">{{ deltaE.toFixed(0) }}</span>
+            <span class="stat-label">mV</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">{{ t().density }}</span>
+            <span class="stat-value">{{ densityText }}</span>
+            <span class="stat-label">mA/m²</span>
+          </div>
         </div>
       </div>
-    </fieldset>
-    <fieldset class="row mb-1 ungest-print">
-      <div class="col-md-7 px-0">
-        <div class="row">
-          <div class="col-xl-6">
-            <p class="text-muted w-100 text-center m-1" (click)="goToBottom()">
-              {{'rappliedload'|localise:'Predim'}}
-              <i class="fas fa-question-circle"></i>
-            </p>
-            <div class="row">
-              <label class="col-sm-2 col-4 text-end col-form-label" for="measuredIntensity">I <sub>app</sub></label>
-              <div class="col-sm-4 col-8 ps-0">
-                <div class="input-group">
-                  <input formControlName="measuredIntensity" class="form-control fw-bold text-end"
-                    placeholder="measured intensity" type="text" aria-describedby="iapp-desc"
-                    aria-label="measuredIntensity" />
-                    <span class="input-group-text" id="iapp-desc">mA</span>
-                  </div>
-                </div>
-                <label class="col-sm-2 col-4 text-end col-form-label"
-                for="measuredSurface">{{'rsurf'|localise:'Predim'}}</label>
-                <div class="col-sm-4 col-8 ps-0">
-                  <div class="input-group">
-                    <input formControlName="measuredSurface" class="form-control fw-bold text-end"
-                      placeholder="measured surface" type="text" aria-describedby="surface-desc"
-                      aria-label="measuredSurface" />
-                      <span class="input-group-text" id="surface-desc">m²</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <p class="text-muted w-100 text-center m-1">{{'rpotential'|localise:'Predim'}}</p>
-                <div class="row">
-                  <label class="col-sm-2 col-4 text-end col-form-label" for="xon">X <sub>on</sub></label>
-                  <div class="col-sm-4 col-8 ps-0">
-                    <div class="input-group" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-                      <input formControlName="xon" class="form-control fw-bold text-end" placeholder="xon" type="text"
-                        aria-describedby="xon-desc" aria-label="xon" />
-                        <span class="input-group-text">mV</span>
-                      </div>
-                    </div>
-                    <label class="col-sm-2 col-4 text-end col-form-label" for="xoff">X <sub>off</sub></label>
-                    <div class="col-sm-4 col-8 ps-0">
-                      <div class="input-group" (mouseenter)="popbox('deltav')" (mouseleave)="popbox('')">
-                        <input formControlName="xoff" class="form-control fw-bold text-end" placeholder="xoff" type="text"
-                          aria-describedby="xoff-desc" aria-label="xoff" />
-                          <span class="input-group-text">mV</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 px-0 mt-md-4 mt-xl-0">
-                <p class="text-muted w-100 text-center m-1">{{'rVCorr'|localise:'Predim'}}</p>
-                <div class="row m-0 w-100">
-                  <label class="col-3 text-end col-form-label" for="icorr">i <sub>corr</sub></label>
-                  <div class="col-9">
-                    <div class="input-group">
-                      <input [value]="userIcorr.effect" class="form-control text-center" placeholder="effect" type="text"
-                        aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
-                        [style.border-color]="userIcorr.bordercolor" />
-                        <input [value]="userIcorr.p3" class="form-control fw-bold text-end" placeholder="icorr" type="text"
-                          aria-describedby="icorr-desc" aria-label="icorr" readonly [style.background-color]="userIcorr.bgcolor"
-                          [style.border-color]="userIcorr.bordercolor" />
-                          <span id="icorr-desc" class="input-group-text" [style.background-color]="userIcorr.bgcolor"
-                          [style.border-color]="userIcorr.bordercolor">mA/m²</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-              </form>
-              <app-theecanvas [title]="'chartTitle'|localise:'Predim'" [usercurve]="corrosionview" class="row m-0 p-0">
-              </app-theecanvas>
+    </div>
 
-              <div class="row">
-                @if (showingdebug) {
-                  <div class="col-12 px-4 debug-aiform">
-                    <h3>Debug</h3>
-                    <p class="form-text">
-                      status : {{ aiForm.status }}
-                      <br />
-                      dirty : {{ aiForm.dirty }}
-                    </p>
-                    <div class="form-text text-muted">
-                      <pre>{{ aiForm.value | json }}</pre>
-                    </div>
-                  </div>
-                }
-                <div class="col-12 p-0">
-                  <p class="text-muted w-100 text-center m-1" id="mathformula">{{'depolFormula'|localise:'Predim'}}</p>
-                  <app-formula-math #mathformula></app-formula-math>
-                </div>
-                <div class="col-12 illust-info">
-                  <div class="row">
-                    <div class="col-lg-6 fig-corr">
-                      <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (Predim software V5)"
-                        class="d-block m-auto" />
-                      </div>
-                      <div class="col-lg-6">
-                        <h2 class="ungest-print">{{'illustDepolTitle'|localise:'Predim'}}</h2>
-                        <h4>{{'illustDepolPurpose'|localise:'Predim'}}</h4>
-                        <p>{{'illustDepolDesc'|localise:'Predim'}}</p>
-                        <ul>
-                          <li>I<sub>app</sub>&nbsp;: {{'riappdesc'|localise:'Predim'}}s</li>
-                          <li>&Delta;E X<sub>on</sub> - X<sub>off</sub>&nbsp;: {{'rxonoffdesc'|localise:'Predim'}}</li>
-                          <li>{{'rcstdesc'|localise:'Predim'}}
-                            <ul>
-                              <li>&beta;<sub>a</sub>&nbsp;:60 mV</li>
-                              <li>&beta;<sub>c</sub>&nbsp;:120 mV</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <div class="blueprint chart-card">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <app-theecanvas [usercurve]="corrosionview" [verdictKey]="verdictKey" [lang]="lang()"
+        (dragMove)="onDragMove($event)"></app-theecanvas>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <figure class="blueprint info-figure">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="duotone">
+        <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (Predim software V5)" />
+      </div>
+      <figcaption>{{ t().illustPurpose }}</figcaption>
+    </figure>
+    <div class="info-text">
+      <h6>{{ t().illustTitle }}</h6>
+      <h3>{{ t().formulaTitle }}</h3>
+      <figure class="blueprint formula-figure">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <app-formula-math></app-formula-math>
+      </figure>
+      <p>{{ t().illustDesc }}</p>
+      <ul>
+        <li>I <sub>app</sub> — {{ t().iappDesc }}</li>
+        <li>ΔE = X <sub>on</sub> − X <sub>off</sub> — {{ t().xonoffDesc }}</li>
+        <li>β <sub>a</sub> 60 mV · β <sub>c</sub> 120 mV — {{ t().cstDesc }}</li>
+      </ul>
+    </div>
+  </div>
+
+  @if (showingdebug) {
+    <div class="px-4 debug-aiform ungest-print">
+      <h3>Debug</h3>
+      <p class="form-text">
+        status : {{ aiForm.status }}
+        <br />
+        dirty : {{ aiForm.dirty }}
+      </p>
+      <div class="form-text text-muted">
+        <pre>{{ aiForm.value | json }}</pre>
+      </div>
+    </div>
+  }
+</form>
