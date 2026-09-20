@@ -1,6 +1,6 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withXhr } from '@angular/common/http';
-import { AisuiteTstoolsModule } from 'aisuite-ngtools';
+import { provideAisuiteTstools } from 'aisuite-ngtools';
 import { environment } from '../environments/environment';
 
 // operational language setup, injected as globals by a <script> tag in index.html
@@ -11,8 +11,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withXhr()),
-    importProvidersFrom(
-      AisuiteTstoolsModule.forRoot({ opLingua, uiLanguageJS: aiSuiteLanguageJS, linsceApiUrl: environment.aisuiteApiUrl })
-    )
+    provideAisuiteTstools({ opLingua, uiLanguageJS: aiSuiteLanguageJS, linsceApiUrl: environment.aisuiteApiUrl })
   ]
 };
