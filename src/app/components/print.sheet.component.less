@@ -1,0 +1,41 @@
+// Printed report header + measurement table. No `display` on :host: the global .gest-print rule
+// (src/styles.less) hides the sheet on screen and shows it in @media print.
+
+.print-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12mm;
+  border-bottom: 2px solid #000;
+  padding-bottom: 3mm;
+}
+.print-title {
+  margin: 0;
+  font-size: 19pt;
+}
+.print-meta {
+  flex: 1 1 auto;
+}
+.print-verdict-box {
+  flex: none;
+  text-align: right;
+  padding: 2mm 3mm;
+  border: 1.5pt solid var(--verdict-ink);
+  color: var(--verdict-ink);
+}
+.print-verdict-word {
+  font-size: 20pt;
+  line-height: 1;
+}
+
+.print-table {
+  width: 100%;
+  margin-top: 5mm;
+  font-size: 10pt;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+}
+th, td {
+  padding: 2px 6px;
+}

@@ -1,0 +1,19 @@
+<figure class="blueprint">
+  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  <app-icorr-measure [lang]="lang()"></app-icorr-measure>
+  <figcaption>{{ t().illustPurpose }}</figcaption>
+</figure>
+<div>
+  <h6>{{ t().illustTitle }}</h6>
+  <h3>{{ t().formulaTitle }}</h3>
+  <figure class="blueprint formula-figure">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <app-formula-math></app-formula-math>
+  </figure>
+  <p>{{ t().illustDesc }}</p>
+  <ul>
+    <li>I <sub>app</sub> — {{ t().iappDesc }}</li>
+    <li>ΔE = X <sub>on</sub> − X <sub>off</sub> — {{ t().xonoffDesc }}</li>
+    <li>β <sub>a</sub> 60 mV · β <sub>c</sub> 120 mV — {{ t().cstDesc }}</li>
+  </ul>
+</div>

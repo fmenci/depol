@@ -1,151 +1,16 @@
 <form class="app-shell" [formGroup]="aiForm" (ngSubmit)="onSubmit()"
   [style.--verdict-ink]="verdictTheme.ink" [style.--verdict-tint]="verdictTheme.tint">
 
-  <nav class="nav ungest-print">
-    <h1 class="nav-title h6">{{ t().title }}</h1>
-    <div class="nav-controls">
-      <input formControlName="refReport" class="input form-control nav-ref" type="text"
-        placeholder="{{ t().refPlaceholder }}" aria-label="{{ t().ref }}" />
-      <button type="button" class="btn btn-primary nav-print" (click)="mePrint()">{{ t().print }}</button>
-      <div class="lang-seg">
-        <input type="radio" id="lang-en" name="lang" [checked]="lang() === 'en'" (change)="setLang('en')">
-        <label for="lang-en">EN</label>
-        <input type="radio" id="lang-fr" name="lang" [checked]="lang() === 'fr'" (change)="setLang('fr')">
-        <label for="lang-fr">FR</label>
-      </div>
-    </div>
-  </nav>
+  <app-screen-nav [(lang)]="lang" [refControl]="aiForm.controls.refReport" (printRequested)="mePrint()" />
 
-  <div class="gest-print">
-    <div class="print-header">
-      <div [innerHtml]="headPrintTemplate"></div>
-      <div class="print-meta">
-        <h6>Predim V5 · Depol</h6>
-        <h3>{{ t().chartTitle }}</h3>
-        <p>{{ t().ref }} : <strong>{{ refreportPrint }}</strong> · {{ printDate }}</p>
-      </div>
-      <div class="print-verdict-box">
-        <div>{{ t().evaluation }}</div>
-        <div class="print-verdict-word">{{ verdictLabel }}</div>
-        <div>i corr {{ icorrText }} mA/m²</div>
-      </div>
-    </div>
-    <table class="print-table">
-      <thead>
-        <tr>
-          <th>{{ t().measure }}</th>
-          <th>I app</th><th>{{ t().surface }}</th><th>X on</th><th>X off</th><th>ΔE</th><th>{{ t().density }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ t().appliedLoad }} / {{ t().potentials }}</td>
-          <td>{{ corrosionview.measuredIntensity }} mA</td>
-          <td>{{ corrosionview.measuredSurface }} m²</td>
-          <td>{{ corrosionview.xon }} mV</td>
-          <td>{{ corrosionview.xoff }} mV</td>
-          <td>{{ deltaE.toFixed(0) }} mV</td>
-          <td>{{ densityText }} mA/m²</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-print-sheet [lang]="lang()" [view]="corrosionview" [headHtml]="headPrintTemplate" [reference]="refreportPrint"
+    [date]="printDate" [verdictLabel]="verdictLabel" [icorrText]="icorrText" [deltaE]="deltaE" [densityText]="densityText" />
 
   <div class="app-body">
     <div class="rail ungest-print">
-
-      <div class="blueprint measurement-card">
-        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div class="measurement-head">
-          <h6>{{ t().measure }} — {{ t().appliedLoad }} · {{ t().potentials }}</h6>
-          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="toggleSliders()">{{ sliderBtnLabel }}</button>
-        </div>
-
-        <div class="inputs-grid">
-          <div class="field-cell">
-            <div class="field-label-row">
-              <label for="measuredIntensity">I <sub>app</sub></label>
-              <span class="unit">mA</span>
-            </div>
-            <input id="measuredIntensity" formControlName="measuredIntensity" type="number" step="0.1" min="0"
-              class="input form-control field-input" aria-label="I app" />
-            @if (slidersOn()) {
-              <input type="range" min="0" max="30" step="0.1" class="field-slider" [formControl]="aiForm.controls.measuredIntensity"
-                aria-label="I app coarse" />
-            }
-          </div>
-          <div class="field-cell">
-            <div class="field-label-row">
-              <label for="measuredSurface">{{ t().surface }}</label>
-              <span class="unit">m²</span>
-            </div>
-            <input id="measuredSurface" formControlName="measuredSurface" type="number" step="0.1" min="0"
-              class="input form-control field-input" aria-label="Surface" />
-            @if (slidersOn()) {
-              <input type="range" min="0.1" max="20" step="0.1" class="field-slider" [formControl]="aiForm.controls.measuredSurface"
-                aria-label="Surface coarse" />
-            }
-          </div>
-          <div class="field-cell">
-            <div class="field-label-row">
-              <label for="xon">X <sub>on</sub></label>
-              <span class="unit">mV</span>
-            </div>
-            <input id="xon" formControlName="xon" type="number" step="1" min="0"
-              class="input form-control field-input" aria-label="X on" />
-            @if (slidersOn()) {
-              <input type="range" min="0" max="1200" step="1" class="field-slider" [formControl]="aiForm.controls.xon"
-                aria-label="X on coarse" />
-            }
-          </div>
-          <div class="field-cell">
-            <div class="field-label-row">
-              <label for="xoff">X <sub>off</sub></label>
-              <span class="unit">mV</span>
-            </div>
-            <input id="xoff" formControlName="xoff" type="number" step="1" min="0"
-              class="input form-control field-input" aria-label="X off" />
-            @if (slidersOn()) {
-              <input type="range" min="0" max="1200" step="1" class="field-slider" [formControl]="aiForm.controls.xoff"
-                aria-label="X off coarse" />
-            }
-          </div>
-        </div>
-
-        @if (hint; as hintText) {
-          <p class="hint">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16.5v.01"></path>
-            </svg>
-            {{ hintText }}
-          </p>
-        }
-      </div>
-
-      <div class="blueprint verdict-card">
-        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div class="verdict-head">
-          <h6>{{ t().evaluation }}</h6>
-          <span class="verdict-tag">{{ verdictLabel }}</span>
-        </div>
-        <div class="icorr-row">
-          <span class="icorr-label">i <sub>corr</sub></span>
-          <span class="icorr-value">{{ icorrText }}</span>
-          <span class="icorr-unit">mA/m²</span>
-        </div>
-        <div class="verdict-footer">
-          <div class="stat">
-            <span class="stat-label">ΔE</span>
-            <span class="stat-value">{{ deltaE.toFixed(0) }}</span>
-            <span class="stat-label">mV</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">{{ t().density }}</span>
-            <span class="stat-value">{{ densityText }}</span>
-            <span class="stat-label">mA/m²</span>
-          </div>
-        </div>
-      </div>
+      <app-measurement-card [controls]="aiForm.controls" [lang]="lang()" [hint]="hint" />
+      <app-verdict-card class="verdict-card" [lang]="lang()" [verdictLabel]="verdictLabel" [icorrText]="icorrText"
+        [deltaE]="deltaE" [densityText]="densityText" />
     </div>
 
     <div class="blueprint chart-card">
@@ -155,29 +20,7 @@
     </div>
   </div>
 
-  <div class="info-block">
-    <figure class="blueprint info-figure">
-      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div class="duotone">
-        <img src="assets/fig_icorr_measure.jpg" alt="Depolarisation measurement illustration (Predim software V5)" />
-      </div>
-      <figcaption>{{ t().illustPurpose }}</figcaption>
-    </figure>
-    <div class="info-text">
-      <h6>{{ t().illustTitle }}</h6>
-      <h3>{{ t().formulaTitle }}</h3>
-      <figure class="blueprint formula-figure">
-        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <app-formula-math></app-formula-math>
-      </figure>
-      <p>{{ t().illustDesc }}</p>
-      <ul>
-        <li>I <sub>app</sub> — {{ t().iappDesc }}</li>
-        <li>ΔE = X <sub>on</sub> − X <sub>off</sub> — {{ t().xonoffDesc }}</li>
-        <li>β <sub>a</sub> 60 mV · β <sub>c</sub> 120 mV — {{ t().cstDesc }}</li>
-      </ul>
-    </div>
-  </div>
+  <app-info-block [lang]="lang()" />
 
   @if (showingdebug) {
     <div class="px-4 debug-aiform ungest-print">

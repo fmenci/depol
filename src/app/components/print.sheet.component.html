@@ -1,0 +1,32 @@
+<div class="print-header">
+  <div [innerHtml]="headHtml()"></div>
+  <div class="print-meta">
+    <h6>Predim V5 · Depol</h6>
+    <h3 class="print-title">{{ t().chartTitle }}</h3>
+    <p>{{ t().ref }} : <strong>{{ reference() }}</strong> · {{ date() }}</p>
+  </div>
+  <div class="print-verdict-box">
+    <div>{{ t().evaluation }}</div>
+    <div class="print-verdict-word heading">{{ verdictLabel() }}</div>
+    <div>i corr {{ icorrText() }} mA/m²</div>
+  </div>
+</div>
+<table class="print-table">
+  <thead>
+    <tr>
+      <th>{{ t().measure }}</th>
+      <th>I app</th><th>{{ t().surface }}</th><th>X on</th><th>X off</th><th>ΔE</th><th>{{ t().density }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ t().appliedLoad }} / {{ t().potentials }}</td>
+      <td>{{ view().measuredIntensity }} mA</td>
+      <td>{{ view().measuredSurface }} m²</td>
+      <td>{{ view().xon }} mV</td>
+      <td>{{ view().xoff }} mV</td>
+      <td>{{ deltaE().toFixed(0) }} mV</td>
+      <td>{{ densityText() }} mA/m²</td>
+    </tr>
+  </tbody>
+</table>

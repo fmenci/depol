@@ -44,6 +44,11 @@ export interface CorrosionStrings {
     iappDesc: string;
     xonoffDesc: string;
     cstDesc: string;
+    figAlt: string;
+    figMonitoringUnit: string;
+    figReferenceElectrode: string;
+    figSteel: string;
+    figZincAnodes: string;
     readout: string;
     measure: string;
     operating: string;
@@ -73,6 +78,9 @@ export const CORROSION_STRINGS: Record<CorrosionLang, CorrosionStrings> = {
         iappDesc: 'Input current intensity applied on green circuit before depolarisation in milliampere.',
         xonoffDesc: 'Feed measured potentials on yellow circuit at Xon and Xoff points in millivolt to obtain the parameter',
         cstDesc: 'These constants were determined empirically following experiences carried out on galvanic anodes.',
+        figAlt: 'Depolarisation measurement illustration (Predim software V5)',
+        figMonitoringUnit: 'Potential and current monitoring unit', figReferenceElectrode: 'Reference electrode',
+        figSteel: 'Steel', figZincAnodes: 'Zinc anodes',
         readout: 'Readout', measure: 'Measurement', operating: 'Operating point',
         sliders: 'sliders', hide: 'hide', show: 'show',
         dragHint: 'Drag the point to adjust X off and I app.'
@@ -96,6 +104,9 @@ export const CORROSION_STRINGS: Record<CorrosionLang, CorrosionStrings> = {
         iappDesc: "Entrer la densité de courrant appliquée, sur le circuit vert, avant dépolarisation en milliampères.",
         xonoffDesc: 'Entrer les potentiels mesurés sur le circuit jaune aux points Xon et Xoff en millivolt pour obtenir le paramètre.',
         cstDesc: 'Ces constantes sont déterminées de façon empirique suite aux expériences menées sur les anodes Galvaniques.',
+        figAlt: 'Illustration de la mesure de dépolarisation (logiciel Predim V5)',
+        figMonitoringUnit: 'Unité de mesure du potentiel et du courant', figReferenceElectrode: 'Électrode de référence',
+        figSteel: 'Acier', figZincAnodes: 'Anodes en zinc',
         readout: 'Lecture', measure: 'Mesure', operating: 'Point de fonctionnement',
         sliders: 'curseurs', hide: 'masquer', show: 'afficher',
         dragHint: 'Glisser le point pour ajuster X off et I app.'

@@ -1,4 +1,115 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Corrosion evaluation screen: design tokens, declared on :root so every component of the screen
+   picks them up through the normal cascade (Angular's style encapsulation only scopes selectors,
+   not custom-property inheritance). The Barlow / Barlow Condensed webfonts are loaded from
+   index.html: a LESS @import of a remote stylesheet gets resolved as a local file by this
+   project's Less build instead of passed through as plain CSS. */
+:root {
+    --color-bg: #f2f2f3;
+    --color-text: #1d1f20;
+    --color-accent: #5980a6;
+    --color-divider: rgba(29, 31, 32, 0.16);
+
+    --color-neutral-200: #e7e7ea;
+    --color-neutral-300: #d4d4d7;
+    --color-neutral-400: #b7b7ba;
+    --color-neutral-600: #7a7a7d;
+    --color-neutral-700: #5d5d60;
+    --color-neutral-800: #424244;
+    --color-neutral-900: #2b2b2d;
+
+    --color-accent-100: #eef6ff;
+    --color-accent-600: #597ea3;
+    --color-accent-700: #416180;
+    --color-accent-800: #2c455d;
+    --color-accent-900: #1d2d3d;
+
+    --font-heading: 'Barlow Condensed', system-ui, sans-serif;
+    --font-body: 'Barlow', system-ui, sans-serif;
+
+    --space-2: 6.8px;
+    --space-3: 10.2px;
+    --space-4: 13.6px;
+    --space-6: 20.4px;
+    --space-8: 27.2px;
+}
+
+h1, h2, h3, h4, h5, h6, .heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 var(--space-2);
+}
+
+/* Blueprint card: framed vertical stack with a crosshair (<i class="corner tl|tr|bl|br">) on each corner. */
+.blueprint {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    /* Grid/flex items default to min-width:auto (shrink-to-fit their content's min-content size);
+       without this override, a card's auto-fit inputs grid forces the card, and the single implicit
+       column of the grid above it, wider than the viewport instead of wrapping. */
+    min-width: 0;
+    padding: var(--space-3);
+    border: 1px solid var(--color-divider);
+}
+
+.corner {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    color: color-mix(in srgb, var(--color-text) 55%, transparent);
+    /* Crosshair: one vertical and one horizontal 1px line, centred. */
+    background:
+        linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat,
+        linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+
+    &.tl, &.tr {
+        top: -6px;
+    }
+
+    &.bl, &.br {
+        bottom: -6px;
+    }
+
+    &.tl, &.bl {
+        left: -6px;
+    }
+
+    &.tr, &.br {
+        right: -6px;
+    }
+}
+
+/* Card title line: the heading on the left, a control or tag on the right. */
+.card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.card-head h6 {
+    margin: 0;
+}
+
+/* Caption + value pairs on a shared baseline: the caption colour / size cascades to the labels and
+   units in the row, and only the values reset it. */
+.baseline-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: var(--color-neutral-800);
+}
+
+.aisuite-publicazione {
+    padding-bottom: 55px;
+}
+
 .gest-print{
     display: none;
 }
@@ -13,6 +124,10 @@
 .footer .pgtitle {
     font-style: italic;
     color: #00b265;
+}
+
+.footer .version {
+    font-size: .7rem;
 }
 
 .footer p {
@@ -47,8 +162,11 @@
     .gest-print{
         display: inline-block;
     }
+    /* !important: components set their own `display` on the same elements (host rules, or classes
+       Angular's emulated encapsulation makes as specific as this one, and injects later), which
+       would otherwise keep them on the printed page. */
     .ungest-print{
-        display: none;
+        display: none !important;
     }
     .footer {
         position: relative;

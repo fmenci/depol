@@ -1,0 +1,37 @@
+// Two-column explanation block: schematic on one side, text on the other (stacked on narrow screens).
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-6);
+  align-items: start;
+  padding: 0 var(--space-4) var(--space-8);
+}
+
+h6 {
+  color: var(--color-accent-700);
+}
+figcaption {
+  font-size: 11px;
+  color: var(--color-neutral-700);
+}
+.formula-figure {
+  margin-bottom: var(--space-4);
+  max-width: 460px;
+}
+ul {
+  font-size: 14px;
+  padding-left: 18px;
+  margin: 0;
+}
+li {
+  margin-bottom: 6px;
+}
+
+@media print {
+  :host {
+    break-inside: avoid;
+    font-size: 75%;
+    padding: 0;
+  }
+}

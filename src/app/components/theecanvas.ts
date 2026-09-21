@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, NgZone, computed, effect, inject, input, output, signal, viewChild } from '@angular/core';
+import { ChartLegendComponent, LegendChip } from './chart.legend.component';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { ChartPadding, ChartScale, formatMagnitude, logTicks, makeScale, niceTicks } from '../../models/chart-geometry.model';
 import { CORROSION_STRINGS, CorrosionLang, VERDICT_THEME, VerdictKey } from '../../models/corrosion-strings.model';
@@ -45,15 +46,6 @@ interface RefPath {
     width: number;
 }
 
-interface LegendChip {
-    density: number;
-    label: string;
-    color: string;
-    dash: string;
-    width: number;
-    on: boolean;
-}
-
 // Eight applied densities ported from the previous theecanvas.ts, re-coloured onto the Industry
 // steel ramp and separated by dash pattern + stroke weight rather than lightness (design handoff
 // README §"Reference curves" — every curve clears ~4.25:1 against the white plot fill).
@@ -81,7 +73,7 @@ const round1 = (n: number): number => Math.round(n * 10) / 10;
     templateUrl: './theecanvas.html',
     styleUrls: ['./theecanvas.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgTemplateOutlet]
+    imports: [NgTemplateOutlet, ChartLegendComponent]
 })
 export class TheeCanvasComponent {
     usercurve = input.required<RedoxCalculation>();

@@ -1,0 +1,25 @@
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div class="card-head">
+  <h6>{{ t().measure }} — {{ t().appliedLoad }} · {{ t().potentials }}</h6>
+  <button type="button" class="btn btn-outline-secondary btn-sm" (click)="toggleSliders()">{{ sliderBtnLabel() }}</button>
+</div>
+
+<div class="inputs-grid">
+  <app-measure-field inputId="measuredIntensity" ariaLabel="I app" unit="mA" [step]="0.1" [sliderMax]="30"
+    [control]="controls().measuredIntensity" [sliders]="slidersOn()">I <sub>app</sub></app-measure-field>
+  <app-measure-field inputId="measuredSurface" ariaLabel="Surface" unit="m²" [step]="0.1" [sliderMin]="0.1" [sliderMax]="20"
+    [control]="controls().measuredSurface" [sliders]="slidersOn()">{{ t().surface }}</app-measure-field>
+  <app-measure-field inputId="xon" ariaLabel="X on" unit="mV" [sliderMax]="1200"
+    [control]="controls().xon" [sliders]="slidersOn()">X <sub>on</sub></app-measure-field>
+  <app-measure-field inputId="xoff" ariaLabel="X off" unit="mV" [sliderMax]="1200"
+    [control]="controls().xoff" [sliders]="slidersOn()">X <sub>off</sub></app-measure-field>
+</div>
+
+@if (hint(); as hintText) {
+  <p class="hint">
+    <svg class="hint-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16.5v.01"></path>
+    </svg>
+    {{ hintText }}
+  </p>
+}

@@ -1,0 +1,82 @@
+// Legend content. The box around it (position, background, border) is the chart's; this component
+// fills it. Tokens come from :root (src/styles.less).
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+h6 {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--color-neutral-800);
+}
+.unit {
+  white-space: nowrap;
+}
+.legend-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.legend-toggle {
+  font-size: 11px;
+  min-height: 24px;
+  padding: 0 4px;
+  color: var(--color-accent-700);
+  text-decoration: none;
+}
+
+.legend-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+// tabular-nums / nowrap cascade down to the chip's label.
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid var(--color-divider);
+  background: transparent;
+  color: var(--color-text);
+}
+.legend-chip--off {
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-600);
+}
+
+.legend-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid var(--color-divider);
+  padding-top: 6px;
+}
+.drag-hint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-neutral-700);
+}
+
+// Plate form: two even columns of centred chips.
+:host(.plate) {
+  .legend-chips {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px;
+  }
+  .legend-chip {
+    justify-content: center;
+    padding: 2px 3px;
+  }
+}

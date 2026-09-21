@@ -1,0 +1,22 @@
+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+<div class="card-head">
+  <h6>{{ t().evaluation }}</h6>
+  <span class="verdict-tag heading">{{ verdictLabel() }}</span>
+</div>
+<div class="baseline-row icorr-row">
+  <span>i <sub>corr</sub></span>
+  <span class="icorr-value heading">{{ icorrText() }}</span>
+  <span class="icorr-unit">mA/m²</span>
+</div>
+<div class="verdict-footer">
+  <div class="baseline-row stat">
+    <span>ΔE</span>
+    <span class="stat-value">{{ deltaE().toFixed(0) }}</span>
+    <span>mV</span>
+  </div>
+  <div class="baseline-row stat">
+    <span>{{ t().density }}</span>
+    <span class="stat-value">{{ densityText() }}</span>
+    <span>mA/m²</span>
+  </div>
+</div>
