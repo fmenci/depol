@@ -31,16 +31,30 @@ Pour en savoir plus :
 
 ## Sponsor and realisation
 
-This project was inially sponsored by (until 2021)
-![RGDevt](/src/assets/logoRGDevt.svg)
-RGD, 15 ter, rue Maurice Petit, 69360 Sérézin du Rhône, France
-
-Since 2022, This project is now sponsored by
-![RGDevt](/src/assets/Logo_Drizoro.svg)
+Since 2022, This project is sponsored by
+![DRIZORO](/src/assets/Logo_Drizoro.svg){width=300 height=200}
 DRIZORO, C/ Primavera nº50-52, Polígono Industrial Las Monjas 28850 Torrejón de Ardoz - Madrid, España
 [DRIZORO](https://www.drizoro.com)
 
 This project is realised by
 ![Arte Scriba](/src/assets/icone_piuma.svg)
 Arte Scriba, 754 route des Fontaines, 69440 Taluyers, France
-[Arte Scriba](https://www.artescriba.com)
+[Arte Scriba](https://www.artescriba.com){width=300 height=200}
+
+
+Until 2021, this project was inially sponsored by
+![RGDevt](/src/assets/logoRGDevt.svg){width=300 height=200}
+RGD, 15 ter, rue Maurice Petit, 69360 Sérézin du Rhône, France
+
+## Licence
+This software is provided under GNU GPL v3 licence.
+Copyright (c) 2025 Franck Menci
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published 
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
