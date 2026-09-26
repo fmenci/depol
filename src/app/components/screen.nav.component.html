@@ -1,0 +1,7 @@
+<h1 class="nav-title heading h6">{{ t().title }}</h1>
+<div class="nav-controls">
+  <input [formControl]="refControl()" class="input form-control nav-ref" type="text"
+    placeholder="{{ t().refPlaceholder }}" aria-label="{{ t().ref }}" />
+  <button type="button" class="btn btn-primary nav-print" (click)="printRequested.emit()">{{ t().print }}</button>
+  <app-lang-switch [(lang)]="lang" />
+</div>

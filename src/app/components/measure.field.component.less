@@ -1,0 +1,51 @@
+// One cell of the measurement card's inputs grid. Tokens (--color-*, --space-*) come from :root
+// (src/styles.less); the caption row is the shared .baseline-row.
+
+:host {
+  display: grid;
+  align-content: start;
+}
+
+.field-label-row {
+  justify-content: space-between;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.unit {
+  font-size: 12px;
+  color: var(--color-neutral-700);
+}
+.field-input {
+  min-height: 48px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--color-text);
+}
+
+// Range inputs: appearance:none with a 4px track and a 24px square thumb inside a 44px control —
+// setting `height` on the native element instead of the track/thumb shrinks the whole hit area.
+// The WebKit and Gecko pseudo-elements can't share a selector list, so they share mixins.
+.slider-track() {
+  height: 4px;
+  background: var(--color-neutral-400);
+}
+.slider-thumb() {
+  width: 24px;
+  height: 24px;
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent-800);
+}
+.field-slider {
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+
+  &::-webkit-slider-runnable-track { .slider-track(); }
+  &::-webkit-slider-thumb { appearance: none; margin-top: -10px; .slider-thumb(); }
+  &::-moz-range-track { .slider-track(); }
+  &::-moz-range-thumb { border-radius: 0; .slider-thumb(); }
+}

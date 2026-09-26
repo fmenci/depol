@@ -4,8 +4,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JsonPipe } from '@angular/common';
 import { LanguageService } from 'aisuite-ngtools';
-import { FormulaMathComponent } from './formula.math.component';
+import { InfoBlockComponent } from './info.block.component';
+import { MeasurementCardComponent } from './measurement.card.component';
+import { PrintSheetComponent } from './print.sheet.component';
+import { ScreenNavComponent } from './screen.nav.component';
 import { TheeCanvasComponent } from './theecanvas';
+import { VerdictCardComponent } from './verdict.card.component';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { IcorrResultModel } from '../../models/icorr.result.model';
 import { environment } from '../../environments/environment';
@@ -17,7 +21,10 @@ import { CORROSION_STRINGS, CorrosionLang, VERDICT_THEME, VerdictKey, verdictKey
     templateUrl: './corrosionpreventioncurve.component.html',
     styleUrls: ['./corrosionpreventioncurve.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ReactiveFormsModule, JsonPipe, FormulaMathComponent, TheeCanvasComponent]
+    imports: [
+        ReactiveFormsModule, JsonPipe, InfoBlockComponent, MeasurementCardComponent, PrintSheetComponent,
+        ScreenNavComponent, TheeCanvasComponent, VerdictCardComponent
+    ]
 })
 export class CorrosionPreventionCurveComponent {
     private readonly linrepo = inject(LanguageService);
@@ -26,16 +33,11 @@ export class CorrosionPreventionCurveComponent {
     // The screen's own FR/EN toggle is local state (see corrosion-strings.model.ts for why),
     // seeded from the app's configured language so the initial paint matches the rest of the app.
     protected readonly lang = signal<CorrosionLang>(this.linrepo.operationLingua === 'fr' ? 'fr' : 'en');
-    // Sliders start collapsed on small/short viewports so the number fields aren't pushed
-    // out of view; this is a one-off read of the initial viewport, not a persistent listener.
-    protected readonly slidersOn = signal(
-        typeof window === 'undefined' || (window.innerWidth >= 720 && window.innerHeight >= 640)
-    );
 
     corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '');
     // No explicit FormGroup<...> annotation: inference keeps each control's concrete FormControl
-    // type, which the range-input [formControl] bindings in the template need (they share the
-    // same control instance as the paired formControlName number input).
+    // type, which the child components' [formControl] bindings need (`aiForm.controls` is handed to
+    // the measurement card as is).
     aiForm = new FormGroup({
         xon: new FormControl(this.corrosionview.xon),
         xoff: new FormControl(this.corrosionview.xoff),
@@ -107,10 +109,6 @@ export class CorrosionPreventionCurveComponent {
         return null;
     }
 
-    get sliderBtnLabel(): string {
-        return (this.slidersOn() ? '− ' : '+ ') + this.t().sliders;
-    }
-
     get refreport(): string {
         const ctr = this.aiForm.get('refReport') as FormControl;
         return ctr.value;
@@ -126,14 +124,6 @@ export class CorrosionPreventionCurveComponent {
 
     get headPrintTemplate(): string {
         return this.sanitizer.sanitize(SecurityContext.HTML, this.linrepo.docHeaderTemplate) ?? '';
-    }
-
-    setLang(lang: CorrosionLang): void {
-        this.lang.set(lang);
-    }
-
-    toggleSliders(): void {
-        this.slidersOn.update((v) => !v);
     }
 
     onDragMove(move: { xoff: number; iapp: number }): void {

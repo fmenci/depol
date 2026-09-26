@@ -1,0 +1,10 @@
+<div class="baseline-row field-label-row">
+  <label [for]="inputId()"><ng-content /></label>
+  <span class="unit">{{ unit() }}</span>
+</div>
+<input #number [id]="inputId()" type="number" min="0" [step]="step()" [formControl]="control()"
+  class="input form-control field-input" [attr.aria-label]="ariaLabel()" (input)="mirrorToRange()" />
+@if (sliders()) {
+  <input #range type="range" [min]="sliderMin()" [max]="sliderMax()" [step]="step()" [formControl]="control()"
+    class="field-slider" [attr.aria-label]="ariaLabel() + ' coarse'" (input)="mirrorToNumber()" />
+}

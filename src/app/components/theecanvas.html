@@ -1,30 +1,6 @@
 <ng-template #legendContent>
-  <div class="legend-head">
-    <h6>{{ t().refCurves }} <span class="unit">(mA/m²)</span></h6>
-    <button type="button" class="btn btn-link btn-sm legend-toggle" (click)="toggleRefs()">
-      {{ refsOn() ? t().hide : t().show }}
-    </button>
-  </div>
-  <div class="legend-chips">
-    @for (chip of legendChips(); track chip.density) {
-      <button type="button" class="legend-chip" [class.legend-chip--off]="!chip.on" (click)="toggleCurve(chip.density)">
-        <svg width="22" height="8" class="legend-swatch" aria-hidden="true">
-          <line x1="0" y1="4" x2="22" y2="4" [attr.stroke]="chip.on ? chip.color : 'var(--color-neutral-400)'"
-            [attr.stroke-width]="chip.width" [attr.stroke-dasharray]="chip.dash"></line>
-        </svg>
-        <span class="legend-label">{{ chip.label }}</span>
-      </button>
-    }
-  </div>
-  <div class="legend-user">
-    <svg width="22" height="8" class="legend-swatch" aria-hidden="true">
-      <line x1="0" y1="4" x2="22" y2="4" [attr.stroke]="verdictInk()" stroke-width="3.5"></line>
-    </svg>
-    {{ t().yourCurve }}
-  </div>
-  @if (!legendInPlot()) {
-    <p class="drag-hint">{{ t().dragHint }}</p>
-  }
+  <app-chart-legend [chips]="legendChips()" [refsOn]="refsOn()" [verdictInk]="verdictInk()" [lang]="lang()"
+    [plate]="legendInPlot()" (refsToggled)="toggleRefs()" (curveToggled)="toggleCurve($event)" />
 </ng-template>
 
 <div class="chart-toolbar">
@@ -87,13 +63,13 @@
       }
     </div>
     @if (legendInPlot()) {
-      <div class="legend legend--plate">
+      <div class="legend-plate">
         <ng-container [ngTemplateOutlet]="legendContent"></ng-container>
       </div>
     }
   </div>
   @if (!legendInPlot()) {
-    <div class="legend legend--row">
+    <div class="legend-row">
       <ng-container [ngTemplateOutlet]="legendContent"></ng-container>
     </div>
   }

@@ -1,8 +1,8 @@
 // Chart engine content. The card chrome (blueprint border + corner marks, background, padding)
 // is owned by the parent (corrosionpreventioncurve.component.less); this component fills that
-// card's content box. Design tokens (--color-*, --space-*, --font-*) are declared on the parent's
-// :host and inherited here through the normal CSS cascade (custom properties aren't affected by
-// Angular's per-component style encapsulation).
+// card's content box. Design tokens (--color-*, --space-*, --font-*) are global (src/styles.less)
+// and the text colour is inherited from the parent's :host through the normal CSS cascade.
+// The legend's own content styles live in chart.legend.component.less.
 :host {
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   gap: var(--space-2);
 }
 
-.chart-toolbar {
+.chart-toolbar, .chart-controls {
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -21,7 +21,6 @@
 
 .chart-title {
   margin: 0 auto 0 0;
-  color: var(--color-text);
 }
 
 .readout {
@@ -30,17 +29,9 @@
   border: 1px solid var(--color-divider);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  background: transparent;
 }
 .readout--hover { background: var(--color-accent-100); }
 .readout--dragging { background: var(--readout-tint, var(--color-neutral-200)); }
-
-.chart-controls {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
 
 .log-toggle {
   display: inline-flex;
@@ -48,29 +39,27 @@
   gap: 6px;
   font-size: 13px;
   cursor: pointer;
-  margin: 0;
 }
 
+// The height is set once on the group; its buttons stretch to it.
 .zoom-group {
   display: flex;
   gap: 2px;
+  height: 40px;
 }
 .zoom-btn {
   width: 40px;
-  height: 40px;
   padding: 0;
   font-size: 18px;
   line-height: 1;
 }
 .reset-btn {
-  height: 40px;
   font-size: 12px;
 }
 
 .chart-row {
   flex: 1 1 auto;
   min-height: 0;
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -80,7 +69,6 @@
   position: relative;
   flex: 1 1 auto;
   min-height: max(220px, 30dvh);
-  min-width: 0;
   touch-action: none;
   // Dragging the operating point is a plain mouse/pointer drag over an SVG, which the browser's
   // default text-selection gesture would otherwise race against (pointer capture only redirects
@@ -94,17 +82,14 @@
   position: absolute;
   inset: 0;
 }
+.plot-rect, .guide-line {
+  stroke: var(--color-neutral-700);
+}
 .plot-rect {
   fill: #fff;
-  stroke: var(--color-neutral-700);
 }
 .grid-line {
   stroke: var(--color-neutral-300);
-  stroke-width: 1;
-}
-.guide-line {
-  stroke: var(--color-neutral-700);
-  stroke-width: 1;
 }
 .guide-ring {
   stroke: var(--color-neutral-900);
@@ -126,74 +111,14 @@
   position: absolute;
   white-space: nowrap;
 }
-.axis-overlay span.axis-title {
+.axis-title {
   font-weight: 500;
-}
-
-.legend {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
-}
-.legend h6 {
-  margin: 0;
-  font-size: 10px;
-  line-height: 1.2;
-  color: var(--color-neutral-800);
-}
-.legend .unit {
-  white-space: nowrap;
-}
-.legend-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-}
-.legend-toggle {
-  font-size: 11px;
-  min-height: 24px;
-  padding: 0 4px;
-  color: var(--color-accent-700);
-  text-decoration: none;
-}
-.legend-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font: inherit;
-  font-size: 11px;
-  cursor: pointer;
-  border: 1px solid var(--color-divider);
-  background: transparent;
-  color: var(--color-text);
-}
-.legend-chip--off {
-  background: var(--color-neutral-200);
-  color: var(--color-neutral-600);
-}
-.legend-label {
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.legend-user {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border-top: 1px solid var(--color-divider);
-  padding-top: 6px;
-}
-.drag-hint {
-  margin: 0;
-  font-size: 11px;
-  color: var(--color-neutral-700);
 }
 
 // Data-aware placement: the plate sits inside the plot's usually-empty top-right corner
 // (design handoff README §"Legend placement rule"); pad.r is a fixed 14px regardless of width,
 // so the plate's offset from the plot's right edge is a constant, not a measured value.
-.legend--plate {
+.legend-plate {
   position: absolute;
   z-index: 2;
   top: 8px;
@@ -203,31 +128,11 @@
   background: #fff;
   border: 1px solid var(--color-neutral-700);
 }
-.legend--plate .legend-chips {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3px;
-}
-.legend--plate .legend-chip {
-  justify-content: center;
-  padding: 2px 3px;
-}
-.legend--plate .drag-hint {
-  display: none;
-}
 
-.legend--row {
+.legend-row {
   flex: none;
   border-top: 1px solid var(--color-divider);
   padding-top: var(--space-2);
-}
-.legend--row .legend-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-}
-.legend--row .legend-chip {
-  padding: 3px 7px;
 }
 
 @media print {
@@ -235,8 +140,7 @@
   // not by CSS. Only the controls that mean nothing on paper are hidden here: zoom/log toggle
   // (interaction only) and the live readout chip (it always reads "—" once printing clears the
   // hover guide). The legend stays — it's the key to the printed chart's reference curves.
-  .chart-controls,
-  .readout {
+  .chart-controls, .readout {
     display: none;
   }
 }

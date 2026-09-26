@@ -1,0 +1,31 @@
+// Rail card 1 — measurement. The card chrome (.blueprint, .corner, .card-head) and the tokens are
+// global (src/styles.less). The rail switches the card to its compact form with --measure-pad /
+// --measure-cols, which cascade in from the parent's layout rules.
+
+:host {
+  padding: var(--measure-pad, var(--space-4));
+}
+
+h6 {
+  color: var(--color-accent-700);
+  text-wrap: balance;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: var(--measure-cols, repeat(auto-fit, minmax(min(100%, 140px), 1fr)));
+  gap: var(--space-3);
+}
+
+.hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+  color: oklch(0.46 0.17 25);
+}
+.hint-icon {
+  flex: none;
+  margin-top: 2px;
+}

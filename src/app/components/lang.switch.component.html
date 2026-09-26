@@ -1,0 +1,5 @@
+@for (option of options; track option.code) {
+  <input type="radio" [id]="'lang-' + option.code" name="lang" [checked]="lang() === option.code"
+    (change)="lang.set(option.code)">
+  <label [for]="'lang-' + option.code">{{ option.label }}</label>
+}

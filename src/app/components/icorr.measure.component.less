@@ -1,0 +1,94 @@
+// Depolarisation measurement schematic. The tokens (--color-*, --font-body) cascade in from
+// app-corrosion-prevention-curve; the wire colours are the figure's own and match the circuits
+// named in the legend beside it (green: applied current, yellow: measured potential).
+// Everything inherits `color`: a class sets it once and the fill / stroke of that element follow.
+
+:host {
+  display: block;
+
+  --wire-anode: #2a6fbf;
+  --wire-current: #2e9d57;
+  --wire-potential: #e0b400;
+  --meter-current: #e07b00;
+}
+
+.figure {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+  font: 11px var(--font-body);
+  color: var(--color-text);
+  fill: currentColor;
+}
+
+.wire-steel { color: var(--color-text); }
+.wire-anode, .meter-potential { color: var(--wire-anode); }
+.wire-current { color: var(--wire-current); }
+.wire-potential { color: var(--wire-potential); }
+.meter-current { color: var(--meter-current); }
+
+.wire, .leader, .frame, .slab-line, .tie, .rebar, .rebar-shine {
+  fill: none;
+}
+.wire, .meter {
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.wire {
+  stroke-linejoin: round;
+}
+.meter {
+  fill: #fff;
+}
+.meter-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.label-end {
+  text-anchor: end;
+}
+
+.leader {
+  stroke: var(--color-neutral-800);
+  stroke-width: 0.8;
+  marker-end: url(#icorr-measure-dot);
+}
+.frame {
+  stroke: var(--color-neutral-800);
+  stroke-dasharray: 3 2;
+}
+
+.slab {
+  fill: var(--color-accent-100);
+}
+.slab, .slab-line {
+  stroke: var(--color-neutral-400);
+}
+.slab-line {
+  stroke-width: 0.6;
+}
+
+.rebar, .rebar-shine {
+  stroke-linecap: round;
+}
+.rebar {
+  stroke: var(--color-neutral-600);
+  stroke-width: 6;
+}
+.rebar-shine {
+  stroke: var(--color-neutral-400);
+  stroke-width: 1.5;
+}
+
+.casing, .tie {
+  stroke: var(--color-neutral-700);
+}
+.casing {
+  fill: var(--color-neutral-200);
+}
+.anode-body {
+  fill: var(--color-neutral-300);
+}

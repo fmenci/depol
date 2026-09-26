@@ -1,13 +1,13 @@
 {
   "name": "depol",
-  "version": "5.7.5",
-  "license": "GNU GPLv3",
+  "version": "5.7.6",
+  "license": "GPL-3.0-or-later",
   "author": {
     "name": "Franck Menci",
     "email": "franck@menci.net",
     "url": "https://www.aisuite.eu"
   },
-  "description": "Predim software V5, courbe de dépolarisation",
+  "description": "Predim software V5, dépolarisation, This application provides a calculation from measured parameters on a steel reinforced concrete structure (see illustration).  The mathematical formula is deduced from Tafel and Butler-Volmer equations",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ssl --ssl-cert %APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem --ssl-key %APPDATA%\\ASP.NET\\https\\%npm_package_name%.key",

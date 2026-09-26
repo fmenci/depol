@@ -1,0 +1,52 @@
+<svg class="figure" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="icorr-measure-title">
+	<title id="icorr-measure-title">{{ t().figAlt }}</title>
+	<defs>
+		<marker id="icorr-measure-dot" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5">
+			<circle cx="3" cy="3" r="2.5" />
+		</marker>
+		<!-- Anode: cylinder and its tie wire, standing on a rebar; origin is the bottom centre -->
+		<g id="icorr-measure-anode">
+			<path class="casing anode-body" d="M-6-28v28a6 2.5 0 0 0 12 0v-28z" />
+			<ellipse class="casing" cy="-28" rx="6" ry="2.5" />
+			<circle cy="-28" r="1.4" />
+			<path class="tie" d="M-9-2l4 6m2-6l4 6m2-6l4 6m2-6l4 6" />
+		</g>
+	</defs>
+
+	<rect class="frame" x="10" y="8" width="190" height="90" />
+
+	<!-- Concrete slab in oblique view, with its three rebars and their anodes -->
+	<path class="slab" d="M16 244H340L424 104H100z" />
+	<path class="slab-line" d="M28 224H352M40 204H364M52 184H376M64 164H388M76 144H400M88 124H412" />
+	<path class="rebar" d="M84 140H396M60 180H372M36 220H348" />
+	<path class="rebar-shine" d="M84 138.5H396M60 178.5H372M36 218.5H348" />
+	<use href="#icorr-measure-anode" x="130" y="139" /><use href="#icorr-measure-anode" x="230" y="139" /><use href="#icorr-measure-anode" x="330" y="139" />
+	<use href="#icorr-measure-anode" x="110" y="179" /><use href="#icorr-measure-anode" x="210" y="179" /><use href="#icorr-measure-anode" x="310" y="179" />
+	<use href="#icorr-measure-anode" x="70" y="219" /><use href="#icorr-measure-anode" x="170" y="219" /><use href="#icorr-measure-anode" x="270" y="219" />
+
+	<!-- Wiring: steel bus, anode groups direct (blue) and through the ammeter (green), reference electrode (yellow) -->
+	<path class="wire wire-steel" d="M170 26H22V220H36M22 62l22-9" />
+	<path class="wire wire-anode" d="M52 76V188M52 108H330M130 108v4M230 108v4M330 108v4M52 188H270M70 188v4M170 188v4M270 188v4" />
+	<path class="wire wire-current" d="M52 50H110V148H310M110 148v4M210 148v4M310 148v4" />
+	<circle class="wire-steel" cx="22" cy="62" r="2" /><circle class="wire-steel" cx="36" cy="220" r="2" />
+	<circle class="wire-steel" cx="52" cy="50" r="2" /><circle class="wire-steel" cx="52" cy="76" r="2" />
+	<circle class="wire-anode" cx="52" cy="108" r="2" /><circle class="wire-anode" cx="52" cy="188" r="2" />
+
+	<rect class="casing" x="165" y="146" width="10" height="22" rx="1" />
+	<path d="M166 168h8v6h-8z" />
+	<path class="wire wire-potential" d="M170 38V146" />
+
+	<circle class="meter meter-current" cx="86" cy="50" r="13" />
+	<text class="meter-label" x="86" y="50">A</text>
+	<circle class="meter meter-potential" cx="170" cy="26" r="12" />
+	<text class="meter-label" x="170" y="26">V</text>
+
+	<path class="leader" d="M216 14H203" />
+	<text x="214" y="18">{{ t().figMonitoringUnit }}</text>
+	<path class="leader" d="M218 92L177 150" />
+	<text x="212" y="86">{{ t().figReferenceElectrode }}</text>
+	<path class="leader" d="M390 181L376 180" />
+	<text x="392" y="184">{{ t().figSteel }}</text>
+	<path class="leader" d="M370 232L277 208" />
+	<text class="label-end" x="434" y="236">{{ t().figZincAnodes }}</text>
+</svg>
