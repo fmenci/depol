@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { LocalisePipe } from 'aisuite-ngtools';
+import { LinScePipe } from '@aisuite-eu/ngtools';
 
 @Component({
     selector: 'app-formula-math',
     templateUrl: './formula.math.component.html',
     styleUrls: ['./formula.math.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [LocalisePipe]
+    imports: [LinScePipe]
 })
 export class FormulaMathComponent {
     @Output() evpopbox = new EventEmitter<string>();

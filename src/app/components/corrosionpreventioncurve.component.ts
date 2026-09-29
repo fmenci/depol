@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JsonPipe } from '@angular/common';
-import { LanguageService } from 'aisuite-ngtools';
+import { LanguageService } from '@aisuite-eu/ngtools';
 import { InfoBlockComponent } from './info.block.component';
 import { MeasurementCardComponent } from './measurement.card.component';
 import { PrintSheetComponent } from './print.sheet.component';
