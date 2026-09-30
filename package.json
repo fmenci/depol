@@ -21,7 +21,7 @@
   },
   "private": true,
   "dependencies": {
-    "@aisuite-eu/ngtools": "file:../AISuite.v14/Includes/aisuite-eu-ngtools-3.0.1.tgz",
+    "@aisuite-eu/ngtools": "^3.0.1",
     "@angular/common": "~22.1.6",
     "@angular/compiler": "~22.1.6",
     "@angular/core": "~22.1.6",
