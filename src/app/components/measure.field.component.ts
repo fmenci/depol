@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { LinScePipe } from '@aisuite-eu/ngtools';
+import { CorrosionLang } from '../../models/corrosion-view.model';
 
 /**
  * One measurement: caption (projected) + unit, the precise number input and, while `sliders` is on,
@@ -13,7 +15,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     templateUrl: './measure.field.component.html',
     styleUrls: ['./measure.field.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ReactiveFormsModule]
+    imports: [ReactiveFormsModule, LinScePipe]
 })
 export class MeasureFieldComponent {
     control = input.required<FormControl<number | null>>();
@@ -24,6 +26,7 @@ export class MeasureFieldComponent {
     sliderMin = input(0);
     sliderMax = input.required<number>();
     sliders = input(false);
+    lang = input<CorrosionLang>('en');
 
     private readonly numberInput = viewChild.required<ElementRef<HTMLInputElement>>('number');
     private readonly rangeInput = viewChild<ElementRef<HTMLInputElement>>('range');

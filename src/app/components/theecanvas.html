@@ -15,8 +15,8 @@
       {{ 'logScale' | linsceLocalisation:'Predim':lang() }}
     </label>
     <div class="zoom-group" role="group">
-      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomOut()" aria-label="Zoom out">−</button>
-      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomIn()" aria-label="Zoom in">+</button>
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomOut()" [attr.aria-label]="'zoomOut' | linsceLocalisation:'Predim':lang()">−</button>
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomIn()" [attr.aria-label]="'zoomIn' | linsceLocalisation:'Predim':lang()">+</button>
       <button type="button" class="btn btn-outline-secondary reset-btn" (click)="resetView()">{{ 'resetView' | linsceLocalisation:'Predim':lang() }}</button>
     </div>
   </div>

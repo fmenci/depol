@@ -1,50 +1,38 @@
 # Localisation audit and plan
 
-Audit of the project against [Instructions.md](../Instructions.md) (2026-10-08).
+Audit of the project against [Instructions.md](../Instructions.md), re-run on 2026-10-08 after the migration to `aiSuiteLanguageJS`.
 
-## Findings
+## Current state
 
-### 1. Parallel label table instead of WDR
-`src/models/corrosion-strings.model.ts` holds ~55 EN/FR labels in a local `CORROSION_STRINGS` table, used by every component through `t()`. It exists because `LanguageService` has no runtime language switch. Only 21 of these labels exist in `aiSuiteLanguageJS`, under different tag names (e.g. `perfEval` vs `title`, `rsurf` vs `surface`).
+- All labels of the screen live in `aiSuiteLanguageJS` (`src/index.html`), formula `Predim`, languages `fr`, `en`, `es` (es-ES), 43 tags each. Every tag used in templates and TS exists in the three languages; there are no duplicate or unused tags.
+- Components read labels with the `linsceLocalisation` pipe (language as 3rd argument) or `LanguageService.label`. This includes `aria-label` and SVG `<title>` texts.
+- The FR/EN/ES switch calls `LanguageService.switchLingua(lang, linguaExport(lang))`; `linguaExport` (in `src/models/corrosion-view.model.ts`) selects one language out of `aiSuiteLanguageJS`, falling back to `en`.
+- No default or fallback text in another language than UK English remains in `src/app` or `src/models`.
+- XML ready for WDR source feeding: [aisuite-labels.xml](aisuite-labels.xml), generated from `aiSuiteLanguageJS` (3 formulas, 129 `LinTag`). Regenerate it whenever tags change.
 
-### 2. Defaults not in UK English
-| Where | Text | Issue |
-|---|---|---|
-| `src/index.html` `<title>` | "Predim software V5 courbe de dépolarisation" | French default |
-| `src/index.html` footer `.pgtitle` | "Predim V5, courbe de dépolarisation" | French default |
-| `formula.math.component.html` | `'TaffelFormula'\|linsceLocalisation:'Predim'` | No tag in `aiSuiteLanguageJS` (the existing tag is `depolFormula`), so the pipe has nothing to resolve and no English default is given. **Tag added** (see below). |
+## Resolved since the first audit
 
-No other French default was found in templates or TS; French text lives only in the `fr` branch of `CORROSION_STRINGS`, `aiSuiteLanguageJS` and README.
+| Finding | Resolution |
+|---|---|
+| Local `CORROSION_STRINGS` table bypassing WDR | Removed; labels moved to `aiSuiteLanguageJS`; file renamed `corrosion-view.model.ts` |
+| No runtime language switch | `LanguageService.switchLingua` already existed; used by `setLang` |
+| `TaffelFormula` tag missing | Template uses `depolFormula` |
+| Duplicate `placeholderRefEtude` (`en`) | Single entry |
+| `chartYLabel` `A/m²` vs `mA/m²` | `mA/m²` in every language |
+| `rsurf` lowercase | "Surface" |
+| French typos ("courrent", "fourni", "Galvaniques") | Corrected |
+| Hardcoded `aria-label` (zoom, slider) | New tags `zoomOut`, `zoomIn`, `ariaSlider`; Surface field uses `rsurf` |
+| Date locale from a `fr`/`en` test | Locale carried by `CORROSION_LANGS` |
 
-### 3. Data defects in `aiSuiteLanguageJS`
-- `en`: `placeholderRefEtude` appears twice ("This case study reference code", "Your case study reference").
-- `en`: `chartYLabel` says `A/m²`, `fr` says `mA/m²` (code uses `mA/m²`).
-- `fr`: `rsurf` is lowercase "surface" in both languages, where the table uses "Surface".
-- `fr`: "courrent" (should be "courant"), "fourni" (should be "fournit"), "Galvaniques" capitalisation.
+## Remaining items
 
-### 4. Hardcoded user-visible text (candidates for tags)
-- `index.html`: `aria-label="Toggle navigation"`, `title="scrool to end"` (typo), `<title>Navigation wheel`, `alt="Depolarisation icon"`, `title="Realisation Arte Scriba"`, `alt="Piuma Arte Scriba"`, "Version 5.7.4", copyright line.
-- `theecanvas.html`: `aria-label="Zoom out"`, `aria-label="Zoom in"`.
-- `measurement.card.component.html`: `ariaLabel="I app"`, `"Surface"`, `"X on"`, `"X off"`.
-- `measure.field.component.html`: `ariaLabel() + ' coarse'`.
-- `corrosionpreventioncurve.component.html`: "Debug", "status", "dirty" (developer-only, low priority).
-- `corrosionpreventioncurve.component.ts:122`: date locale chosen from `lang()`; acceptable, derive from `lingua`.
-- Language switch labels `EN`/`FR` come from the table (`lang`); candidates for `00`.
+1. **`index.html` host texts** (French `<title>` and footer title, `Toggle navigation`, `scrool to end` typo, `alt`/`title` of logos, copyright line): out of scope, the file is only used during development. In production the host page (Razor tag helper) provides them.
+2. **Developer-only debug panel** (`Debug`, `status`, `dirty` in `corrosionpreventioncurve.component.html`), shown only when `environment.production` is false. Left unlocalised on purpose.
+3. **`00` (language agnostic) labels**: none are needed today. Symbols and units (`mA/m²`, `ΔE`, `I app`, `X on`, `X off`, `β a 60 mV · β c 120 mV`), the `EN`/`FR`/`ES` switch captions and "Predim V5 · Depol" are literals in the templates. If any of them must become a label, give it its own formula (for example `PredimCommon`, lingua `00`), because the language service takes the first formula of a given name.
+4. **`README.md`** has English and French sections only; a Spanish section would follow the other two.
+5. **Spanish review**: the `es` texts were written without a native review.
+6. **Specs**: no spec covers the language switch (`setLang` / `linguaExport`, fallback to `en`). Worth adding.
 
-### 5. Language-agnostic (`00`) candidates
-`brand` ("Predim V5 — Depol"), `lang` codes, units (`mA`, `mV`, `m²`, `mA/m²`), `ΔE`, `I app`, `X on`, `X off`, `β a 60 mV · β c 120 mV`.
+## Rules for new work
 
-## Status (update)
-
-Done: the local `CORROSION_STRINGS` table was removed and all its labels moved to `aiSuiteLanguageJS` (formula `Predim`, `en` + `fr`); components use `linsceLocalisation` with the language as 3rd argument; the FR/EN switch calls `LanguageService.switchLingua` (plan steps 2, 4, 5). Data defects of section 3 are fixed (`TaffelFormula` replaced by `depolFormula`). Still open: sections 2 (index.html French title/footer) and 4 (hardcoded aria/alt/title texts).
-
-## Plan
-
-1. **Done now:** added `TaffelFormula` (`en`/`fr`) to `aiSuiteLanguageJS`. No other code touched.
-2. **Tag inventory:** give every `CORROSION_STRINGS` key a stable `Predim` tag, reusing the 21 existing tags where they match; add the rest to `aiSuiteLanguageJS` for `en` and `fr`; put language-agnostic values under `00`.
-3. **Fix data defects** in section 3 (needs confirmation of the intended wording for the `fr` corrections).
-4. **Runtime language switch:** extend the shared `LanguageService` (in `@aisuite-eu/ngtools`) with a settable lingua, or keep a thin local adapter that reads `label('Predim', tag)` per language. This is the blocker for retiring `CORROSION_STRINGS`; it touches the shared library, so it needs your decision.
-5. **Migrate components** one at a time from `t().key` to `LinScePipe` / `label()`, with English defaults; delete `CORROSION_STRINGS` and update specs (`app.component.spec.ts` provides `uiLanguageJS: []`, so tests will exercise the defaults).
-6. **Hardcoded text** (section 4): replace with tags; fix the `scrool` typo.
-7. **index.html French defaults:** make `<title>` and footer title English defaults, localised via `aiSuiteLanguageJS` (the host page, not Angular, so it needs a small script or Razor tag helper in production).
-8. **Handoff to WDR:** export the final `aiSuiteLanguageJS` as XML in the format shown in `CLAUDE.md`.
+See [CLAUDE.md](../CLAUDE.md): every new label gets a tag in `aiSuiteLanguageJS` for `fr`, `en` and `es`, is read through the pipe or `LanguageService.label`, and the XML export is regenerated.

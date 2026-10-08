@@ -4,7 +4,7 @@ import { LinSceExportFormula } from '@aisuite-eu/ngtools';
 // `aiSuiteLanguageJS` (src/index.html), formula `Predim`, and is read with the `linsceLocalisation`
 // pipe or `LanguageService.label` (see Instructions.md).
 
-export type CorrosionLang = 'en' | 'fr';
+export type CorrosionLang = 'en' | 'fr' | 'es';
 export type VerdictKey = 'unset' | 'passive' | 'low' | 'moderate' | 'high';
 
 /** Formula (label group) of this application in `aiSuiteLanguageJS`. */
@@ -20,9 +20,10 @@ export const VERDICT_TAG: Record<VerdictKey, string> = {
 };
 
 /** Languages offered by the screen's switch; the label is the same in every language, hence a literal. */
-export const CORROSION_LANGS: { code: CorrosionLang; label: string }[] = [
-    { code: 'en', label: 'EN' },
-    { code: 'fr', label: 'FR' }
+export const CORROSION_LANGS: { code: CorrosionLang; label: string; locale: string }[] = [
+    { code: 'en', label: 'EN', locale: 'en-GB' },
+    { code: 'fr', label: 'FR', locale: 'fr-FR' },
+    { code: 'es', label: 'ES', locale: 'es-ES' }
 ];
 
 declare const aiSuiteLanguageJS: string | LinSceExportFormula[] | undefined;

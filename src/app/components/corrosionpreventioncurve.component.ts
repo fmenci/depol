@@ -14,7 +14,7 @@ import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { IcorrResultModel } from '../../models/icorr.result.model';
 import { environment } from '../../environments/environment';
 import { formatMagnitude } from '../../models/chart-geometry.model';
-import { CorrosionLang, PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, linguaExport, verdictKeyFor } from '../../models/corrosion-view.model';
+import { CORROSION_LANGS, CorrosionLang, PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, linguaExport, verdictKeyFor } from '../../models/corrosion-view.model';
 
 @Component({
     selector: 'app-corrosion-prevention-curve',
@@ -32,7 +32,7 @@ export class CorrosionPreventionCurveComponent {
 
     // Current language of the screen, seeded from the app's configured language. It changes through
     // setLang, so the language service holds the new labels before the screen re-reads them.
-    protected readonly lang = signal<CorrosionLang>(this.linrepo.operationLingua === 'fr' ? 'fr' : 'en');
+    protected readonly lang = signal<CorrosionLang>(CORROSION_LANGS.find((l) => l.code === this.linrepo.operationLingua)?.code ?? 'en');
 
     corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '');
     // No explicit FormGroup<...> annotation: inference keeps each control's concrete FormControl
@@ -122,7 +122,7 @@ export class CorrosionPreventionCurveComponent {
     }
 
     get printDate(): string {
-        return new Date().toLocaleDateString(this.lang() === 'fr' ? 'fr-FR' : 'en-GB');
+        return new Date().toLocaleDateString(CORROSION_LANGS.find((l) => l.code === this.lang())?.locale);
     }
 
     get headPrintTemplate(): string {

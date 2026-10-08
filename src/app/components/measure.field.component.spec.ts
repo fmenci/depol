@@ -1,9 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
-import { describe, expect, it } from 'vitest';
+import { provideAisuiteNgtools } from '@aisuite-eu/ngtools';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { MeasureFieldComponent } from './measure.field.component';
 
 describe('MeasureFieldComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideAisuiteNgtools({ opLingua: 'en', uiLanguageJS: [], linsceApiUrl: '' })] });
+  });
+
   function setup(sliders = true) {
     const fixture = TestBed.createComponent(MeasureFieldComponent);
     const control = new FormControl<number | null>(3);
