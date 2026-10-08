@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings.model';
+import { LinScePipe } from '@aisuite-eu/ngtools';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { CorrosionLang } from '../../models/corrosion-view.model';
 
 export interface LegendChip {
     density: number;
@@ -21,6 +22,7 @@ export interface LegendChip {
     templateUrl: './chart.legend.component.html',
     styleUrls: ['./chart.legend.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [LinScePipe],
     host: { '[class.plate]': 'plate()' }
 })
 export class ChartLegendComponent {
@@ -32,6 +34,4 @@ export class ChartLegendComponent {
 
     refsToggled = output<void>();
     curveToggled = output<number>();
-
-    protected readonly t = computed(() => CORROSION_STRINGS[this.lang()]);
 }

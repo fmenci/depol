@@ -1,7 +1,7 @@
 <form class="app-shell" [formGroup]="aiForm" (ngSubmit)="onSubmit()"
   [style.--verdict-ink]="verdictTheme.ink" [style.--verdict-tint]="verdictTheme.tint">
 
-  <app-screen-nav [(lang)]="lang" [refControl]="aiForm.controls.refReport" (printRequested)="mePrint()" />
+  <app-screen-nav [lang]="lang()" (langChange)="setLang($event)" [refControl]="aiForm.controls.refReport" (printRequested)="mePrint()" />
 
   <app-print-sheet [lang]="lang()" [view]="corrosionview" [headHtml]="headPrintTemplate" [reference]="refreportPrint"
     [date]="printDate" [verdictLabel]="verdictLabel" [icorrText]="icorrText" [deltaE]="deltaE" [densityText]="densityText" />

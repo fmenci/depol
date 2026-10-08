@@ -1,9 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { LanguageService, LinScePipe } from '@aisuite-eu/ngtools';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, NgZone, computed, effect, inject, input, output, signal, viewChild } from '@angular/core';
 import { ChartLegendComponent, LegendChip } from './chart.legend.component';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { ChartPadding, ChartScale, formatMagnitude, logTicks, makeScale, niceTicks } from '../../models/chart-geometry.model';
-import { CORROSION_STRINGS, CorrosionLang, VERDICT_THEME, VerdictKey } from '../../models/corrosion-strings.model';
+import { CorrosionLang, PREDIM, VERDICT_THEME, VerdictKey } from '../../models/corrosion-view.model';
 
 interface ReferenceCurveSpec {
     density: number;
@@ -73,7 +74,7 @@ const round1 = (n: number): number => Math.round(n * 10) / 10;
     templateUrl: './theecanvas.html',
     styleUrls: ['./theecanvas.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgTemplateOutlet, ChartLegendComponent]
+    imports: [NgTemplateOutlet, ChartLegendComponent, LinScePipe]
 })
 export class TheeCanvasComponent {
     usercurve = input.required<RedoxCalculation>();
@@ -83,6 +84,7 @@ export class TheeCanvasComponent {
     /** Emitted while dragging the operating point: inverts the model (x sets ΔE via X off, y sets i corr via I app). */
     dragMove = output<{ xoff: number; iapp: number }>();
 
+    private readonly linrepo = inject(LanguageService);
     private readonly zone = inject(NgZone);
     private readonly destroyRef = inject(DestroyRef);
 
@@ -105,7 +107,6 @@ export class TheeCanvasComponent {
     protected readonly dragging = signal(false);
     protected readonly printing = signal(false);
 
-    protected readonly t = computed(() => CORROSION_STRINGS[this.lang()]);
     protected readonly verdictInk = computed(() => VERDICT_THEME[this.verdictKey()].ink);
     protected readonly verdictTint = computed(() => VERDICT_THEME[this.verdictKey()].tint);
 
@@ -171,16 +172,16 @@ export class TheeCanvasComponent {
     });
 
     protected readonly labels = computed<AxisLabel[]>(() => {
+        this.lang();
         const pad = this.pad();
         const w = this.w();
         const h = this.h();
         const bottom = this.plotRect().bottom;
-        const t = this.t();
         const out: AxisLabel[] = [];
         this.gridX().forEach((g) => out.push({ text: g.label, left: g.x, top: bottom + 8, transform: 'translate(-50%,0)', bold: false }));
         this.gridY().forEach((g) => out.push({ text: g.label, left: pad.l - 8, top: g.y, transform: 'translate(-100%,-50%)', bold: false }));
-        out.push({ text: t.xLabel, left: pad.l + (w - pad.l - pad.r) / 2, top: h - 14, transform: 'translate(-50%,0)', bold: true });
-        out.push({ text: t.yLabel, left: 12, top: pad.t + (bottom - pad.t) / 2, transform: 'translate(-50%,-50%) rotate(-90deg)', bold: true });
+        out.push({ text: this.linrepo.label(PREDIM, 'chartXLabel'), left: pad.l + (w - pad.l - pad.r) / 2, top: h - 14, transform: 'translate(-50%,0)', bold: true });
+        out.push({ text: this.linrepo.label(PREDIM, 'chartYLabel'), left: 12, top: pad.t + (bottom - pad.t) / 2, transform: 'translate(-50%,-50%) rotate(-90deg)', bold: true });
         return out;
     });
 

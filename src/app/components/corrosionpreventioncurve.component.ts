@@ -14,7 +14,7 @@ import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { IcorrResultModel } from '../../models/icorr.result.model';
 import { environment } from '../../environments/environment';
 import { formatMagnitude } from '../../models/chart-geometry.model';
-import { CORROSION_STRINGS, CorrosionLang, VERDICT_THEME, VerdictKey, verdictKeyFor } from '../../models/corrosion-strings.model';
+import { CorrosionLang, PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, linguaExport, verdictKeyFor } from '../../models/corrosion-view.model';
 
 @Component({
     selector: 'app-corrosion-prevention-curve',
@@ -30,8 +30,8 @@ export class CorrosionPreventionCurveComponent {
     private readonly linrepo = inject(LanguageService);
     private readonly sanitizer = inject(DomSanitizer);
 
-    // The screen's own FR/EN toggle is local state (see corrosion-strings.model.ts for why),
-    // seeded from the app's configured language so the initial paint matches the rest of the app.
+    // Current language of the screen, seeded from the app's configured language. It changes through
+    // setLang, so the language service holds the new labels before the screen re-reads them.
     protected readonly lang = signal<CorrosionLang>(this.linrepo.operationLingua === 'fr' ? 'fr' : 'en');
 
     corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '');
@@ -46,7 +46,10 @@ export class CorrosionPreventionCurveComponent {
         refReport: new FormControl()
     });
 
-    protected readonly t = () => CORROSION_STRINGS[this.lang()];
+    protected setLang(lang: CorrosionLang): void {
+        this.linrepo.switchLingua(lang, linguaExport(lang) ?? []);
+        this.lang.set(lang);
+    }
 
     constructor() {
         // Rebuild the curve as a new instance (rather than mutating in place) so OnPush children
@@ -69,7 +72,7 @@ export class CorrosionPreventionCurveComponent {
     }
 
     get verdictLabel(): string {
-        return this.t().verdict[this.verdictKey];
+        return this.linrepo.label(PREDIM, VERDICT_TAG[this.verdictKey]);
     }
 
     get verdictTheme(): { ink: string; tint: string } {
@@ -101,10 +104,10 @@ export class CorrosionPreventionCurveComponent {
     get hint(): string | null {
         const v = this.corrosionview;
         if (!(v.xon > 0) || !(v.xoff > 0) || !(v.measuredIntensity > 0) || !(v.measuredSurface > 0)) {
-            return this.t().hintZero;
+            return this.linrepo.label(PREDIM, 'hintZero');
         }
         if (v.xon <= v.xoff) {
-            return this.t().hintXon;
+            return this.linrepo.label(PREDIM, 'hintXon');
         }
         return null;
     }

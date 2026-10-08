@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
-import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings.model';
+import { CORROSION_LANGS, CorrosionLang } from '../../models/corrosion-view.model';
 
 /** FR/EN segmented control: one visually hidden radio per language, its label is the button. */
 @Component({
@@ -11,6 +11,5 @@ import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings
 export class LangSwitchComponent {
     lang = model.required<CorrosionLang>();
 
-    protected readonly options = (Object.keys(CORROSION_STRINGS) as CorrosionLang[])
-        .map((code) => ({ code, label: CORROSION_STRINGS[code].lang }));
+    protected readonly options = CORROSION_LANGS;
 }
