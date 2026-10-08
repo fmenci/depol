@@ -1,18 +1,18 @@
 <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
 <div class="card-head">
-  <h6>{{ 'measure' | linsceLocalisation:'Predim':lang() }} — {{ 'rappliedload' | linsceLocalisation:'Predim':lang() }} · {{ 'rpotential' | linsceLocalisation:'Predim':lang() }}</h6>
+  <h6>{{ 'measure' | linsceLocalisation:'Predim' }} — {{ 'rappliedload' | linsceLocalisation:'Predim' }} · {{ 'rpotential' | linsceLocalisation:'Predim' }}</h6>
   <button type="button" class="btn btn-outline-secondary btn-sm" (click)="toggleSliders()">{{ sliderBtnLabel() }}</button>
 </div>
 
 <div class="inputs-grid">
   <app-measure-field inputId="measuredIntensity" ariaLabel="I app" unit="mA" [step]="0.1" [sliderMax]="30"
-    [control]="controls().measuredIntensity" [sliders]="slidersOn()" [lang]="lang()">I <sub>app</sub></app-measure-field>
-  <app-measure-field inputId="measuredSurface" [ariaLabel]="'rsurf' | linsceLocalisation:'Predim':lang()" unit="m²" [step]="0.1" [sliderMin]="0.1" [sliderMax]="20"
-    [control]="controls().measuredSurface" [sliders]="slidersOn()" [lang]="lang()">{{ 'rsurf' | linsceLocalisation:'Predim':lang() }}</app-measure-field>
+    [control]="controls().measuredIntensity" [sliders]="slidersOn()">I <sub>app</sub></app-measure-field>
+  <app-measure-field inputId="measuredSurface" [ariaLabel]="'rsurf' | linsceLocalisation:'Predim'" unit="m²" [step]="0.1" [sliderMin]="0.1" [sliderMax]="20"
+    [control]="controls().measuredSurface" [sliders]="slidersOn()">{{ 'rsurf' | linsceLocalisation:'Predim' }}</app-measure-field>
   <app-measure-field inputId="xon" ariaLabel="X on" unit="mV" [sliderMax]="1200"
-    [control]="controls().xon" [sliders]="slidersOn()" [lang]="lang()">X <sub>on</sub></app-measure-field>
+    [control]="controls().xon" [sliders]="slidersOn()">X <sub>on</sub></app-measure-field>
   <app-measure-field inputId="xoff" ariaLabel="X off" unit="mV" [sliderMax]="1200"
-    [control]="controls().xoff" [sliders]="slidersOn()" [lang]="lang()">X <sub>off</sub></app-measure-field>
+    [control]="controls().xoff" [sliders]="slidersOn()">X <sub>off</sub></app-measure-field>
 </div>
 
 @if (hint(); as hintText) {

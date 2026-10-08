@@ -1,6 +1,5 @@
 import { LinScePipe } from '@aisuite-eu/ngtools';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { CorrosionLang } from '../../models/corrosion-view.model';
 
 export interface LegendChip {
     density: number;
@@ -29,7 +28,6 @@ export class ChartLegendComponent {
     chips = input.required<LegendChip[]>();
     refsOn = input.required<boolean>();
     verdictInk = input.required<string>();
-    lang = input<CorrosionLang>('en');
     plate = input(false);
 
     refsToggled = output<void>();

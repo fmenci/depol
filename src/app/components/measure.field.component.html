@@ -6,5 +6,5 @@
   class="input form-control field-input" [attr.aria-label]="ariaLabel()" (input)="mirrorToRange()" />
 @if (sliders()) {
   <input #range type="range" [min]="sliderMin()" [max]="sliderMax()" [step]="step()" [formControl]="control()"
-    class="field-slider" [attr.aria-label]="ariaLabel() + ' (' + ('ariaSlider' | linsceLocalisation:'Predim':lang()) + ')'" (input)="mirrorToNumber()" />
+    class="field-slider" [attr.aria-label]="ariaLabel() + ' (' + ('ariaSlider' | linsceLocalisation:'Predim') + ')'" (input)="mirrorToNumber()" />
 }

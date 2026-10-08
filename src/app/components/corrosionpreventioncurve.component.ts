@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, SecurityContext, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, SecurityContext, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { IcorrResultModel } from '../../models/icorr.result.model';
 import { environment } from '../../environments/environment';
 import { formatMagnitude } from '../../models/chart-geometry.model';
-import { CORROSION_LANGS, CorrosionLang, PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, linguaExport, verdictKeyFor } from '../../models/corrosion-view.model';
+import { PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, verdictKeyFor } from '../../models/corrosion-view.model';
 
 @Component({
     selector: 'app-corrosion-prevention-curve',
@@ -30,10 +30,6 @@ export class CorrosionPreventionCurveComponent {
     private readonly linrepo = inject(LanguageService);
     private readonly sanitizer = inject(DomSanitizer);
 
-    // Current language of the screen, seeded from the app's configured language. It changes through
-    // setLang, so the language service holds the new labels before the screen re-reads them.
-    protected readonly lang = signal<CorrosionLang>(CORROSION_LANGS.find((l) => l.code === this.linrepo.operationLingua)?.code ?? 'en');
-
     corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '');
     // No explicit FormGroup<...> annotation: inference keeps each control's concrete FormControl
     // type, which the child components' [formControl] bindings need (`aiForm.controls` is handed to
@@ -45,11 +41,6 @@ export class CorrosionPreventionCurveComponent {
         measuredSurface: new FormControl(this.corrosionview.measuredSurface),
         refReport: new FormControl()
     });
-
-    protected setLang(lang: CorrosionLang): void {
-        this.linrepo.switchLingua(lang, linguaExport(lang) ?? []);
-        this.lang.set(lang);
-    }
 
     constructor() {
         // Rebuild the curve as a new instance (rather than mutating in place) so OnPush children
@@ -122,7 +113,7 @@ export class CorrosionPreventionCurveComponent {
     }
 
     get printDate(): string {
-        return new Date().toLocaleDateString(CORROSION_LANGS.find((l) => l.code === this.lang())?.locale);
+        return new Date().toLocaleDateString(this.linrepo.operationLingua === 'en' ? 'en-GB' : this.linrepo.operationLingua);
     }
 
     get headPrintTemplate(): string {

@@ -2,7 +2,7 @@ import { LanguageService, LinScePipe } from '@aisuite-eu/ngtools';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MeasureFieldComponent } from './measure.field.component';
-import { CorrosionLang, PREDIM } from '../../models/corrosion-view.model';
+import { PREDIM } from '../../models/corrosion-view.model';
 
 export interface MeasurementControls {
     measuredIntensity: FormControl<number | null>;
@@ -23,7 +23,6 @@ export interface MeasurementControls {
 export class MeasurementCardComponent {
     private readonly linrepo = inject(LanguageService);
     controls = input.required<MeasurementControls>();
-    lang = input<CorrosionLang>('en');
     /** Validation message, already in the current language; null when the measurements are usable. */
     hint = input<string | null>(null);
 
@@ -34,7 +33,6 @@ export class MeasurementCardComponent {
     );
 
     protected readonly sliderBtnLabel = computed(() => {
-        this.lang();
         return (this.slidersOn() ? '− ' : '+ ') + this.linrepo.label(PREDIM, 'sliders');
     });
 

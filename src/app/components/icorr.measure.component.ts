@@ -1,6 +1,5 @@
 import { LinScePipe } from '@aisuite-eu/ngtools';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CorrosionLang } from '../../models/corrosion-view.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'app-icorr-measure',
@@ -10,5 +9,4 @@ import { CorrosionLang } from '../../models/corrosion-view.model';
     imports: [LinScePipe]
 })
 export class IcorrMeasureComponent {
-    lang = input<CorrosionLang>('en');
 }

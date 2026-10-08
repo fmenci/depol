@@ -1,7 +1,6 @@
 import { LinScePipe } from '@aisuite-eu/ngtools';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
-import { CorrosionLang } from '../../models/corrosion-view.model';
 
 /**
  * Report header and measurement table, on the printed page only. The host carries the app-wide
@@ -16,7 +15,6 @@ import { CorrosionLang } from '../../models/corrosion-view.model';
     host: { class: 'gest-print' }
 })
 export class PrintSheetComponent {
-    lang = input<CorrosionLang>('en');
     /** The measurements the report is about. */
     view = input.required<RedoxCalculation>();
     /** Sanitized HTML of the document header (logo, address…) configured on the language service. */

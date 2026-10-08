@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, NgZone, com
 import { ChartLegendComponent, LegendChip } from './chart.legend.component';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { ChartPadding, ChartScale, formatMagnitude, logTicks, makeScale, niceTicks } from '../../models/chart-geometry.model';
-import { CorrosionLang, PREDIM, VERDICT_THEME, VerdictKey } from '../../models/corrosion-view.model';
+import { PREDIM, VERDICT_THEME, VerdictKey } from '../../models/corrosion-view.model';
 
 interface ReferenceCurveSpec {
     density: number;
@@ -79,7 +79,6 @@ const round1 = (n: number): number => Math.round(n * 10) / 10;
 export class TheeCanvasComponent {
     usercurve = input.required<RedoxCalculation>();
     verdictKey = input<VerdictKey>('unset');
-    lang = input<CorrosionLang>('en');
 
     /** Emitted while dragging the operating point: inverts the model (x sets ΔE via X off, y sets i corr via I app). */
     dragMove = output<{ xoff: number; iapp: number }>();
@@ -172,7 +171,6 @@ export class TheeCanvasComponent {
     });
 
     protected readonly labels = computed<AxisLabel[]>(() => {
-        this.lang();
         const pad = this.pad();
         const w = this.w();
         const h = this.h();
