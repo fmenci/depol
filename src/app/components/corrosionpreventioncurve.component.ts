@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, SecurityContext, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, SecurityContext, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { RedoxCalculation } from '../../models/redox.calculation.model';
 import { IcorrResultModel } from '../../models/icorr.result.model';
 import { environment } from '../../environments/environment';
 import { formatMagnitude } from '../../models/chart-geometry.model';
-import { CORROSION_STRINGS, CorrosionLang, VERDICT_THEME, VerdictKey, verdictKeyFor } from '../../models/corrosion-strings.model';
+import { PREDIM, VERDICT_TAG, VERDICT_THEME, VerdictKey, verdictKeyFor } from '../../models/corrosion-view.model';
 
 @Component({
     selector: 'app-corrosion-prevention-curve',
@@ -30,10 +30,6 @@ export class CorrosionPreventionCurveComponent {
     private readonly linrepo = inject(LanguageService);
     private readonly sanitizer = inject(DomSanitizer);
 
-    // The screen's own FR/EN toggle is local state (see corrosion-strings.model.ts for why),
-    // seeded from the app's configured language so the initial paint matches the rest of the app.
-    protected readonly lang = signal<CorrosionLang>(this.linrepo.operationLingua === 'fr' ? 'fr' : 'en');
-
     corrosionview: RedoxCalculation = new RedoxCalculation(740, 618, 3, 1, '');
     // No explicit FormGroup<...> annotation: inference keeps each control's concrete FormControl
     // type, which the child components' [formControl] bindings need (`aiForm.controls` is handed to
@@ -45,8 +41,6 @@ export class CorrosionPreventionCurveComponent {
         measuredSurface: new FormControl(this.corrosionview.measuredSurface),
         refReport: new FormControl()
     });
-
-    protected readonly t = () => CORROSION_STRINGS[this.lang()];
 
     constructor() {
         // Rebuild the curve as a new instance (rather than mutating in place) so OnPush children
@@ -69,7 +63,7 @@ export class CorrosionPreventionCurveComponent {
     }
 
     get verdictLabel(): string {
-        return this.t().verdict[this.verdictKey];
+        return this.linrepo.label(PREDIM, VERDICT_TAG[this.verdictKey]);
     }
 
     get verdictTheme(): { ink: string; tint: string } {
@@ -101,10 +95,10 @@ export class CorrosionPreventionCurveComponent {
     get hint(): string | null {
         const v = this.corrosionview;
         if (!(v.xon > 0) || !(v.xoff > 0) || !(v.measuredIntensity > 0) || !(v.measuredSurface > 0)) {
-            return this.t().hintZero;
+            return this.linrepo.label(PREDIM, 'hintZero');
         }
         if (v.xon <= v.xoff) {
-            return this.t().hintXon;
+            return this.linrepo.label(PREDIM, 'hintXon');
         }
         return null;
     }
@@ -119,7 +113,7 @@ export class CorrosionPreventionCurveComponent {
     }
 
     get printDate(): string {
-        return new Date().toLocaleDateString(this.lang() === 'fr' ? 'fr-FR' : 'en-GB');
+        return new Date().toLocaleDateString(this.linrepo.operationLingua === 'en' ? 'en-GB' : this.linrepo.operationLingua);
     }
 
     get headPrintTemplate(): string {

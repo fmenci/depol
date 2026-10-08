@@ -1,16 +1,16 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withXhr } from '@angular/common/http';
-import { LinSceExportFormula, provideAisuiteNgtools } from '@aisuite-eu/ngtools';
+import { provideAisuiteNgtools } from '@aisuite-eu/ngtools';
 import { environment } from '../environments/environment';
+import { linguaExport } from '../models/corrosion-view.model';
 
-// operational language setup, injected as globals by a <script> tag in index.html
+// operational language setup, injected as globals by a <script> tag in index.html (labels: aiSuiteLanguageJS, see linguaExport)
 declare const opLingua: string;
-declare const aiSuiteLanguageJS: string | LinSceExportFormula[] | undefined;
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withXhr()),
-    provideAisuiteNgtools({ opLingua, uiLanguageJS: aiSuiteLanguageJS, linsceApiUrl: environment.aisuiteApiUrl })
+    provideAisuiteNgtools({ opLingua, uiLanguageJS: linguaExport(opLingua), linsceApiUrl: environment.aisuiteApiUrl })
   ]
 };

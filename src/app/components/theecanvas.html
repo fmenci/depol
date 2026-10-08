@@ -1,10 +1,10 @@
 <ng-template #legendContent>
-  <app-chart-legend [chips]="legendChips()" [refsOn]="refsOn()" [verdictInk]="verdictInk()" [lang]="lang()"
+  <app-chart-legend [chips]="legendChips()" [refsOn]="refsOn()" [verdictInk]="verdictInk()"
     [plate]="legendInPlot()" (refsToggled)="toggleRefs()" (curveToggled)="toggleCurve($event)" />
 </ng-template>
 
 <div class="chart-toolbar">
-  <h6 class="chart-title">{{ t().chartTitle }}</h6>
+  <h6 class="chart-title">{{ 'chartTitle' | linsceLocalisation:'Predim' }}</h6>
   <span class="readout" [class.readout--hover]="guideInfo().show" [class.readout--dragging]="dragging()"
     [style.--readout-tint]="verdictTint()">
     ΔE {{ readout().x }} mV · i corr {{ readout().y }} mA/m²
@@ -12,12 +12,12 @@
   <div class="chart-controls">
     <label class="log-toggle">
       <input type="checkbox" class="form-check-input" [checked]="logOn()" (change)="toggleLog()">
-      {{ t().logScale }}
+      {{ 'logScale' | linsceLocalisation:'Predim' }}
     </label>
     <div class="zoom-group" role="group">
-      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomOut()" aria-label="Zoom out">−</button>
-      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomIn()" aria-label="Zoom in">+</button>
-      <button type="button" class="btn btn-outline-secondary reset-btn" (click)="resetView()">{{ t().reset }}</button>
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomOut()" [attr.aria-label]="'zoomOut' | linsceLocalisation:'Predim'">−</button>
+      <button type="button" class="btn btn-outline-secondary zoom-btn" (click)="zoomIn()" [attr.aria-label]="'zoomIn' | linsceLocalisation:'Predim'">+</button>
+      <button type="button" class="btn btn-outline-secondary reset-btn" (click)="resetView()">{{ 'resetView' | linsceLocalisation:'Predim' }}</button>
     </div>
   </div>
 </div>
@@ -27,7 +27,7 @@
     <svg class="plot-svg" [attr.width]="w()" [attr.height]="h()" [attr.viewBox]="'0 0 ' + w() + ' ' + h()"
       [style.cursor]="plotCursor()" (pointermove)="onPointerMove($event)" (pointerleave)="onPointerLeave()"
       (pointerdown)="onPointerDown($event)" (pointerup)="onPointerUp($event)" (wheel)="onWheel($event)">
-      <title>{{ t().chartTitle }}</title>
+      <title>{{ 'chartTitle' | linsceLocalisation:'Predim' }}</title>
       <rect class="plot-rect" [attr.x]="plotRect().x" [attr.y]="plotRect().y" [attr.width]="plotRect().w" [attr.height]="plotRect().h"></rect>
       @for (g of gridY(); track g.y) {
         <line class="grid-line" [attr.x1]="g.x1" [attr.x2]="g.x2" [attr.y1]="g.y" [attr.y2]="g.y"></line>

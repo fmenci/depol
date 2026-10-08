@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AISuite>
+  <AILabelFormula name="Predim" lingua="fr">
+    <Formula>Predim</Formula>
+    <Lingua>fr</Lingua>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Évaluation de la vitesse de corrosion]]></PCMT>
+      <Tag>perfEval</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Courbe d'évaluation de la performance de protection de corrosion]]></PCMT>
+      <Tag>chartTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Dépolarisation ΔE (mV)]]></PCMT>
+      <Tag>chartXLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Taux de corrosion i corr (mA/m²)]]></PCMT>
+      <Tag>chartYLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Imprimer]]></PCMT>
+      <Tag>btnPrint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Votre courbe]]></PCMT>
+      <Tag>yourCurve</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Courbes de référence]]></PCMT>
+      <Tag>refCurves</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Log i corr]]></PCMT>
+      <Tag>logScale</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Vue initiale]]></PCMT>
+      <Tag>resetView</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[curseurs]]></PCMT>
+      <Tag>sliders</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[masquer]]></PCMT>
+      <Tag>hide</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[afficher]]></PCMT>
+      <Tag>show</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Glisser le point pour ajuster X off et I app.]]></PCMT>
+      <Tag>dragHint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[X on doit être supérieur à X off — la dépolarisation est leur différence.]]></PCMT>
+      <Tag>hintXon</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Les quatre mesures doivent être supérieures à zéro.]]></PCMT>
+      <Tag>hintZero</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[risque élevé]]></PCMT>
+      <Tag>icorrDepolHigh</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[peu de risque]]></PCMT>
+      <Tag>icorrDepolLow</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[modéré]]></PCMT>
+      <Tag>icorrDepolModerate</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[passif]]></PCMT>
+      <Tag>icorrDepolPassif</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[indéfini]]></PCMT>
+      <Tag>icorrDepolUnset</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Référence de l'étude]]></PCMT>
+      <Tag>labelRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Votre référence de cette étude]]></PCMT>
+      <Tag>placeholderRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Mesure]]></PCMT>
+      <Tag>measure</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Charge appliquée]]></PCMT>
+      <Tag>rappliedload</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Potentiels mesurés]]></PCMT>
+      <Tag>rpotential</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Surface]]></PCMT>
+      <Tag>rsurf</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Évaluation de la corrosion]]></PCMT>
+      <Tag>rVCorr</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Densité appliquée]]></PCMT>
+      <Tag>rdensity</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Équation de Tafel, Butler-Volmer]]></PCMT>
+      <Tag>depolFormula</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Protection galvanique]]></PCMT>
+      <Tag>illustDepolTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Prévention de la corrosion avec anodes galvaniques dans les structures en béton armé]]></PCMT>
+      <Tag>illustDepolPurpose</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Cette application fournit la méthode de calcul depuis un ensemble de paramètres mesurés sur une structure en béton armé (voir illustration). La formule mathématique est déduite de l'équation de Tafel et Butler-Volmer]]></PCMT>
+      <Tag>illustDepolDesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Entrer l'intensité du courant appliqué, sur le circuit vert, avant dépolarisation en milliampères.]]></PCMT>
+      <Tag>riappdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Entrer les potentiels mesurés sur le circuit jaune aux points Xon et Xoff en millivolt pour obtenir le paramètre.]]></PCMT>
+      <Tag>rxonoffdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Ces constantes sont déterminées de façon empirique suite aux expériences menées sur les anodes galvaniques.]]></PCMT>
+      <Tag>rcstdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Illustration de la mesure de dépolarisation (logiciel Predim V5)]]></PCMT>
+      <Tag>figAlt</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Unité de mesure du potentiel et du courant]]></PCMT>
+      <Tag>figMonitoringUnit</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Électrode de référence]]></PCMT>
+      <Tag>figReferenceElectrode</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Zoom arrière]]></PCMT>
+      <Tag>zoomOut</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Zoom avant]]></PCMT>
+      <Tag>zoomIn</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[curseur]]></PCMT>
+      <Tag>ariaSlider</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Acier]]></PCMT>
+      <Tag>figSteel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Anodes en zinc]]></PCMT>
+      <Tag>figZincAnodes</Tag>
+    </LinTag>
+  </AILabelFormula>
+  <AILabelFormula name="Predim" lingua="en">
+    <Formula>Predim</Formula>
+    <Lingua>en</Lingua>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Corrosion speed evaluation]]></PCMT>
+      <Tag>perfEval</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Corrosion performance evaluation curve]]></PCMT>
+      <Tag>chartTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Depolarisation ΔE (mV)]]></PCMT>
+      <Tag>chartXLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Corrosion rate i corr (mA/m²)]]></PCMT>
+      <Tag>chartYLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Print]]></PCMT>
+      <Tag>btnPrint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Your curve]]></PCMT>
+      <Tag>yourCurve</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Reference curves]]></PCMT>
+      <Tag>refCurves</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Log i corr]]></PCMT>
+      <Tag>logScale</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Reset view]]></PCMT>
+      <Tag>resetView</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[sliders]]></PCMT>
+      <Tag>sliders</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[hide]]></PCMT>
+      <Tag>hide</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[show]]></PCMT>
+      <Tag>show</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Drag the point to adjust X off and I app.]]></PCMT>
+      <Tag>dragHint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[X on should exceed X off — depolarisation is their difference.]]></PCMT>
+      <Tag>hintXon</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[All four measurements must be greater than zero.]]></PCMT>
+      <Tag>hintZero</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[high risk]]></PCMT>
+      <Tag>icorrDepolHigh</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[low risk]]></PCMT>
+      <Tag>icorrDepolLow</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[moderate risk]]></PCMT>
+      <Tag>icorrDepolModerate</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[passive]]></PCMT>
+      <Tag>icorrDepolPassif</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[undefined]]></PCMT>
+      <Tag>icorrDepolUnset</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Project reference]]></PCMT>
+      <Tag>labelRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Your case study reference]]></PCMT>
+      <Tag>placeholderRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Measurement]]></PCMT>
+      <Tag>measure</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Applied load]]></PCMT>
+      <Tag>rappliedload</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Measured potential]]></PCMT>
+      <Tag>rpotential</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Surface]]></PCMT>
+      <Tag>rsurf</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Corrosion evaluation]]></PCMT>
+      <Tag>rVCorr</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Applied density]]></PCMT>
+      <Tag>rdensity</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Tafel, Butler-Volmer equation]]></PCMT>
+      <Tag>depolFormula</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Galvanic protection]]></PCMT>
+      <Tag>illustDepolTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Concrete steel reinforced structure corrosion prevention with galvanic anodes]]></PCMT>
+      <Tag>illustDepolPurpose</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[This application provides a calculation from measured parameters on a steel reinforced concrete structure (see illustration). The mathematical formula is deduced from Tafel and Butler-Volmer equations]]></PCMT>
+      <Tag>illustDepolDesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Input current intensity applied on green circuit before depolarisation in milliampere.]]></PCMT>
+      <Tag>riappdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Feed measured potentials on yellow circuit at Xon and Xoff points in millivolt to obtain the parameter.]]></PCMT>
+      <Tag>rxonoffdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[These constants were determined empirically following experiences carried out on galvanic anodes.]]></PCMT>
+      <Tag>rcstdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Depolarisation measurement illustration (Predim software V5)]]></PCMT>
+      <Tag>figAlt</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Potential and current monitoring unit]]></PCMT>
+      <Tag>figMonitoringUnit</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Reference electrode]]></PCMT>
+      <Tag>figReferenceElectrode</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Zoom out]]></PCMT>
+      <Tag>zoomOut</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Zoom in]]></PCMT>
+      <Tag>zoomIn</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[slider]]></PCMT>
+      <Tag>ariaSlider</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Steel]]></PCMT>
+      <Tag>figSteel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Zinc anodes]]></PCMT>
+      <Tag>figZincAnodes</Tag>
+    </LinTag>
+  </AILabelFormula>
+  <AILabelFormula name="Predim" lingua="es">
+    <Formula>Predim</Formula>
+    <Lingua>es</Lingua>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Evaluación de la velocidad de corrosión]]></PCMT>
+      <Tag>perfEval</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Curva de evaluación del rendimiento de la protección contra la corrosión]]></PCMT>
+      <Tag>chartTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Despolarización ΔE (mV)]]></PCMT>
+      <Tag>chartXLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Velocidad de corrosión i corr (mA/m²)]]></PCMT>
+      <Tag>chartYLabel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Imprimir]]></PCMT>
+      <Tag>btnPrint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Su curva]]></PCMT>
+      <Tag>yourCurve</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Curvas de referencia]]></PCMT>
+      <Tag>refCurves</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Log i corr]]></PCMT>
+      <Tag>logScale</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Vista inicial]]></PCMT>
+      <Tag>resetView</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[controles deslizantes]]></PCMT>
+      <Tag>sliders</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[ocultar]]></PCMT>
+      <Tag>hide</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[mostrar]]></PCMT>
+      <Tag>show</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Arrastre el punto para ajustar X off e I app.]]></PCMT>
+      <Tag>dragHint</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[X on debe ser mayor que X off: la despolarización es su diferencia.]]></PCMT>
+      <Tag>hintXon</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Las cuatro medidas deben ser mayores que cero.]]></PCMT>
+      <Tag>hintZero</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[riesgo alto]]></PCMT>
+      <Tag>icorrDepolHigh</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[riesgo bajo]]></PCMT>
+      <Tag>icorrDepolLow</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[riesgo moderado]]></PCMT>
+      <Tag>icorrDepolModerate</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[pasivo]]></PCMT>
+      <Tag>icorrDepolPassif</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[indefinido]]></PCMT>
+      <Tag>icorrDepolUnset</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Referencia del estudio]]></PCMT>
+      <Tag>labelRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Su referencia de este estudio]]></PCMT>
+      <Tag>placeholderRefEtude</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Medida]]></PCMT>
+      <Tag>measure</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Carga aplicada]]></PCMT>
+      <Tag>rappliedload</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Potenciales medidos]]></PCMT>
+      <Tag>rpotential</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Superficie]]></PCMT>
+      <Tag>rsurf</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Evaluación de la corrosión]]></PCMT>
+      <Tag>rVCorr</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Densidad aplicada]]></PCMT>
+      <Tag>rdensity</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Ecuación de Tafel, Butler-Volmer]]></PCMT>
+      <Tag>depolFormula</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Protección galvánica]]></PCMT>
+      <Tag>illustDepolTitle</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Prevención de la corrosión con ánodos galvánicos en estructuras de hormigón armado]]></PCMT>
+      <Tag>illustDepolPurpose</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Esta aplicación proporciona un cálculo a partir de parámetros medidos en una estructura de hormigón armado (véase la ilustración). La fórmula matemática se deduce de las ecuaciones de Tafel y Butler-Volmer]]></PCMT>
+      <Tag>illustDepolDesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Introduzca la intensidad de corriente aplicada, en el circuito verde, antes de la despolarización, en miliamperios.]]></PCMT>
+      <Tag>riappdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Introduzca los potenciales medidos en el circuito amarillo, en los puntos Xon y Xoff, en milivoltios, para obtener el parámetro.]]></PCMT>
+      <Tag>rxonoffdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Estas constantes se determinaron de forma empírica a partir de los ensayos realizados con ánodos galvánicos.]]></PCMT>
+      <Tag>rcstdesc</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Ilustración de la medida de despolarización (software Predim V5)]]></PCMT>
+      <Tag>figAlt</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Unidad de medida del potencial y de la corriente]]></PCMT>
+      <Tag>figMonitoringUnit</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Electrodo de referencia]]></PCMT>
+      <Tag>figReferenceElectrode</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Alejar]]></PCMT>
+      <Tag>zoomOut</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Acercar]]></PCMT>
+      <Tag>zoomIn</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[control deslizante]]></PCMT>
+      <Tag>ariaSlider</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Acero]]></PCMT>
+      <Tag>figSteel</Tag>
+    </LinTag>
+    <LinTag AIModor="robot">
+      <PCMT><![CDATA[Ánodos de zinc]]></PCMT>
+      <Tag>figZincAnodes</Tag>
+    </LinTag>
+  </AILabelFormula>
+</AISuite>

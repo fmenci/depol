@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { LinScePipe } from '@aisuite-eu/ngtools';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RedoxCalculation } from '../../models/redox.calculation.model';
-import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings.model';
 
 /**
  * Report header and measurement table, on the printed page only. The host carries the app-wide
@@ -11,10 +11,10 @@ import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings
     templateUrl: './print.sheet.component.html',
     styleUrls: ['./print.sheet.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [LinScePipe],
     host: { class: 'gest-print' }
 })
 export class PrintSheetComponent {
-    lang = input<CorrosionLang>('en');
     /** The measurements the report is about. */
     view = input.required<RedoxCalculation>();
     /** Sanitized HTML of the document header (logo, address…) configured on the language service. */
@@ -25,6 +25,4 @@ export class PrintSheetComponent {
     icorrText = input.required<string>();
     deltaE = input.required<number>();
     densityText = input.required<string>();
-
-    protected readonly t = computed(() => CORROSION_STRINGS[this.lang()]);
 }

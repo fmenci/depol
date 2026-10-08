@@ -2,11 +2,11 @@
   <div [innerHtml]="headHtml()"></div>
   <div class="print-meta">
     <h6>Predim V5 · Depol</h6>
-    <h3 class="print-title">{{ t().chartTitle }}</h3>
-    <p>{{ t().ref }} : <strong>{{ reference() }}</strong> · {{ date() }}</p>
+    <h3 class="print-title">{{ 'chartTitle' | linsceLocalisation:'Predim' }}</h3>
+    <p>{{ 'labelRefEtude' | linsceLocalisation:'Predim' }} : <strong>{{ reference() }}</strong> · {{ date() }}</p>
   </div>
   <div class="print-verdict-box">
-    <div>{{ t().evaluation }}</div>
+    <div>{{ 'rVCorr' | linsceLocalisation:'Predim' }}</div>
     <div class="print-verdict-word heading">{{ verdictLabel() }}</div>
     <div>i corr {{ icorrText() }} mA/m²</div>
   </div>
@@ -14,13 +14,13 @@
 <table class="print-table">
   <thead>
     <tr>
-      <th>{{ t().measure }}</th>
-      <th>I app</th><th>{{ t().surface }}</th><th>X on</th><th>X off</th><th>ΔE</th><th>{{ t().density }}</th>
+      <th>{{ 'measure' | linsceLocalisation:'Predim' }}</th>
+      <th>I app</th><th>{{ 'rsurf' | linsceLocalisation:'Predim' }}</th><th>X on</th><th>X off</th><th>ΔE</th><th>{{ 'rdensity' | linsceLocalisation:'Predim' }}</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>{{ t().appliedLoad }} / {{ t().potentials }}</td>
+      <td>{{ 'rappliedload' | linsceLocalisation:'Predim' }} / {{ 'rpotential' | linsceLocalisation:'Predim' }}</td>
       <td>{{ view().measuredIntensity }} mA</td>
       <td>{{ view().measuredSurface }} m²</td>
       <td>{{ view().xon }} mV</td>

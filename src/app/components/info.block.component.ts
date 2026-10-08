@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { LinScePipe } from '@aisuite-eu/ngtools';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormulaMathComponent } from './formula.math.component';
 import { IcorrMeasureComponent } from './icorr.measure.component';
-import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings.model';
 
 /** Under the chart: the measurement schematic, the depolarisation formula and what each input means. */
 @Component({
@@ -9,10 +9,7 @@ import { CORROSION_STRINGS, CorrosionLang } from '../../models/corrosion-strings
     templateUrl: './info.block.component.html',
     styleUrls: ['./info.block.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [FormulaMathComponent, IcorrMeasureComponent]
+    imports: [FormulaMathComponent, IcorrMeasureComponent, LinScePipe]
 })
 export class InfoBlockComponent {
-    lang = input<CorrosionLang>('en');
-
-    protected readonly t = computed(() => CORROSION_STRINGS[this.lang()]);
 }

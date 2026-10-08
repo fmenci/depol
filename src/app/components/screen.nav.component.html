@@ -1,7 +1,6 @@
-<h1 class="nav-title heading h6">{{ t().title }}</h1>
+<h1 class="nav-title heading h6">{{ 'perfEval' | linsceLocalisation:'Predim' }}</h1>
 <div class="nav-controls">
   <input [formControl]="refControl()" class="input form-control nav-ref" type="text"
-    placeholder="{{ t().refPlaceholder }}" aria-label="{{ t().ref }}" />
-  <button type="button" class="btn btn-primary nav-print" (click)="printRequested.emit()">{{ t().print }}</button>
-  <app-lang-switch [(lang)]="lang" />
+    placeholder="{{ 'placeholderRefEtude' | linsceLocalisation:'Predim' }}" aria-label="{{ 'labelRefEtude' | linsceLocalisation:'Predim' }}" />
+  <button type="button" class="btn btn-primary nav-print" (click)="printRequested.emit()">{{ 'btnPrint' | linsceLocalisation:'Predim' }}</button>
 </div>
