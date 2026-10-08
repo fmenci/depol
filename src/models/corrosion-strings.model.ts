@@ -1,7 +1,7 @@
 // FR/EN label table for the corrosion evaluation screen, carried verbatim from the design
 // handoff's strings.js (itself sourced from src/index.html's aiSuiteLanguageJS).
 //
-// Why a local table instead of the repo's LanguageService/localise pipe: that mechanism resolves
+// Why a local table instead of the repo's LanguageService/linsceLocalisation pipe: that mechanism resolves
 // a single fixed string table once per app load (from the `opLingua` global in index.html) and has
 // no API to switch language at runtime. The redesign calls for a live EN/FR segmented control that
 // swaps the whole screen's text; adding that to the shared service would mean changing app-wide

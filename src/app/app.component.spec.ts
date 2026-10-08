@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideAisuiteTstools } from 'aisuite-ngtools';
+import { provideAisuiteNgtools } from '@aisuite-eu/ngtools';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AppComponent } from './app.component';
 
@@ -8,9 +8,9 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [
-        // AppComponent's template tree pulls in LanguageService (via the `localise`
+        // AppComponent's template tree pulls in LanguageService (via the `linsceLocalisation`
         // pipe); stand in for the real app.config.ts wiring with test-only values.
-        provideAisuiteTstools({ opLingua: 'en', uiLanguageJS: [], linsceApiUrl: '' })
+        provideAisuiteNgtools({ opLingua: 'en', uiLanguageJS: [], linsceApiUrl: '' })
       ],
     }).compileComponents();
   });
